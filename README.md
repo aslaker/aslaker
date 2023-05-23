@@ -1,7 +1,7 @@
 ### Hi there my name is Adam
 
-[![Adam's GitHub stats](https://github-readme-stats.vercel.app/api?username=aslaker)](https://github.com/anuraghazra/github-readme-stats)
-
+<!-- [![Adam's GitHub stats](https://github-readme-stats.vercel.app/api?username=aslaker)](https://github.com/anuraghazra/github-readme-stats)
+ -->
 <!--
 **aslaker/aslaker** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
 
