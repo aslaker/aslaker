@@ -1,7 +1,13 @@
-### Hi there my name is Adam
+### Hi! I'm Adam and I'm a Full Stack Developer
 
-![Adam's GitHub stats](https://github-readme-stats.vercel.app/api?username=aslaker&count_private=true)
+github-readme-stats-aslaker.vercel.app
 
+![Adam's GitHub stats](https://github-readme-stats-aslaker.vercel.app/api?username=aslaker&count_private=true)
+
+
+#### Currently working on 🚧
+- A GPT powered application that allows Non-Profits to generate content for fundraising campaigns
+- A map application that allows the user to connect their Web3 wallet and allows them access if they hold a certain NFT
 <!--
 **aslaker/aslaker** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
 
