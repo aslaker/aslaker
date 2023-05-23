@@ -1,6 +1,7 @@
 ### Hi! I'm Adam and I'm a Full Stack Developer
 
-![Adam's GitHub stats](https://github-readme-stats-aslaker.vercel.app/api?username=aslaker&count_private=true)
+![Adam's GitHub stats](https://github-readme-stats-aslaker.vercel.app/api?username=aslaker&count_private=true&show_icons=true&theme=radical)
+)
 
 
 #### Currently working on 🚧
