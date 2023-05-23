@@ -7,7 +7,7 @@
 #### Currently Learning 🌱
 - Rust (Might be at this one a while)
 - Cutting my teeth on the new NextJS v13 serverless component structure
-- How to be a better leader/manager within the engineering world, as well as how to better support my managers (shout out to Sarah Drasner for this wonderful book (Engineering Management for the Rest of Us)[https://www.engmanagement.dev/])
+- How to be a better leader/manager within the engineering world, as well as how to better support my managers (shout out to Sarah Drasner for this wonderful book [Engineering Management for the Rest of Us](https://www.engmanagement.dev/)
 
 ![Adam's GitHub stats](https://github-readme-stats-aslaker.vercel.app/api?username=aslaker&count_private=true&show_icons=true&theme=radical)
 )
