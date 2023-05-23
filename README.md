@@ -6,8 +6,18 @@
 
 #### Currently Learning 🌱
 - Rust (Might be at this one a while)
+- How to leverage Rust to build smart contracts on the Solana blockchain
 - Cutting my teeth on the new NextJS v13 serverless component structure
+- Starting to take a look at the Qwik framework by Misko Hevery, and how we can leverage it's concept of resumeability to deliver significantly less Javascript to the browser
 - How to be a better leader/manager within the engineering world, as well as how to better support my managers (shout out to Sarah Drasner for this wonderful book [Engineering Management for the Rest of Us](https://www.engmanagement.dev/)
+
+#### I'm looking to collaborate on 🤝
+Almost anything!  I specialize in Full stack Typescript right now, and my current favorite tech stack is NextJS v12, TailwindCSS, Prisma, and tRPC.
+
+#### Ask me about 🤔
+- My board game collection, and how my wife is such a lovely accommodating woman in this regard
+- My love of single track mountain biking
+- The fact that I was a competition dancer for 7 years when I was younger
 
 ![Adam's GitHub stats](https://github-readme-stats-aslaker.vercel.app/api?username=aslaker&count_private=true&show_icons=true&theme=radical)
 )
