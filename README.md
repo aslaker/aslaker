@@ -1,7 +1,5 @@
 ### Hi! I'm Adam and I'm a Full Stack Developer
 
-github-readme-stats-aslaker.vercel.app
-
 ![Adam's GitHub stats](https://github-readme-stats-aslaker.vercel.app/api?username=aslaker&count_private=true)
 
 
