@@ -20,7 +20,7 @@ Almost anything!  I specialize in Full stack Typescript right now, and my curren
 - The fact that I was a competition dancer for 7 years when I was younger
 
 ![Adam's GitHub stats](https://github-readme-stats-aslaker.vercel.app/api?username=aslaker&count_private=true&show_icons=true&theme=radical)
-)
+
 
 <!--
 **aslaker/aslaker** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
