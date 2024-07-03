@@ -5,9 +5,10 @@
 - A map application that allows the user to connect their Web3 wallet and allows them access if they hold a certain NFT
 
 #### Currently Learning 🌱
-- Rust (Might be at this one a while)
-- How to leverage Rust to build smart contracts on the Solana blockchain
-- Cutting my teeth on the new NextJS v13 serverless component structure
+- ~~Rust (Might be at this one a while)~~
+- ~~How to leverage Rust to build smart contracts on the Solana blockchain~~
+- Paused on Rust, decided to learn Go instead
+- Cutting my teeth on the new NextJS v14 serverless component structure
 - Starting to take a look at the Qwik framework by Misko Hevery, and how we can leverage it's concept of resumeability to deliver significantly less Javascript to the browser
 - How to be a better leader/manager within the engineering world, as well as how to better support my managers (shout out to Sarah Drasner for this wonderful book [Engineering Management for the Rest of Us](https://www.engmanagement.dev/)
 
