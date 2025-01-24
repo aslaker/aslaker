@@ -2,18 +2,21 @@
 
 #### Currently working on 🚧
 - An AI powered recipe application that sends me and my wife recipe options for meals based on our ingredients
+- A gamified social writing app that users can 
 - A way to generate video content for LinkedIn and Youtube leveraging multiple different AI models
 
 #### Currently Learning 🌱
 - ~~Rust (Might be at this one a while)~~
 - ~~How to leverage Rust to build smart contracts on the Solana blockchain~~
 - Paused on Rust, decided to learn Go instead
-- Cutting my teeth on the new NextJS v14 serverless component structure
+- Cutting my teeth on the new NextJS v15
 - Building CMS systems leveraging PayloadCMS
 - How to be a better leader/manager within the engineering world, as well as how to better support my managers (shout out to Sarah Drasner for this wonderful book [Engineering Management for the Rest of Us](https://www.engmanagement.dev/)
 
 #### I'm looking to collaborate on 🤝
-Almost anything!  I specialize in Full stack Typescript right now, and my current favorite tech stack is NextJS v15, TailwindCSS, Prisma, and tRPC.
+Almost anything!  
+- I specialize in Full stack Typescript right now, and my current favorite tech stack is NextJS v15, TailwindCSS, Prisma, and tRPC.
+- I'm also spending a ton of time learning some low code workflow automation tools (n8n and Make.com).  I want to be able to leverage these to better standardize processes I want to build using AI
 
 #### Ask me about 🤔
 - My board game collection, and how my wife is such a lovely accommodating woman in this regard
