@@ -1,42 +1,188 @@
-### Hi! I'm Adam and I'm a Full Stack Developer
+<div align="center">
 
-#### Currently working on 🚧
-- An AI powered recipe application that sends me and my wife recipe options for meals based on our ingredients
-- A gamified social writing app that users can 
-- A way to generate video content for LinkedIn and Youtube leveraging multiple different AI models
+<!-- Typing Animation Header -->
+[![Typing SVG](https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=28&duration=3000&pause=1000&color=00FF41&center=true&vCenter=true&multiline=true&repeat=true&width=700&height=100&lines=Principal+Software+Engineer;Principal+Agentic+Engineer;Staff+AI+Engineer;Building+the+future+with+AI+agents)](https://git.io/typing-svg)
 
-#### Currently Learning 🌱
-- ~~Rust (Might be at this one a while)~~
-- ~~How to leverage Rust to build smart contracts on the Solana blockchain~~
-- Paused on Rust, decided to learn Go instead
-- Cutting my teeth on the new NextJS v15
-- Building CMS systems leveraging PayloadCMS
-- How to be a better leader/manager within the engineering world, as well as how to better support my managers (shout out to Sarah Drasner for this wonderful book [Engineering Management for the Rest of Us](https://www.engmanagement.dev/)
+`> Principal Engineer by day | Dungeon Master by night | AI whisperer always_`
 
-#### I'm looking to collaborate on 🤝
-Almost anything!  
-- I specialize in Full stack Typescript right now, and my current favorite tech stack is NextJS v15, TailwindCSS, Prisma, and tRPC.
-- I'm also spending a ton of time learning some low code workflow automation tools (n8n and Make.com).  I want to be able to leverage these to better standardize processes I want to build using AI
+<br/>
 
-#### Ask me about 🤔
-- My board game collection, and how my wife is such a lovely accommodating woman in this regard
-- My love of single track mountain biking
-- The fact that I was a competition dancer for 7 years when I was younger
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com/in/adam-slaker)
+[![Website](https://img.shields.io/badge/adamslaker.dev-00FF41?style=for-the-badge&logo=googlechrome&logoColor=black)](https://adamslaker.dev)
 
-![Adam's GitHub stats](https://github-readme-stats-aslaker.vercel.app/api?username=aslaker&count_private=true&show_icons=true&theme=radical)
+</div>
 
+---
 
-<!--
-**aslaker/aslaker** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
+## `> whoami`
 
-Here are some ideas to get you started:
+```
+ _____ _            _                    _
+|_   _| |          | |                  | |
+  | | | |__   ___  | |     ___  __ _  __| |
+  | | | '_ \ / _ \ | |    / _ \/ _` |/ _` |
+  | | | | | |  __/ | |___|  __/ (_| | (_| |
+  \_/ |_| |_|\___| \_____/\___|\__,_|\__,_|
+                                    is loading...
+```
 
-- 🔭 I’m currently working on ...
-- 🌱 I’m currently learning ...
-- 👯 I’m looking to collaborate on ...
-- 🤔 I’m looking for help with ...
-- 💬 Ask me about ...
-- 📫 How to reach me: ...
-- 😄 Pronouns: ...
-- ⚡ Fun fact: ...
--->
+I'm a **Principal Software Engineer** with a passion for building intelligent systems that actually solve problems. My current quest? Architecting **agentic AI systems** that can reason, plan, and execute complex workflows autonomously.
+
+When I'm not crafting code or wrangling LLMs, you'll find me rolling dice at the D&D table, optimizing my board game collection (my wife is a saint), or shredding single track on my mountain bike.
+
+**Current Campaign:** Building AI-powered applications that feel like magic but are powered by engineering.
+
+---
+
+## `> ls -la ./active_quests`
+
+<table>
+<tr>
+<td width="50%" valign="top">
+
+### AI/LLM Projects
+- **Agentic Workflow Systems** - Multi-agent architectures that collaborate to solve complex problems
+- **AI Recipe Assistant** - Personalized meal planning for me and my wife based on available ingredients
+- **Content Generation Pipeline** - Multi-model video content for LinkedIn/YouTube
+
+</td>
+<td width="50%" valign="top">
+
+### Full Stack Applications
+- **Modern Web Apps** - Next.js 15, TypeScript, TailwindCSS
+- **Automation Workflows** - n8n & Make.com integrations
+- **CMS Solutions** - PayloadCMS implementations
+
+</td>
+</tr>
+</table>
+
+---
+
+## `> cat ./tech_stack.json`
+
+<div align="center">
+
+### Core Stack
+![Next.js](https://img.shields.io/badge/Next.js_15-000000?style=for-the-badge&logo=next.js&logoColor=white)
+![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white)
+![TailwindCSS](https://img.shields.io/badge/Tailwind_CSS-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white)
+![Prisma](https://img.shields.io/badge/Prisma-2D3748?style=for-the-badge&logo=prisma&logoColor=white)
+![tRPC](https://img.shields.io/badge/tRPC-2596BE?style=for-the-badge&logo=trpc&logoColor=white)
+
+### AI/ML & Agentic Tools
+![OpenAI](https://img.shields.io/badge/OpenAI-412991?style=for-the-badge&logo=openai&logoColor=white)
+![Anthropic](https://img.shields.io/badge/Anthropic-191919?style=for-the-badge&logo=anthropic&logoColor=white)
+![LangChain](https://img.shields.io/badge/LangChain-1C3C3C?style=for-the-badge&logo=langchain&logoColor=white)
+![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
+
+### Automation & Workflow
+![n8n](https://img.shields.io/badge/n8n-EA4B71?style=for-the-badge&logo=n8n&logoColor=white)
+![Make](https://img.shields.io/badge/Make.com-6D00CC?style=for-the-badge&logo=make&logoColor=white)
+
+### Infrastructure
+![Vercel](https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-4169E1?style=for-the-badge&logo=postgresql&logoColor=white)
+![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)
+
+</div>
+
+---
+
+## `> git log --stats`
+
+<div align="center">
+
+<img src="https://github-readme-stats-aslaker.vercel.app/api?username=aslaker&count_private=true&show_icons=true&theme=tokyonight&hide_border=true&bg_color=0D1117&title_color=00FF41&icon_color=00FF41&text_color=c9d1d9" alt="GitHub Stats" />
+
+<img src="https://streak-stats.demolab.com?user=aslaker&theme=tokyonight&hide_border=true&background=0D1117&stroke=00FF41&ring=00FF41&fire=FF6B6B&currStreakNum=00FF41&sideNums=00FF41&currStreakLabel=00FF41&sideLabels=c9d1d9&dates=6e7681" alt="GitHub Streak" />
+
+<img src="https://github-readme-stats-aslaker.vercel.app/api/top-langs/?username=aslaker&layout=compact&theme=tokyonight&hide_border=true&bg_color=0D1117&title_color=00FF41&text_color=c9d1d9" alt="Top Languages" />
+
+</div>
+
+---
+
+## `> ./render_contributions.sh`
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/aslaker/aslaker/output/github-snake-dark.svg" />
+  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/aslaker/aslaker/output/github-snake.svg" />
+  <img alt="github-snake" src="https://raw.githubusercontent.com/aslaker/aslaker/output/github-snake-dark.svg" />
+</picture>
+
+---
+
+## `> tail -f ./learning.log`
+
+```diff
++ AI Engineering & Agentic Systems
++ Multi-agent orchestration patterns
++ RAG architectures and vector databases
++ Prompt engineering and LLM optimization
++ Leadership & engineering management
+! PayloadCMS and headless CMS patterns
+- Rust (paused, pivoted to Go)
+```
+
+---
+
+## `> cat ./character_sheet.md`
+
+<table>
+<tr>
+<td width="50%" valign="top">
+
+### Attributes
+| Stat | Value |
+|------|-------|
+| **Class** | Principal Engineer / AI Architect |
+| **Race** | Human (Caffeinated) |
+| **Alignment** | Chaotic Good |
+| **Strength** | Agentic Systems, Full Stack |
+| **Weakness** | Board Game Acquisition Disorder |
+
+</td>
+<td width="50%" valign="top">
+
+### Proficiencies
+- **Tabletop RPGs** - D&D 5e, and always looking for new systems
+- **Board Games** - Euro games, deck builders, campaign games
+- **Literature** - Fantasy, Sci-Fi (always taking recs)
+- **Athletics** - Single track mountain biking
+- **Performance** - 7 years of competition dance
+
+</td>
+</tr>
+</table>
+
+---
+
+## `> echo $COLLABORATION_STATUS`
+
+```bash
+STATUS="OPEN"
+INTERESTS=("AI/LLM Projects" "Agentic Systems" "Full Stack TypeScript" "Automation Workflows")
+RESPONSE_TIME="Usually within 24 hours"
+```
+
+<div align="center">
+
+**Let's build something intelligent together.**
+
+[![LinkedIn](https://img.shields.io/badge/Connect-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com/in/adam-slaker)
+[![Website](https://img.shields.io/badge/adamslaker.dev-00FF41?style=for-the-badge&logo=googlechrome&logoColor=black)](https://adamslaker.dev)
+
+</div>
+
+---
+
+<div align="center">
+
+![Profile Views](https://komarev.com/ghpvc/?username=aslaker&color=00FF41&style=for-the-badge&label=PROFILE+VIEWS)
+
+```
+> "Any sufficiently advanced AI is indistinguishable from magic."
+```
+
+</div>
