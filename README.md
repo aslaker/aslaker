@@ -34,24 +34,36 @@ When I'm not crafting code or wrangling LLMs, you'll find me rolling dice at the
 
 ---
 
+## `> cat ./open_source.json`
+
+<div align="center">
+
+[![Auto-Claude](https://img.shields.io/badge/Maintainer-Auto--Claude-00FF41?style=for-the-badge&logo=github&logoColor=white)](https://github.com/AndyMik90/Auto-Claude)
+
+**Autonomous multi-agent coding framework** - Orchestrates AI-powered development with parallel processing, git worktree isolation, and self-validating QA. Describe your goal; agents handle planning, implementation, and validation.
+
+</div>
+
+---
+
 ## `> ls -la ./active_quests`
 
 <table>
 <tr>
 <td width="50%" valign="top">
 
-### AI/LLM Projects
-- **Agentic Workflow Systems** - Multi-agent architectures that collaborate to solve complex problems
-- **AI Recipe Assistant** - Personalized meal planning for me and my wife based on available ingredients
-- **Content Generation Pipeline** - Multi-model video content for LinkedIn/YouTube
+### Building Now
+- **Stealth B2B SaaS** - AI-powered platform for the food & beverage industry, revolutionizing sensory QA programs *(coming soon)*
+- **[Ephemeris](https://github.com/aslaker/ephemeris)** - AI-enabled ISS tracker with offline-first architecture, real-time position data, and crew tracking
+- **VAPI Voice Agents** - Virtual AI receptionists for lead generation & appointment booking via Make.com
 
 </td>
 <td width="50%" valign="top">
 
-### Full Stack Applications
-- **Modern Web Apps** - Next.js 15, TypeScript, TailwindCSS
-- **Automation Workflows** - n8n & Make.com integrations
-- **CMS Solutions** - PayloadCMS implementations
+### Agentic Experiments
+- **CrewAI Idea Pipeline** - Multi-agent workflow that captures notes, classifies them as features/bugs, and auto-organizes into Linear projects via SQLite
+- **Claude Code Workflows** - Custom agentic development patterns and automation
+- **Multi-Agent Orchestration** - Exploring patterns for agent collaboration and task delegation
 
 </td>
 </tr>
@@ -73,6 +85,8 @@ When I'm not crafting code or wrangling LLMs, you'll find me rolling dice at the
 ### AI/ML & Agentic Tools
 ![OpenAI](https://img.shields.io/badge/OpenAI-412991?style=for-the-badge&logo=openai&logoColor=white)
 ![Anthropic](https://img.shields.io/badge/Anthropic-191919?style=for-the-badge&logo=anthropic&logoColor=white)
+![CrewAI](https://img.shields.io/badge/CrewAI-FF6B6B?style=for-the-badge&logo=robot&logoColor=white)
+![VAPI](https://img.shields.io/badge/VAPI-5046E5?style=for-the-badge&logo=microphone&logoColor=white)
 ![LangChain](https://img.shields.io/badge/LangChain-1C3C3C?style=for-the-badge&logo=langchain&logoColor=white)
 ![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
 
