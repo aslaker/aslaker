@@ -203,7 +203,7 @@ export function ProjectModal({
             {!project.githubUrl && !project.demoUrl && (
               <div className="font-mono text-sm text-zinc-600">
                 <span className="text-yellow-500/70">[!</span> Links unavailable
-                - project in stealth mode
+                - project in pre-launch
                 <span className="text-yellow-500/70">]</span>
               </div>
             )}

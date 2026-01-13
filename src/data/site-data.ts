@@ -108,11 +108,11 @@ export const projects: Project[] = [
 	},
 	{
 		id: "tasterra",
-		title: "Tasterra",
+		title: "Pre-Launch B2B SaaS",
 		shortDescription:
-			"A sensory evaluation platform bringing lab-quality taste panel analysis to craft beverage producers with AI-powered off-flavor detection.",
+			"An AI-powered platform for the food & beverage industry, revolutionizing sensory QA programs.",
 		fullDescription:
-			"Tasterra helps breweries, wineries, and distilleries conduct professional sensory panels, detect off-flavors with AI, and maintain product consistency across locations.\n\nKey features include multiple panel types (consumer, internal, pilot), real-time collaboration, trend analysis, and professional report generation. Set up your first panel in under 10 minutes with no training required.",
+			"A sensory evaluation platform bringing lab-quality taste panel analysis to craft beverage producers with AI-powered off-flavor detection.\n\nHelps breweries, wineries, and distilleries conduct professional sensory panels, detect off-flavors with AI, and maintain product consistency across locations. Features include multiple panel types, real-time collaboration, trend analysis, and professional report generation.",
 		logoUrl: "/projects/tasterra/logo.png",
 		tags: ["AI/ML", "B2B SaaS", "Full-Stack"],
 		technologies: ["Next.js", "Convex", "Clerk", "OpenRouter", "wink-nlp"],

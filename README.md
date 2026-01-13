@@ -53,7 +53,7 @@ When I'm not crafting code or wrangling LLMs, you'll find me rolling dice at the
 <td width="50%" valign="top">
 
 ### Building Now
-- **Stealth B2B SaaS** - AI-powered platform for the food & beverage industry, revolutionizing sensory QA programs *(coming soon)*
+- **Pre-Launch B2B SaaS** - AI-powered platform for the food & beverage industry, revolutionizing sensory QA programs *(coming soon)*
 - **[Ephemeris](https://github.com/aslaker/ephemeris)** - AI-enabled ISS tracker with offline-first architecture, real-time position data, and crew tracking
 - **VAPI Voice Agents** - Virtual AI receptionists for lead generation & appointment booking via Make.com
 
