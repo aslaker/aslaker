@@ -17,7 +17,6 @@
     "@astrojs/react": "^4.4.2",
     "@astrojs/rss": "^4.0.14",
     "@astrojs/sitemap": "^3.6.1",
-    "@astrojs/tailwind": "^6.0.2",
     "@tailwindcss/postcss": "^4.1.18",
     "astro": "^5.16.7",
     "lucide-react": "^0.562.0",
