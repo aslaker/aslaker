@@ -7,26 +7,34 @@
 	// Static assets configuration
 	"assets": {
 		"directory": "dist",
-		"run_worker_first": true
+		"binding": "ASSETS",
+		"html_handling": "auto-trailing-slash",
+		"not_found_handling": "single-page-application"
+	},
+	"observability": {
+		"logs": {
+			"enabled": true,
+			"invocation_logs": true
+		}
 	},
 
-	// Route both domains to this worker
+	// Route both domains to this worker (custom_domain creates DNS records automatically)
 	"routes": [
 		{
-			"pattern": "adamslaker.dev/*",
-			"zone_name": "adamslaker.dev"
+			"pattern": "adamslaker.dev",
+			"custom_domain": true
 		},
 		{
-			"pattern": "www.adamslaker.dev/*",
-			"zone_name": "adamslaker.dev"
+			"pattern": "www.adamslaker.dev",
+			"custom_domain": true
 		},
 		{
-			"pattern": "adamslaker.com/*",
-			"zone_name": "adamslaker.com"
+			"pattern": "adamslaker.com",
+			"custom_domain": true
 		},
 		{
-			"pattern": "www.adamslaker.com/*",
-			"zone_name": "adamslaker.com"
+			"pattern": "www.adamslaker.com",
+			"custom_domain": true
 		}
 	],
 

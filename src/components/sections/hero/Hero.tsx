@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import type { Hero as HeroType, SocialLink } from '../../../types'
 import { TypingText } from './TypingText'
-import { Github, Linkedin, Twitter, Mail } from 'lucide-react'
+import { Github, Linkedin, Mail } from 'lucide-react'
 
 interface HeroProps {
   hero: HeroType
@@ -14,7 +14,6 @@ interface HeroProps {
 const icons = {
   github: Github,
   linkedin: Linkedin,
-  twitter: Twitter,
   email: Mail,
 }
 

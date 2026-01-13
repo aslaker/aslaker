@@ -1,9 +1,9 @@
 <div align="center">
 
 <!-- Typing Animation Header -->
-[![Typing SVG](https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=28&duration=3000&pause=1000&color=00FF41&center=true&vCenter=true&multiline=true&repeat=true&width=700&height=100&lines=Principal+Software+Engineer;Principal+Agentic+Engineer;Staff+AI+Engineer;Building+the+future+with+AI+agents)](https://git.io/typing-svg)
+[![Typing SVG](https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=28&duration=3000&pause=1000&color=00FF41&center=true&vCenter=true&multiline=true&repeat=true&width=700&height=120&lines=Principal+Software+Engineer;Principal+Agentic+Engineer;Staff+AI+Engineer;Building+the+future+with+AI+agents)](https://git.io/typing-svg)
 
-`> Principal Engineer by day | Dungeon Master by night | AI whisperer always_`
+`> Principal Engineer | Proud Dad | AI whisperer_`
 
 <br/>
 

@@ -1,4 +1,4 @@
-import { Github, Linkedin, Twitter } from 'lucide-react'
+import { Github, Linkedin } from 'lucide-react'
 import type { SocialLink } from '../../types'
 
 interface SocialLinksProps {
@@ -9,7 +9,6 @@ interface SocialLinksProps {
 const iconMap = {
   github: Github,
   linkedin: Linkedin,
-  twitter: Twitter,
   email: null, // handled separately if needed
 }
 

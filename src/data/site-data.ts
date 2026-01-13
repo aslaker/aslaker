@@ -58,12 +58,6 @@ export const socialLinks: SocialLink[] = [
 		url: "https://linkedin.com/in/adamslaker",
 		icon: "linkedin",
 	},
-	{
-		id: "twitter",
-		platform: "X",
-		url: "https://x.com/adam_slaker",
-		icon: "twitter",
-	},
 ];
 
 // =============================================================================

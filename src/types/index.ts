@@ -37,7 +37,7 @@ export interface SocialLink {
   id: string
   platform: string
   url: string
-  icon: 'github' | 'linkedin' | 'twitter' | 'email'
+  icon: 'github' | 'linkedin' | 'email'
 }
 
 /**
