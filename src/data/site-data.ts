@@ -193,22 +193,22 @@ export const topicOptions: TopicOption[] = [
 	{
 		id: "strategic-ai",
 		label: "Strategic AI Consulting",
-		value: "strategic-ai-consulting",
+		value: "Strategic AI Consulting",
 	},
 	{
 		id: "web-dev",
 		label: "Website Development",
-		value: "website-development",
+		value: "Website Development",
 	},
 	{
 		id: "fractional-cto",
 		label: "Fractional CTO",
-		value: "fractional-cto",
+		value: "Fractional CTO",
 	},
 	{
 		id: "speaking",
 		label: "Speaking",
-		value: "speaking",
+		value: "Speaking",
 	},
 ];
 
