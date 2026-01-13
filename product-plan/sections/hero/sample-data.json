@@ -1,0 +1,35 @@
+{
+  "hero": {
+    "name": "Adam Slaker",
+    "title": "Principal Agentic Engineer",
+    "tagline": "Building intelligent systems that amplify human capability. Open source contributor, AI/agentic specialist, and full-stack engineer.",
+    "primaryCta": {
+      "label": "View Projects",
+      "href": "#projects"
+    },
+    "secondaryCta": {
+      "label": "Get in Touch",
+      "href": "#contact"
+    }
+  },
+  "socialLinks": [
+    {
+      "id": "github",
+      "platform": "GitHub",
+      "url": "https://github.com/adamslaker",
+      "icon": "github"
+    },
+    {
+      "id": "linkedin",
+      "platform": "LinkedIn",
+      "url": "https://linkedin.com/in/adamslaker",
+      "icon": "linkedin"
+    },
+    {
+      "id": "twitter",
+      "platform": "X (Twitter)",
+      "url": "https://x.com/adamslaker",
+      "icon": "twitter"
+    }
+  ]
+}

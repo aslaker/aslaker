@@ -1,0 +1,145 @@
+{
+  "_meta": {
+    "models": {
+      "interests": "Each interest represents a personal passion or hobby that humanizes Adam beyond his professional work. In this section, each interest is displayed as a themed card with domain-specific visual metaphors."
+    },
+    "relationships": [
+      "Each Interest contains nested data specific to its theme (traits, games, or trails)",
+      "Interests are displayed together in a matrix grid layout"
+    ]
+  },
+  "interests": [
+    {
+      "id": "ttrpg",
+      "title": "Tabletop RPGs",
+      "theme": "character-sheet",
+      "traits": [
+        {
+          "name": "Agentic Intuition",
+          "value": 16,
+          "description": "Knowing when to let AI run vs. when to intervene"
+        },
+        {
+          "name": "Flow State",
+          "value": 18,
+          "description": "Deep focus capacity for complex problems"
+        },
+        {
+          "name": "Caffeine Metabolism",
+          "value": 15,
+          "description": "Unusually high tolerance, possibly adaptive"
+        },
+        {
+          "name": "Risk Appetite",
+          "value": 17,
+          "description": "Send it. Applies to trails and architecture decisions"
+        },
+        {
+          "name": "Kid Patience",
+          "value": 14,
+          "description": "Infinite loops don't crash this process"
+        },
+        {
+          "name": "Strategic Depth",
+          "value": 16,
+          "description": "Sees three moves ahead, plans for twelve"
+        }
+      ],
+      "flavorText": "Roll for initiative"
+    },
+    {
+      "id": "board-games",
+      "title": "Board Games",
+      "theme": "scorecard",
+      "games": [
+        {
+          "name": "Bruges",
+          "designer": "Stefan Feld",
+          "category": "Euro",
+          "playCount": 12,
+          "rating": 9
+        },
+        {
+          "name": "Wingspan",
+          "designer": "Elizabeth Hargrave",
+          "category": "Engine Building",
+          "playCount": 24,
+          "rating": 9
+        },
+        {
+          "name": "Voidfall",
+          "designer": "David Turczi & Nigel Buckle",
+          "category": "4X Euro",
+          "playCount": 8,
+          "rating": 10
+        },
+        {
+          "name": "Arcs",
+          "designer": "Cole Wehrle",
+          "category": "Trick-Taking Strategy",
+          "playCount": 15,
+          "rating": 10
+        },
+        {
+          "name": "Pax Pamir (2nd Edition)",
+          "designer": "Cole Wehrle",
+          "category": "Area Control",
+          "playCount": 18,
+          "rating": 10
+        },
+        {
+          "name": "Scales of Fate",
+          "designer": "Max Anderson, Zac Dixon & Austin Harrison",
+          "category": "Strategic Deduction",
+          "playCount": 6,
+          "rating": 8
+        },
+        {
+          "name": "Tend",
+          "designer": "Max Anderson, Zac Dixon, Austin Harrison & Toby Sarnelle",
+          "category": "Flip-and-Write",
+          "playCount": 10,
+          "rating": 8
+        }
+      ],
+      "totalPlays": 93,
+      "favoriteDesigner": "Cole Wehrle"
+    },
+    {
+      "id": "mountain-biking",
+      "title": "Mountain Biking",
+      "theme": "trail-map",
+      "areas": [
+        {
+          "name": "Quarry Ridge",
+          "trails": [
+            { "name": "Pork Chop", "difficulty": "intermediate" },
+            { "name": "North Woods", "difficulty": "intermediate" },
+            { "name": "Bottoms Up", "difficulty": "advanced" }
+          ]
+        },
+        {
+          "name": "Blackhawk",
+          "trails": [
+            { "name": "Twist and Shout", "difficulty": "intermediate" },
+            { "name": "Rollercoaster", "difficulty": "advanced" },
+            { "name": "Don't Worry, Be Happy", "difficulty": "beginner" }
+          ]
+        },
+        {
+          "name": "Saris Trails",
+          "trails": []
+        },
+        {
+          "name": "Seminole Trails",
+          "trails": []
+        }
+      ],
+      "coaching": {
+        "certification": "NICA Level 1",
+        "yearsExperience": 3,
+        "organization": "National Interscholastic Cycling Association"
+      }
+    }
+  ]
+}

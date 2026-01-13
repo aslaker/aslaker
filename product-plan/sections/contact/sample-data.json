@@ -1,0 +1,88 @@
+{
+  "_meta": {
+    "models": {
+      "topicOptions": "The available topics a visitor can select when filling out the contact form. Each topic corresponds to a consulting service or speaking inquiry.",
+      "calendarConfig": "Configuration for the embedded calendar widget used for booking calls.",
+      "exampleSubmissions": "Sample form submissions showing what data gets sent to HubSpot. Useful for testing and understanding the data shape."
+    },
+    "relationships": [
+      "Topic options populate the dropdown in the contact form",
+      "Form submissions include the selected topic as a string value",
+      "Calendar config is independent and used after form submission"
+    ]
+  },
+  "topicOptions": [
+    {
+      "id": "strategic-ai",
+      "label": "Strategic AI Consulting",
+      "value": "strategic-ai-consulting"
+    },
+    {
+      "id": "web-dev",
+      "label": "Website Development",
+      "value": "website-development"
+    },
+    {
+      "id": "fractional-cto",
+      "label": "Fractional CTO",
+      "value": "fractional-cto"
+    },
+    {
+      "id": "speaking",
+      "label": "Speaking",
+      "value": "speaking"
+    }
+  ],
+  "calendarConfig": {
+    "provider": "calendly",
+    "embedUrl": "https://calendly.com/your-calendar/30min",
+    "fallbackUrl": "https://calendly.com/your-calendar"
+  },
+  "exampleSubmissions": [
+    {
+      "id": "sub-001",
+      "name": "Sarah Chen",
+      "email": "sarah.chen@techstartup.io",
+      "company": "TechStartup.io",
+      "topic": "strategic-ai-consulting",
+      "message": "We're a Series A startup looking to integrate AI into our customer support workflow. Would love to discuss how you could help us build an agentic solution that handles tier-1 inquiries.",
+      "submittedAt": "2024-01-15T10:30:00Z"
+    },
+    {
+      "id": "sub-002",
+      "name": "Marcus Johnson",
+      "email": "marcus@creativestudio.com",
+      "company": "Creative Studio Co",
+      "topic": "website-development",
+      "message": "Need a complete redesign of our agency website. Looking for something modern with great performance. Saw your work and think you'd be a great fit.",
+      "submittedAt": "2024-01-14T15:45:00Z"
+    },
+    {
+      "id": "sub-003",
+      "name": "Jennifer Wu",
+      "email": "jwu@growthventures.com",
+      "company": "Growth Ventures",
+      "topic": "fractional-cto",
+      "message": "Our portfolio companies often need technical leadership but can't justify a full-time CTO. Interested in discussing a retainer arrangement for advisory services across 2-3 companies.",
+      "submittedAt": "2024-01-12T09:15:00Z"
+    },
+    {
+      "id": "sub-004",
+      "name": "David Park",
+      "email": "david@aiconference.org",
+      "company": "AI Summit 2024",
+      "topic": "speaking",
+      "message": "We're organizing a conference on practical AI applications in enterprise. Would you be interested in giving a talk on agentic engineering? The event is in September.",
+      "submittedAt": "2024-01-10T14:00:00Z"
+    },
+    {
+      "id": "sub-005",
+      "name": "Alex Rivera",
+      "email": "alex@solofounder.dev",
+      "company": "",
+      "topic": "strategic-ai-consulting",
+      "message": "Solo founder here. Building a developer tool and want to add AI features but not sure where to start. Looking for a few hours of guidance.",
+      "submittedAt": "2024-01-08T11:20:00Z"
+    }
+  ]
+}

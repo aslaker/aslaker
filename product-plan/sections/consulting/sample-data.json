@@ -1,0 +1,53 @@
+{
+  "_meta": {
+    "models": {
+      "services": "Each service represents a consulting offering you provide through Local Tech Labs, describing what's included and who it's for.",
+      "intro": "The introductory content that sets the tone for your consulting approach.",
+      "cta": "The call-to-action configuration for booking consultations.",
+      "localTechLabsCallout": "A subtle plug for your AI voice agent business with a link to the main site."
+    },
+    "relationships": [
+      "Services stand alone as individual offerings",
+      "The CTA applies to all services (shared booking link)",
+      "The Local Tech Labs callout is separate from the main services"
+    ]
+  },
+  "intro": {
+    "headline": "Let's Build Something Together",
+    "body": "I help teams navigate the rapidly evolving AI landscape—whether that's architecting agentic systems, modernizing your web presence, or providing ongoing technical leadership. With hands-on experience building production AI systems and a pragmatic approach to technology, I focus on solutions that actually ship."
+  },
+  "services": [
+    {
+      "id": "strategic-ai",
+      "title": "Strategic AI Consulting",
+      "description": "One-on-one sessions to help you understand where AI fits in your business. We'll cut through the hype, identify high-impact opportunities, and create a practical roadmap for implementation. Ideal for founders and technical leaders exploring agentic architectures, LLM integration, or AI-powered workflows.",
+      "placeholder": "Starting at $X/session",
+      "icon": "brain"
+    },
+    {
+      "id": "website-dev",
+      "title": "Website Development",
+      "description": "Full-service website design, development, and ongoing management. From modern React applications to marketing sites that convert, I handle the technical complexity so you can focus on your business. Includes performance optimization, SEO fundamentals, and a maintainable codebase.",
+      "placeholder": "Custom pricing",
+      "icon": "globe"
+    },
+    {
+      "id": "fractional-cto",
+      "title": "Fractional CTO",
+      "description": "Part-time technical leadership for startups and growing teams. I'll help you make architecture decisions, build engineering culture, evaluate build-vs-buy tradeoffs, and keep your technical strategy aligned with business goals. Perfect for non-technical founders or teams between senior hires.",
+      "placeholder": "Monthly retainer",
+      "icon": "users"
+    }
+  ],
+  "cta": {
+    "text": "Book a Consult",
+    "subtext": "30-minute conversation to explore how I can help",
+    "href": "https://calendar.google.com/placeholder",
+    "attribution": "via Local Tech Labs"
+  },
+  "localTechLabsCallout": {
+    "text": "Interested in AI voice agents for your business?",
+    "linkText": "Check out Local Tech Labs",
+    "href": "https://localtechlabs.io"
+  }
+}

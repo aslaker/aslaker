@@ -1,16 +1,16 @@
-import { getCollection } from 'astro:content';
 import rss from '@astrojs/rss';
-import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
+import { writings } from '../data/site-data';
 
 export async function GET(context) {
-	const posts = await getCollection('blog');
 	return rss({
-		title: SITE_TITLE,
-		description: SITE_DESCRIPTION,
+		title: 'Adam Slaker',
+		description: 'Building intelligent systems that think, adapt, and ship.',
 		site: context.site,
-		items: posts.map((post) => ({
-			...post.data,
-			link: `/blog/${post.id}/`,
+		items: writings.map((writing) => ({
+			title: writing.title,
+			pubDate: new Date(writing.publishedAt),
+			description: writing.excerpt,
+			link: `/blog/${writing.slug}/`,
 		})),
 	});
 }

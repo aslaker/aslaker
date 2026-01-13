@@ -199,4 +199,8 @@ RESPONSE_TIME="Usually within 24 hours"
 > "Any sufficiently advanced AI is indistinguishable from magic."
 ```
 
+```
+> "We are not writing code with AI any more, we are orchestrating intelligence."
+```
+
 </div>

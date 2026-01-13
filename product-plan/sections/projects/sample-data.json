@@ -1,0 +1,58 @@
+{
+  "_meta": {
+    "models": {
+      "projects": "A featured technical project showcasing Adam's work in AI/agentic engineering, full-stack development, or open source contributions. Each project includes details about the architecture, challenges solved, and technologies used."
+    },
+    "relationships": [
+      "Each Project has multiple Tags for categorization (e.g., AI/ML, Open Source)",
+      "Each Project lists Technologies used in its tech stack"
+    ]
+  },
+  "projects": [
+    {
+      "id": "auto-claude",
+      "title": "Auto-Claude",
+      "shortDescription": "An autonomous AI agent framework that enables Claude to execute complex, multi-step tasks with minimal human intervention.",
+      "fullDescription": "Auto-Claude is an open-source framework for building autonomous AI agents powered by Anthropic's Claude. It enables Claude to break down complex goals into executable steps, manage its own context, and recover from errors—all while maintaining human oversight. The project explores the boundaries of what's possible when you give an LLM the ability to reason, plan, and act independently.\n\nKey innovations include a novel context management system that allows for extended autonomous sessions, a robust error recovery mechanism, and a permission system that balances autonomy with safety. Auto-Claude has been used to automate code reviews, generate documentation, and even build small applications from scratch.",
+      "logoUrl": "/projects/auto-claude/logo.svg",
+      "tags": ["AI/ML", "Open Source", "Agentic"],
+      "technologies": ["TypeScript", "Claude API", "Node.js", "React"],
+      "screenshots": [
+        "/projects/auto-claude/screenshot-1.png",
+        "/projects/auto-claude/screenshot-2.png",
+        "/projects/auto-claude/screenshot-3.png"
+      ],
+      "githubUrl": "https://github.com/adamslaker/auto-claude",
+      "demoUrl": null
+    },
+    {
+      "id": "stealth-b2b-saas",
+      "title": "Stealth B2B SaaS",
+      "shortDescription": "A production-grade AI-powered platform helping enterprises automate complex workflows. Currently in stealth mode.",
+      "fullDescription": "This stealth-mode B2B SaaS platform leverages agentic AI to transform how enterprises handle complex, multi-step workflows. Built from the ground up with scalability and security in mind, the platform integrates seamlessly with existing enterprise tools while providing intelligent automation that learns and adapts.\n\nAs the technical co-founder and principal engineer, I architected the entire system—from the real-time event processing pipeline to the LLM orchestration layer. The platform handles thousands of concurrent workflows, maintains SOC 2 compliance, and delivers sub-second response times even under heavy load.\n\nMore details coming soon as we prepare for public launch.",
+      "logoUrl": "/projects/stealth-saas/logo.svg",
+      "tags": ["AI/ML", "Enterprise", "Full-Stack"],
+      "technologies": ["Next.js", "Python", "PostgreSQL", "Claude API", "AWS"],
+      "screenshots": [
+        "/projects/stealth-saas/screenshot-1.png"
+      ],
+      "githubUrl": null,
+      "demoUrl": null
+    },
+    {
+      "id": "ephemeris-iss-tracker",
+      "title": "Ephemeris ISS Tracker",
+      "shortDescription": "A real-time visualization of the International Space Station's orbital path with predictive pass notifications.",
+      "fullDescription": "Ephemeris is a passion project born from my fascination with orbital mechanics and data visualization. The application tracks the International Space Station in real-time, rendering its orbital path on an interactive 3D globe and calculating upcoming visible passes for any location on Earth.\n\nThe tracker pulls live telemetry data from NASA's public APIs, processes orbital elements (TLEs), and uses SGP4 propagation algorithms to predict the station's position with high accuracy. Users can subscribe to notifications for visible passes in their area, complete with viewing angles and brightness predictions.\n\nBuilt as a weekend project, Ephemeris grew into a full-featured application with thousands of monthly active users who want to catch a glimpse of humanity's outpost in space.",
+      "logoUrl": "/projects/ephemeris/logo.svg",
+      "tags": ["Open Source", "Data Viz", "Full-Stack"],
+      "technologies": ["React", "Three.js", "Python", "FastAPI", "Redis"],
+      "screenshots": [
+        "/projects/ephemeris/screenshot-1.png",
+        "/projects/ephemeris/screenshot-2.png"
+      ],
+      "githubUrl": "https://github.com/adamslaker/ephemeris",
+      "demoUrl": "https://ephemeris.dev"
+    }
+  ]
+}
