@@ -160,7 +160,7 @@ export function ContactSection({
               <span>Email</span>
             </a>
             <a
-              href="https://linkedin.com/in/adamslaker"
+              href="https://linkedin.com/in/adam-slaker"
               target="_blank"
               rel="noopener noreferrer"
               className="group inline-flex items-center gap-2 font-mono text-sm text-zinc-400 transition-colors hover:text-lime-400"

@@ -55,7 +55,7 @@ export const socialLinks: SocialLink[] = [
 	{
 		id: "linkedin",
 		platform: "LinkedIn",
-		url: "https://linkedin.com/in/adamslaker",
+		url: "https://linkedin.com/in/adam-slaker",
 		icon: "linkedin",
 	},
 	{
