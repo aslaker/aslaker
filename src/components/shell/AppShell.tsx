@@ -34,7 +34,7 @@ export function AppShell({
   return (
     <div className="min-h-screen bg-zinc-950 text-zinc-100">
       {/* Header */}
-      <header className="fixed top-0 left-0 right-0 z-30 border-b border-zinc-800/50 bg-zinc-950/90 backdrop-blur-sm">
+      <header className="fixed top-0 left-0 right-0 z-30 border-b border-zinc-800/50 bg-zinc-950 md:bg-zinc-950/90 backdrop-blur-sm md:backdrop-blur-md">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           <div className="flex h-16 items-center justify-between">
             {/* Logo/Site Name */}
