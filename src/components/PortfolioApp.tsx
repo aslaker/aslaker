@@ -1,10 +1,12 @@
 import { useState } from 'react'
+import { FontProvider } from '../context/FontContext'
 import { AppShell } from './shell'
 import { Hero } from './sections/hero'
 import { ProjectsGrid } from './sections/projects'
 import { AboutGrid } from './sections/about'
 import { ConsultingSection } from './sections/consulting'
 import { ContactSection, ContactModal } from './sections/contact'
+import { SectionDivider } from './ui/SectionDivider'
 import type { ContactFormData } from '../types'
 import {
   navigationItems,
@@ -75,60 +77,90 @@ export function PortfolioApp() {
     setIsContactModalOpen(true)
   }
 
+  const handleContinueToAbout = () => {
+    const element = document.querySelector('#about')
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' })
+    }
+  }
+
+  const handleContinueToConsulting = () => {
+    const element = document.querySelector('#consulting')
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' })
+    }
+  }
+
   const handleFormSubmit = async (data: ContactFormData) => {
     await submitToHubSpot(data)
   }
 
   return (
-    <AppShell navigationItems={navigationItems} socialLinks={socialLinks}>
-      <Hero
-        hero={hero}
-        socialLinks={socialLinks}
-        onPrimaryCtaClick={handlePrimaryCtaClick}
-        onSecondaryCtaClick={handleSecondaryCtaClick}
-      />
+    <FontProvider>
+      <AppShell navigationItems={navigationItems} socialLinks={socialLinks}>
+        <Hero
+          hero={hero}
+          socialLinks={socialLinks}
+          onPrimaryCtaClick={handlePrimaryCtaClick}
+          onSecondaryCtaClick={handleSecondaryCtaClick}
+        />
 
-      <ProjectsGrid projects={projects} />
+        <SectionDivider toSection="projects" />
 
-      <AboutGrid interests={interests} />
+        <ProjectsGrid
+          projects={projects}
+          onContinueToAbout={handleContinueToAbout}
+        />
 
-      <ConsultingSection
-        intro={consultingIntro}
-        services={services}
-        cta={consultingCta}
-        localTechLabsCallout={localTechLabsCallout}
-        onBookConsult={handleContactClick}
-      />
+        <SectionDivider toSection="about" />
 
-      <ContactSection
-        topicOptions={topicOptions}
-        calendarConfig={calendarConfig}
-        onContactClick={handleContactClick}
-      />
+        <AboutGrid
+          interests={interests}
+          onContinueToConsulting={handleContinueToConsulting}
+        />
 
-      <ContactModal
-        isOpen={isContactModalOpen}
-        topicOptions={topicOptions}
-        calendarConfig={calendarConfig}
-        onClose={() => setIsContactModalOpen(false)}
-        onFormSubmit={handleFormSubmit}
-      />
+        <SectionDivider toSection="consulting" />
 
-      {/* Footer */}
-      <footer className="border-t border-zinc-800 bg-zinc-950 py-8">
-        <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col items-center justify-between gap-4 sm:flex-row">
-            <p className="font-mono text-xs text-zinc-600">
-              <span className="text-lime-600">&gt;</span> adamslaker.dev
-              <span className="text-zinc-700"> | </span>
-              Built with Astro, React, and Tailwind CSS
-            </p>
-            <p className="font-mono text-xs text-zinc-600">
-              <span className="text-emerald-500">&copy;</span> {new Date().getFullYear()} Adam Slaker
-            </p>
+        <ConsultingSection
+          intro={consultingIntro}
+          services={services}
+          cta={consultingCta}
+          localTechLabsCallout={localTechLabsCallout}
+          onBookConsult={handleContactClick}
+        />
+
+        <SectionDivider toSection="contact" />
+
+        <ContactSection
+          topicOptions={topicOptions}
+          calendarConfig={calendarConfig}
+          onContactClick={handleContactClick}
+        />
+
+        <ContactModal
+          isOpen={isContactModalOpen}
+          topicOptions={topicOptions}
+          calendarConfig={calendarConfig}
+          onClose={() => setIsContactModalOpen(false)}
+          onFormSubmit={handleFormSubmit}
+        />
+
+        {/* Footer */}
+        <footer className="border-t border-zinc-800 bg-zinc-950 py-8">
+          <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+            <div className="flex flex-col items-center justify-between gap-4 sm:flex-row">
+              <p className="font-mono text-xs text-zinc-600">
+                <span className="text-lime-600">&gt;</span> adamslaker.dev
+                <span className="text-zinc-700"> | </span>
+                Built with Astro, React, and Tailwind CSS
+              </p>
+              <p className="font-mono text-xs text-zinc-600">
+                <span className="text-emerald-500">&copy;</span> {new Date().getFullYear()} Adam Slaker
+              </p>
+            </div>
           </div>
-        </div>
-      </footer>
-    </AppShell>
+        </footer>
+      </AppShell>
+    </FontProvider>
   )
 }

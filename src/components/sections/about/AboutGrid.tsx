@@ -8,6 +8,7 @@ interface AboutGridProps {
   interests: Interest[]
   onCardHover?: (id: string) => void
   onCardClick?: (id: string) => void
+  onContinueToConsulting?: () => void
 }
 
 function isTTRPGInterest(interest: Interest): interest is TTRPGInterest {
@@ -157,6 +158,7 @@ export function AboutGrid({
   interests,
   onCardHover,
   onCardClick,
+  onContinueToConsulting,
 }: AboutGridProps) {
   const [isVisible, setIsVisible] = useState(false)
 
@@ -215,16 +217,34 @@ export function AboutGrid({
           ))}
         </div>
 
+        {/* Section CTA */}
         <div
           className={`mt-12 text-center transition-all delay-700 duration-700 ${
             isVisible ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'
           }`}
         >
-          <p className="font-mono text-xs text-zinc-600">
+          <p className="mb-6 font-mono text-xs text-zinc-600">
             <span className="text-lime-600">[</span>
             Hover over cards to explore more details
             <span className="text-lime-600">]</span>
           </p>
+
+          {/* Transition message */}
+          <p className="mb-6 font-mono text-sm text-zinc-400">
+            <span className="text-lime-600">&gt; </span>
+            Now that you know me, let&apos;s talk about what we can build together.
+          </p>
+
+          {/* Primary CTA */}
+          <button
+            onClick={onContinueToConsulting}
+            className="group inline-flex items-center gap-2 bg-lime-400 px-6 py-3 font-mono text-sm uppercase tracking-widest text-zinc-900 transition-all duration-300 hover:bg-lime-300 hover:shadow-[0_0_30px_rgba(163,230,53,0.4)]"
+          >
+            <span className="text-lime-700 transition-colors group-hover:text-lime-600">
+              &gt;
+            </span>
+            Explore Services
+          </button>
         </div>
       </div>
 

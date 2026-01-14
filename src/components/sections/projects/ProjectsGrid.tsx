@@ -9,6 +9,8 @@ interface ProjectsGridProps {
 	onGitHubClick?: (url: string) => void;
 	onDemoClick?: (url: string) => void;
 	onCloseModal?: () => void;
+	onContinueToAbout?: () => void;
+	githubProfileUrl?: string;
 }
 
 export function ProjectsGrid({
@@ -17,6 +19,8 @@ export function ProjectsGrid({
 	onGitHubClick,
 	onDemoClick,
 	onCloseModal,
+	onContinueToAbout,
+	githubProfileUrl = "https://github.com/aslaker",
 }: ProjectsGridProps) {
 	const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 	const [isVisible, setIsVisible] = useState(false);
@@ -124,17 +128,42 @@ export function ProjectsGrid({
 					))}
 				</div>
 
-				{/* Footer prompt */}
+				{/* Section CTA */}
 				<div
 					className={`mt-12 text-center transition-all delay-700 duration-700 ${
 						isVisible ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"
 					}`}
 				>
-					<p className="font-mono text-xs text-zinc-600">
+					<p className="mb-6 font-mono text-xs text-zinc-600">
 						<span className="text-lime-600">[</span>
 						Click a project to view details
 						<span className="text-lime-600">]</span>
 					</p>
+
+					{/* Primary CTA */}
+					<button
+						onClick={onContinueToAbout}
+						className="group inline-flex items-center gap-2 border border-lime-400/50 bg-transparent px-6 py-3 font-mono text-sm uppercase tracking-widest text-lime-400 transition-all duration-300 hover:border-lime-400 hover:bg-lime-400/10 hover:shadow-[0_0_20px_rgba(163,230,53,0.2)]"
+					>
+						<span className="text-emerald-400 transition-colors group-hover:text-lime-300">
+							&gt;
+						</span>
+						Learn About Me
+					</button>
+
+					{/* Secondary link */}
+					<div className="mt-4">
+						<a
+							href={githubProfileUrl}
+							target="_blank"
+							rel="noopener noreferrer"
+							className="font-mono text-xs text-zinc-500 transition-colors hover:text-lime-400"
+						>
+							<span className="text-lime-600">[</span>
+							View more on GitHub
+							<span className="text-lime-600">]</span>
+						</a>
+					</div>
 				</div>
 			</div>
 

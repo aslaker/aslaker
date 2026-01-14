@@ -1,4 +1,5 @@
 import type { NavigationItem, SocialLink } from '../../types'
+import { FontSelector } from './FontSelector'
 import { MainNav } from './MainNav'
 import { MobileMenu } from './MobileMenu'
 import { SocialLinks } from './SocialLinks'
@@ -34,7 +35,7 @@ export function AppShell({
   return (
     <div className="min-h-screen bg-zinc-950 text-zinc-100">
       {/* Header */}
-      <header className="fixed top-0 left-0 right-0 z-30 border-b border-zinc-800/50 bg-zinc-950/90 backdrop-blur-sm">
+      <header className="fixed top-0 left-0 right-0 z-30 border-b border-zinc-800/50 bg-zinc-950 md:bg-zinc-950/90 backdrop-blur-sm md:backdrop-blur-md">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           <div className="flex h-16 items-center justify-between">
             {/* Logo/Site Name */}
@@ -52,7 +53,7 @@ export function AppShell({
             </a>
 
             {/* Desktop Navigation */}
-            <div className="hidden items-center gap-8 md:flex">
+            <div className="hidden items-center gap-6 md:flex">
               <MainNav items={navigationItems} onNavigate={handleNavigate} />
               {socialLinks.length > 0 && (
                 <>
@@ -60,6 +61,8 @@ export function AppShell({
                   <SocialLinks links={socialLinks} />
                 </>
               )}
+              <div className="h-5 w-px bg-zinc-800" />
+              <FontSelector variant="compact" />
             </div>
 
             {/* Mobile Menu */}
