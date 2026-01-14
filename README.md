@@ -85,6 +85,8 @@ When I'm not crafting code or wrangling LLMs, you'll find me rolling dice at the
 ### AI/ML & Agentic Tools
 ![OpenAI](https://img.shields.io/badge/OpenAI-412991?style=for-the-badge&logo=openai&logoColor=white)
 ![Anthropic](https://img.shields.io/badge/Anthropic-191919?style=for-the-badge&logo=anthropic&logoColor=white)
+![GitHub Copilot](https://img.shields.io/badge/GitHub_Copilot-000000?style=for-the-badge&logo=githubcopilot&logoColor=white)
+![Cursor](https://img.shields.io/badge/Cursor-000000?style=for-the-badge&logo=cursor&logoColor=white)
 ![CrewAI](https://img.shields.io/badge/CrewAI-FF6B6B?style=for-the-badge&logo=robot&logoColor=white)
 ![VAPI](https://img.shields.io/badge/VAPI-5046E5?style=for-the-badge&logo=microphone&logoColor=white)
 ![LangChain](https://img.shields.io/badge/LangChain-1C3C3C?style=for-the-badge&logo=langchain&logoColor=white)
