@@ -6,7 +6,7 @@
   "workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind",
   "workspaceFolder": "/workspace",
   "mounts": [
-    "source=${localEnv:HOME}/.claude,target=/home/pwuser/.claude,type=bind,readonly"
+    "source=${localEnv:HOME}/.claude,target=/home/pwuser/.claude,type=bind"
   ],
   "remoteUser": "pwuser",
   "runArgs": ["--network=none"],
