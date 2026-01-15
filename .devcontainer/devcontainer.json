@@ -1,0 +1,12 @@
+{
+  "name": "aslaker-optimize",
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
+  "mounts": [
+    "source=${localEnv:HOME}/.claude,target=/home/pwuser/.claude,type=bind,readonly"
+  ],
+  "runArgs": ["--network=none"],
+  "workspaceFolder": "/workspace",
+  "postCreateCommand": "npm install"
+}
