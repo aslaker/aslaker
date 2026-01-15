@@ -3,10 +3,11 @@
   "build": {
     "dockerfile": "Dockerfile"
   },
+  "workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind",
+  "workspaceFolder": "/workspace",
   "mounts": [
     "source=${localEnv:HOME}/.claude,target=/home/pwuser/.claude,type=bind,readonly"
   ],
   "runArgs": ["--network=none"],
-  "workspaceFolder": "/workspace",
   "postCreateCommand": "npm install"
 }
