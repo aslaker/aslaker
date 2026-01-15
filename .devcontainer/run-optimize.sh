@@ -17,8 +17,8 @@ echo "Launching Claude Code with /optimize command..."
 echo ""
 
 # Run Claude with skip permissions and auto-execute optimize
-# Use script to provide a pseudo-TTY (workaround for -p flag TTY dependency)
-script -q /dev/null -c 'claude --dangerously-skip-permissions -p "/optimize"'
+# Use script for pseudo-TTY, --verbose and stream-json for visible progress
+script -q /dev/null -c 'claude --dangerously-skip-permissions --verbose --output-format=stream-json -p "/optimize"'
 
 # After Claude exits, show changes
 echo ""
