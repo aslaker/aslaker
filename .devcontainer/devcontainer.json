@@ -8,6 +8,7 @@
   "mounts": [
     "source=${localEnv:HOME}/.claude,target=/home/pwuser/.claude,type=bind,readonly"
   ],
+  "remoteUser": "pwuser",
   "runArgs": ["--network=none"],
   "postCreateCommand": "npm install"
 }
