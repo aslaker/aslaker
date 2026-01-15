@@ -9,6 +9,5 @@
     "source=${localEnv:HOME}/.claude,target=/home/pwuser/.claude,type=bind"
   ],
   "remoteUser": "pwuser",
-  "runArgs": ["--network=none"],
   "postCreateCommand": "npm install"
 }
