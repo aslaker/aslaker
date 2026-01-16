@@ -48,26 +48,27 @@ When I'm not crafting code or wrangling LLMs, you'll find me rolling dice at the
 
 ## `> ls -la ./active_quests`
 
+<!-- BEGIN ACTIVE_QUESTS -->
 <table>
 <tr>
 <td width="50%" valign="top">
 
 ### Building Now
-- **Pre-Launch B2B SaaS** - AI-powered platform for the food & beverage industry, revolutionizing sensory QA programs *(coming soon)*
-- **[Ephemeris](https://github.com/aslaker/ephemeris)** - AI-enabled ISS tracker with offline-first architecture, real-time position data, and crew tracking
-- **VAPI Voice Agents** - Virtual AI receptionists for lead generation & appointment booking via Make.com
+- **[Tasterra](https://tasterra.io)** - AI-powered sensory QA platform for food & beverage *(building)*
+- **[Ephemeris](https://github.com/aslaker/ephemeris)** - AI-enabled ISS tracker with offline-first architecture *(iterating)*
+- **[Auto-Claude](https://github.com/AndyMik90/Auto-Claude)** - Autonomous multi-agent coding framework *(iterating)*
 
 </td>
 <td width="50%" valign="top">
 
-### Agentic Experiments
-- **CrewAI Idea Pipeline** - Multi-agent workflow that captures notes, classifies them as features/bugs, and auto-organizes into Linear projects via SQLite
-- **Claude Code Workflows** - Custom agentic development patterns and automation
-- **Multi-Agent Orchestration** - Exploring patterns for agent collaboration and task delegation
+### Strategic Projects
+- **Maintainer HQ** - Command center for open source maintainers *(architecture)*
+- **CrewAI Idea Pipeline** - Multi-agent workflow for idea organization *(architecture)*
 
 </td>
 </tr>
 </table>
+<!-- END ACTIVE_QUESTS -->
 
 ---
 
@@ -140,6 +141,20 @@ When I'm not crafting code or wrangling LLMs, you'll find me rolling dice at the
 ! PayloadCMS and headless CMS patterns
 - Rust (paused, pivoted to Go)
 ```
+
+---
+
+## `> tail -f ./thinking_about.log`
+
+<!-- BEGIN THINKING_ABOUT -->
+Recent research and explorations:
+
+| Topic | Tags | Read Time |
+|-------|------|-----------|
+| **[Building Autonomous Agents with Claude](https://adamslaker.dev/writings/building-autonomous-agents-claude)** - Lessons from Auto-Claude | `AI`, `Agents`, `Claude` | 8 min |
+| **[Terraform Patterns for AI Workloads](https://adamslaker.dev/writings/terraform-patterns-ai-workloads)** - Infrastructure patterns for AI | `DevOps`, `AI`, `Terraform` | 6 min |
+| **[Type-Safe LLM Outputs: Zod Schemas](https://adamslaker.dev/writings/type-safe-llm-outputs-zod-schemas)** - Bringing type safety to AI | `TypeScript`, `AI`, `Zod` | 5 min |
+<!-- END THINKING_ABOUT -->
 
 ---
 

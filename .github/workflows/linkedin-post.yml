@@ -1,4 +1,4 @@
-name: Generate LinkedIn Post Draft
+name: Generate LinkedIn Post & Sync README
 
 on:
   pull_request:
@@ -6,7 +6,7 @@ on:
     branches: [main]
 
 jobs:
-  generate-linkedin-post:
+  generate-content:
     if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
 
@@ -56,18 +56,24 @@ jobs:
           # Run Claude Code
           claude -p "$(cat /tmp/prompt.txt)" --allowedTools "Read,Grep,Glob,Bash,Write" --max-turns 10
 
-      - name: Commit and push draft
+      - name: Sync README with current projects
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: |
+          claude -p "Use the sync-readme skill to update README.md with current projects and writings from site-data.ts. Update the content between the marker comments." --allowedTools "Read,Grep,Glob,Edit,Write" --max-turns 15
+
+      - name: Commit and push changes
         env:
           PR_NUMBER: ${{ github.event.pull_request.number }}
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
 
-          # Check if there are new files to commit
-          if [ -n "$(git status linkedin-drafts --porcelain)" ]; then
-            git add linkedin-drafts/
-            git commit -m "Add LinkedIn post draft for PR #$PR_NUMBER"
+          # Check if there are changes to commit
+          if [ -n "$(git status linkedin-drafts README.md --porcelain)" ]; then
+            git add linkedin-drafts/ README.md
+            git commit -m "Auto-update: LinkedIn draft and README sync for PR #$PR_NUMBER"
             git push
           else
-            echo "No new LinkedIn draft to commit"
+            echo "No changes to commit"
           fi
