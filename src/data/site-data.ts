@@ -102,7 +102,7 @@ export const projects: Project[] = [
 		screenshots: [],
 		githubUrl: "https://github.com/aslaker/ephemeris",
 		demoUrl: "https://ephemeris.observer",
-		phase: "deployed",
+		phase: "iterating",
 	},
 	{
 		id: "auto-claude",
@@ -150,6 +150,21 @@ export const projects: Project[] = [
 		logoUrl: "/projects/maintainer-hq/logo.svg",
 		tags: ["Open Source", "Developer Tools", "AI/ML", "Full-Stack"],
 		technologies: ["React", "TanStack Start", "Convex", "TypeScript"],
+		screenshots: [],
+		githubUrl: null,
+		demoUrl: null,
+		phase: "architecture",
+	},
+	{
+		id: "crewai-idea-pipeline",
+		title: "CrewAI Idea Pipeline",
+		shortDescription:
+			"A multi-agent workflow that captures notes, classifies them as features or bugs, and auto-organizes them into Linear projects.",
+		fullDescription:
+			"CrewAI Idea Pipeline is an intelligent note-processing system powered by multiple AI agents working in coordination. Capture ideas anywhere, and agents handle classification, prioritization, and organization automatically.\n\nThe pipeline uses SQLite for persistent storage and integrates directly with Linear to create properly tagged and organized issues. Each agent specializes in a specific task—classification, enrichment, or project assignment—creating a seamless flow from raw thought to actionable ticket.\n\nBuilt as an experiment in multi-agent orchestration patterns and practical AI workflow automation.",
+		logoUrl: "/projects/crewai-idea-pipeline/logo.svg",
+		tags: ["AI/ML", "Agentic", "Automation", "Developer Tools"],
+		technologies: ["Python", "CrewAI", "SQLite", "Linear API"],
 		screenshots: [],
 		githubUrl: null,
 		demoUrl: null,
