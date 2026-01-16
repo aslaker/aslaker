@@ -1,4 +1,14 @@
 import type { Project } from '../../../types'
+import { PROJECT_PHASES } from '../../../data/site-data'
+
+const PHASE_COLOR_CLASSES = {
+  zinc: 'text-zinc-400 border-zinc-500/40',
+  purple: 'text-purple-400 border-purple-500/40',
+  blue: 'text-blue-400 border-blue-500/40',
+  amber: 'text-amber-400 border-amber-500/40',
+  lime: 'text-lime-400 border-lime-500/40',
+  emerald: 'text-emerald-400 border-emerald-500/40',
+}
 
 interface ProjectCardProps {
   project: Project
@@ -7,6 +17,9 @@ interface ProjectCardProps {
 }
 
 export function ProjectCard({ project, index, onSelect }: ProjectCardProps) {
+  const phaseData = PROJECT_PHASES[project.phase]
+  const colorClasses = PHASE_COLOR_CLASSES[phaseData.color]
+
   return (
     <button
       onClick={onSelect}
@@ -28,8 +41,11 @@ export function ProjectCard({ project, index, onSelect }: ProjectCardProps) {
           <span className="h-2.5 w-2.5 rounded-full bg-yellow-500/70" />
           <span className="h-2.5 w-2.5 rounded-full bg-lime-500/70" />
         </div>
-        <span className="truncate font-mono text-xs text-lime-500/50">
+        <span className="flex-1 truncate font-mono text-xs text-lime-500/50">
           ~/projects/{project.id}
+        </span>
+        <span className={`rounded border px-1.5 py-0.5 font-mono text-[10px] ${colorClasses}`}>
+          {phaseData.label}
         </span>
       </div>
 

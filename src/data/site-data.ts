@@ -7,7 +7,9 @@ import type {
 	LocalTechLabsCallout,
 	MountainBikingInterest,
 	NavigationItem,
+	PhaseMetadata,
 	Project,
+	ProjectPhase,
 	Service,
 	SocialLink,
 	TopicOption,
@@ -70,6 +72,15 @@ export const socialLinks: SocialLink[] = [
 // Projects
 // =============================================================================
 
+export const PROJECT_PHASES: Record<ProjectPhase, PhaseMetadata> = {
+	concept: { label: 'Concept', order: 1, color: 'zinc', isActive: true },
+	design: { label: 'Design', order: 2, color: 'purple', isActive: true },
+	architecture: { label: 'Architecture', order: 3, color: 'blue', isActive: true },
+	building: { label: 'Building', order: 4, color: 'amber', isActive: true },
+	deployed: { label: 'Deployed', order: 5, color: 'lime', isActive: false },
+	iterating: { label: 'Iterating', order: 6, color: 'emerald', isActive: false },
+};
+
 export const projects: Project[] = [
 	{
 		id: "ephemeris-iss-tracker",
@@ -91,6 +102,7 @@ export const projects: Project[] = [
 		screenshots: [],
 		githubUrl: "https://github.com/aslaker/ephemeris",
 		demoUrl: "https://ephemeris.observer",
+		phase: "deployed",
 	},
 	{
 		id: "auto-claude",
@@ -111,6 +123,7 @@ export const projects: Project[] = [
 		screenshots: [],
 		githubUrl: "https://github.com/AndyMik90/Auto-Claude",
 		demoUrl: null,
+		phase: "iterating",
 	},
 	{
 		id: "tasterra",
@@ -125,6 +138,22 @@ export const projects: Project[] = [
 		screenshots: [],
 		githubUrl: null,
 		demoUrl: null,
+		phase: "building",
+	},
+	{
+		id: "maintainer-hq",
+		title: "Maintainer HQ",
+		shortDescription:
+			"A command center for open source maintainers to view issues, PRs, and track project health with dynamically generated scores based on GitHub activity and Discord sentiment.",
+		fullDescription:
+			"Maintainer HQ gives open source maintainers the ability to manage multiple repos from a single dashboard. Drill into any repo to see its health at a glance—issues, pull requests, CI/CD workflows, and contributor insights all in one place.\n\nThe goal is to replace the noise of GitHub with a focused experience designed specifically for maintainers. Instead of context-switching between tabs and notifications, spend your time where it matters: understanding your project's pulse and making decisions.\n\nHealth scores are dynamically generated from GitHub activity patterns and community sentiment from Discord, giving you signal without the noise.",
+		logoUrl: "/projects/maintainer-hq/logo.svg",
+		tags: ["Open Source", "Developer Tools", "AI/ML", "Full-Stack"],
+		technologies: ["React", "TanStack Start", "Convex", "TypeScript"],
+		screenshots: [],
+		githubUrl: null,
+		demoUrl: null,
+		phase: "architecture",
 	},
 ];
 

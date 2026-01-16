@@ -1,4 +1,5 @@
 import type { Project } from '../../../types'
+import { PhaseIndicator } from './PhaseIndicator'
 
 interface ProjectModalProps {
   project: Project | null
@@ -99,6 +100,11 @@ export function ProjectModal({
                   [{tag}]
                 </span>
               ))}
+            </div>
+
+            {/* Phase indicator */}
+            <div className="mt-4">
+              <PhaseIndicator phase={project.phase} size="md" />
             </div>
           </div>
 

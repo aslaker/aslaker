@@ -27,6 +27,7 @@
 	--animate-wave: wave 8s ease-in-out infinite;
 	--animate-blink: blink 1s step-end infinite;
 	--animate-pulse-glow: pulse-glow 2s ease-in-out infinite;
+	--animate-phase-pulse: phase-pulse 1.5s ease-in-out infinite;
 
 	@keyframes wave {
 		0%, 100% {
@@ -52,6 +53,15 @@
 		}
 		50% {
 			box-shadow: 0 0 30px rgba(163, 230, 53, 0.5);
+		}
+	}
+
+	@keyframes phase-pulse {
+		0%, 100% {
+			opacity: 1;
+		}
+		50% {
+			opacity: 0.5;
 		}
 	}
 }
