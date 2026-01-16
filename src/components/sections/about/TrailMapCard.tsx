@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import type { MountainBikingInterest, RidingArea, Trail } from '../../../types'
 
 interface TrailMapCardProps {
@@ -92,6 +93,8 @@ export function TrailMapCard({
   onHover,
   onClick,
 }: TrailMapCardProps) {
+  const [isExpanded, setIsExpanded] = useState(false)
+
   const allTrails = interest.areas.flatMap(a => a.trails)
   const difficultyCounts = allTrails.reduce((acc, trail) => {
     acc[trail.difficulty] = (acc[trail.difficulty] || 0) + 1
@@ -197,29 +200,89 @@ export function TrailMapCard({
         ))}
       </div>
 
-      {exploredAreas.length > 0 && (
-        <div className="mb-4 space-y-3">
-          {exploredAreas.map((area) => (
-            <AreaSection key={area.name} area={area} />
-          ))}
+      {/* Accordion Toggle */}
+      <button
+        type="button"
+        onClick={(e) => {
+          e.stopPropagation()
+          setIsExpanded(!isExpanded)
+        }}
+        aria-expanded={isExpanded}
+        aria-controls="trail-details"
+        className="group/toggle mb-4 flex w-full items-center justify-between rounded border border-zinc-800 bg-zinc-900/50 px-4 py-3 transition-all hover:border-lime-500/40 hover:bg-zinc-900/80 focus:outline-none focus:ring-2 focus:ring-lime-500/50 focus:ring-offset-2 focus:ring-offset-zinc-950"
+      >
+        <div className="flex items-center gap-2">
+          <span className="text-lime-600">&gt;</span>
+          <span className="font-mono text-sm text-zinc-300 group-hover/toggle:text-lime-400">
+            {isExpanded ? 'cd ..' : 'ls -la ./trails'}
+          </span>
+          <span className="font-mono text-xs text-zinc-600">
+            [{exploredAreas.length} areas{unexploredAreas.length > 0 ? `, +${unexploredAreas.length} on bucket list` : ''}]
+          </span>
         </div>
-      )}
+        <svg
+          className={`h-4 w-4 text-lime-500 transition-transform duration-300 ${
+            isExpanded ? 'rotate-180' : ''
+          }`}
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+        </svg>
+      </button>
 
-      {unexploredAreas.length > 0 && (
-        <div className="mb-4">
-          <div className="mb-2 flex items-center gap-2">
-            <span className="font-mono text-xs uppercase tracking-wider text-zinc-600">
-              On the Bucket List
-            </span>
-            <div className="h-px flex-1 bg-zinc-800" />
-          </div>
-          <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
-            {unexploredAreas.map((area) => (
-              <AreaSection key={area.name} area={area} />
-            ))}
-          </div>
+      {/* Collapsible Trail Content */}
+      <div
+        id="trail-details"
+        className={`grid transition-all duration-500 ease-in-out ${
+          isExpanded ? 'mb-4 grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'
+        }`}
+      >
+        <div className="overflow-hidden">
+          {exploredAreas.length > 0 && (
+            <div className="space-y-3 pb-4">
+              {exploredAreas.map((area, idx) => (
+                <div
+                  key={area.name}
+                  style={{
+                    animation: isExpanded
+                      ? `trailSlideIn 0.4s ease-out ${idx * 0.1}s both`
+                      : 'none',
+                  }}
+                >
+                  <AreaSection area={area} />
+                </div>
+              ))}
+            </div>
+          )}
+
+          {unexploredAreas.length > 0 && (
+            <div className="pb-4">
+              <div className="mb-2 flex items-center gap-2">
+                <span className="font-mono text-xs uppercase tracking-wider text-zinc-600">
+                  On the Bucket List
+                </span>
+                <div className="h-px flex-1 bg-zinc-800" />
+              </div>
+              <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
+                {unexploredAreas.map((area, idx) => (
+                  <div
+                    key={area.name}
+                    style={{
+                      animation: isExpanded
+                        ? `trailSlideIn 0.4s ease-out ${(exploredAreas.length + idx) * 0.1}s both`
+                        : 'none',
+                    }}
+                  >
+                    <AreaSection area={area} />
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
-      )}
+      </div>
 
       <div className="mt-auto rounded border border-emerald-500/30 bg-emerald-950/30 px-4 py-3">
         <div className="flex items-center justify-between">
@@ -244,6 +307,20 @@ export function TrailMapCard({
           </div>
         </div>
       </div>
+
+      {/* Animation keyframes */}
+      <style>{`
+        @keyframes trailSlideIn {
+          0% {
+            opacity: 0;
+            transform: translateX(-10px);
+          }
+          100% {
+            opacity: 1;
+            transform: translateX(0);
+          }
+        }
+      `}</style>
     </div>
   )
 }
