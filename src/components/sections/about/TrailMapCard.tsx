@@ -38,14 +38,25 @@ const difficultyConfig = {
   },
 }
 
-function TrailMarker({ trail }: { trail: Trail }) {
+function TrailMarker({
+  trail,
+  delay,
+  isVisible,
+}: {
+  trail: Trail
+  delay: number
+  isVisible: boolean
+}) {
   const config = difficultyConfig[trail.difficulty]
 
   return (
-    <div className="group/trail flex items-center gap-2 rounded px-2 py-1.5 transition-colors hover:bg-zinc-800/50">
-      <span className={`font-mono text-xs ${config.textColor}`}>
-        {config.icon}
-      </span>
+    <div
+      className="group/trail flex items-center gap-2 rounded px-2 py-1.5 transition-colors hover:bg-zinc-800/50"
+      style={{
+        animation: isVisible ? `trailFadeIn 0.3s ease-out ${delay}s both` : 'none',
+      }}
+    >
+      <span className={`font-mono text-xs ${config.textColor}`}>{config.icon}</span>
       <span className="font-mono text-sm text-zinc-300 group-hover/trail:text-lime-400">
         {trail.name}
       </span>
@@ -53,36 +64,96 @@ function TrailMarker({ trail }: { trail: Trail }) {
   )
 }
 
-function AreaSection({ area }: { area: RidingArea }) {
-  if (area.trails.length === 0) {
-    return (
-      <div className="rounded border border-dashed border-zinc-700 bg-zinc-900/20 px-4 py-3">
-        <div className="flex items-center gap-2">
-          <svg className="h-4 w-4 text-zinc-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-          </svg>
-          <span className="font-mono text-sm text-zinc-500">{area.name}</span>
-          <span className="font-mono text-xs italic text-zinc-600">— unexplored</span>
-        </div>
-      </div>
-    )
-  }
+function AreaAccordion({
+  area,
+  isExpanded,
+  onToggle,
+}: {
+  area: RidingArea
+  isExpanded: boolean
+  onToggle: () => void
+}) {
+  const areaSlug = area.name.toLowerCase().replace(/\s+/g, '-')
 
   return (
-    <div className="rounded border border-zinc-800 bg-zinc-900/30">
-      <div className="flex items-center gap-2 border-b border-zinc-800 px-4 py-2.5">
-        <svg className="h-4 w-4 text-lime-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+    <div className="rounded border border-zinc-800 bg-zinc-900/30 transition-all hover:border-zinc-700">
+      {/* Clickable header */}
+      <button
+        type="button"
+        onClick={(e) => {
+          e.stopPropagation()
+          onToggle()
+        }}
+        aria-expanded={isExpanded}
+        className="group/area flex w-full items-center justify-between px-4 py-2.5 transition-colors hover:bg-zinc-800/30 focus:outline-none focus:ring-2 focus:ring-lime-500/50 focus:ring-offset-1 focus:ring-offset-zinc-950"
+      >
+        <div className="flex items-center gap-2">
+          <svg
+            className="h-4 w-4 text-lime-500"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+            />
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+            />
+          </svg>
+          <span className="font-mono text-sm font-medium text-zinc-300 group-hover/area:text-lime-400">
+            {area.name}
+          </span>
+          <span className="font-mono text-xs text-zinc-600">
+            ({area.trails.length} trails)
+          </span>
+        </div>
+        <svg
+          className={`h-4 w-4 text-lime-500 transition-transform duration-300 ${
+            isExpanded ? 'rotate-180' : ''
+          }`}
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M19 9l-7 7-7-7"
+          />
         </svg>
-        <span className="font-mono text-sm font-medium text-zinc-300">{area.name}</span>
-        <span className="font-mono text-xs text-zinc-600">({area.trails.length} trails)</span>
-      </div>
-      <div className="grid grid-cols-1 gap-1 p-2 sm:grid-cols-2 lg:grid-cols-3">
-        {area.trails.map((trail) => (
-          <TrailMarker key={trail.name} trail={trail} />
-        ))}
+      </button>
+
+      {/* Collapsible trails */}
+      <div
+        className={`grid transition-all duration-300 ease-in-out ${
+          isExpanded ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'
+        }`}
+      >
+        <div className="overflow-hidden">
+          <div className="border-t border-zinc-800 px-4 py-3">
+            <div className="mb-2 font-mono text-xs text-zinc-500">
+              <span className="text-lime-600">&gt;</span> ls -la ./trails/{areaSlug}
+            </div>
+            <div className="grid grid-cols-1 gap-1 sm:grid-cols-2">
+              {area.trails.map((trail, idx) => (
+                <TrailMarker
+                  key={trail.name}
+                  trail={trail}
+                  delay={idx * 0.05}
+                  isVisible={isExpanded}
+                />
+              ))}
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   )
@@ -93,16 +164,31 @@ export function TrailMapCard({
   onHover,
   onClick,
 }: TrailMapCardProps) {
-  const [isExpanded, setIsExpanded] = useState(false)
+  const [expandedAreas, setExpandedAreas] = useState<Set<string>>(new Set())
 
-  const allTrails = interest.areas.flatMap(a => a.trails)
-  const difficultyCounts = allTrails.reduce((acc, trail) => {
-    acc[trail.difficulty] = (acc[trail.difficulty] || 0) + 1
-    return acc
-  }, {} as Record<string, number>)
+  const toggleArea = (areaName: string) => {
+    setExpandedAreas((prev) => {
+      const next = new Set(prev)
+      if (next.has(areaName)) {
+        next.delete(areaName)
+      } else {
+        next.add(areaName)
+      }
+      return next
+    })
+  }
 
-  const exploredAreas = interest.areas.filter(a => a.trails.length > 0)
-  const unexploredAreas = interest.areas.filter(a => a.trails.length === 0)
+  const allTrails = interest.areas.flatMap((a) => a.trails)
+  const difficultyCounts = allTrails.reduce(
+    (acc, trail) => {
+      acc[trail.difficulty] = (acc[trail.difficulty] || 0) + 1
+      return acc
+    },
+    {} as Record<string, number>
+  )
+
+  const exploredAreas = interest.areas.filter((a) => a.trails.length > 0)
+  const unexploredAreas = interest.areas.filter((a) => a.trails.length === 0)
 
   return (
     <div
@@ -136,9 +222,7 @@ export function TrailMapCard({
           <span className="h-2.5 w-2.5 rounded-full bg-yellow-500/70" />
           <span className="h-2.5 w-2.5 rounded-full bg-lime-500/70" />
         </div>
-        <span className="truncate font-mono text-xs text-lime-500/50">
-          ~/about/trails.gpx
-        </span>
+        <span className="truncate font-mono text-xs text-lime-500/50">~/about/trails.gpx</span>
       </div>
 
       <div className="mb-5 flex items-center justify-between">
@@ -177,7 +261,9 @@ export function TrailMapCard({
           </div>
           <div className="h-8 w-px bg-zinc-800" />
           <div className="text-right">
-            <div className="font-mono text-xl font-bold text-emerald-400">{interest.areas.length}</div>
+            <div className="font-mono text-xl font-bold text-emerald-400">
+              {exploredAreas.length}
+            </div>
             <div className="font-mono text-xs text-zinc-500">areas</div>
           </div>
         </div>
@@ -187,12 +273,8 @@ export function TrailMapCard({
         <span className="font-mono text-xs text-zinc-500">Difficulty:</span>
         {Object.entries(difficultyConfig).map(([key, config]) => (
           <div key={key} className="flex items-center gap-1.5">
-            <span className={`font-mono text-sm ${config.textColor}`}>
-              {config.icon}
-            </span>
-            <span className="font-mono text-xs text-zinc-400">
-              {config.label}
-            </span>
+            <span className={`font-mono text-sm ${config.textColor}`}>{config.icon}</span>
+            <span className="font-mono text-xs text-zinc-400">{config.label}</span>
             <span className="font-mono text-xs text-zinc-600">
               ({difficultyCounts[key] || 0})
             </span>
@@ -200,104 +282,47 @@ export function TrailMapCard({
         ))}
       </div>
 
-      {/* Accordion Toggle */}
-      <button
-        type="button"
-        onClick={(e) => {
-          e.stopPropagation()
-          setIsExpanded(!isExpanded)
-        }}
-        aria-expanded={isExpanded}
-        aria-controls="trail-details"
-        className="group/toggle mb-4 flex w-full items-center justify-between rounded border border-zinc-800 bg-zinc-900/50 px-4 py-3 transition-all hover:border-lime-500/40 hover:bg-zinc-900/80 focus:outline-none focus:ring-2 focus:ring-lime-500/50 focus:ring-offset-2 focus:ring-offset-zinc-950"
-      >
-        <div className="flex items-center gap-2">
-          <span className="text-lime-600">&gt;</span>
-          <span className="font-mono text-sm text-zinc-300 group-hover/toggle:text-lime-400">
-            {isExpanded ? 'cd ..' : 'ls -la ./trails'}
-          </span>
-          <span className="font-mono text-xs text-zinc-600">
-            [{exploredAreas.length} areas{unexploredAreas.length > 0 ? `, +${unexploredAreas.length} on bucket list` : ''}]
-          </span>
-        </div>
-        <svg
-          className={`h-4 w-4 text-lime-500 transition-transform duration-300 ${
-            isExpanded ? 'rotate-180' : ''
-          }`}
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-        </svg>
-      </button>
-
-      {/* Collapsible Trail Content */}
-      <div
-        id="trail-details"
-        className={`grid transition-all duration-500 ease-in-out ${
-          isExpanded ? 'mb-4 grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'
-        }`}
-      >
-        <div className="overflow-hidden">
-          {exploredAreas.length > 0 && (
-            <div className="space-y-3 pb-4">
-              {exploredAreas.map((area, idx) => (
-                <div
-                  key={area.name}
-                  style={{
-                    animation: isExpanded
-                      ? `trailSlideIn 0.4s ease-out ${idx * 0.1}s both`
-                      : 'none',
-                  }}
-                >
-                  <AreaSection area={area} />
-                </div>
-              ))}
-            </div>
-          )}
-
-          {unexploredAreas.length > 0 && (
-            <div className="pb-4">
-              <div className="mb-2 flex items-center gap-2">
-                <span className="font-mono text-xs uppercase tracking-wider text-zinc-600">
-                  On the Bucket List
-                </span>
-                <div className="h-px flex-1 bg-zinc-800" />
-              </div>
-              <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
-                {unexploredAreas.map((area, idx) => (
-                  <div
-                    key={area.name}
-                    style={{
-                      animation: isExpanded
-                        ? `trailSlideIn 0.4s ease-out ${(exploredAreas.length + idx) * 0.1}s both`
-                        : 'none',
-                    }}
-                  >
-                    <AreaSection area={area} />
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
-        </div>
+      {/* Terminal command header */}
+      <div className="mb-3 font-mono text-xs text-zinc-500">
+        <span className="text-lime-600">&gt;</span> ls ./trails
       </div>
+
+      {/* Area accordions */}
+      <div className="mb-4 space-y-2">
+        {exploredAreas.map((area) => (
+          <AreaAccordion
+            key={area.name}
+            area={area}
+            isExpanded={expandedAreas.has(area.name)}
+            onToggle={() => toggleArea(area.name)}
+          />
+        ))}
+      </div>
+
+      {/* Bucket list indicator */}
+      {unexploredAreas.length > 0 && (
+        <div className="mb-4 font-mono text-xs text-zinc-600">
+          <span className="text-lime-600">+</span> {unexploredAreas.length} area
+          {unexploredAreas.length !== 1 ? 's' : ''} on the bucket list
+        </div>
+      )}
 
       <div className="mt-auto rounded border border-emerald-500/30 bg-emerald-950/30 px-4 py-3">
         <div className="flex items-center justify-between">
           <div>
             <div className="mb-1 flex items-center gap-2">
               <svg className="h-4 w-4 text-emerald-400" fill="currentColor" viewBox="0 0 20 20">
-                <path fillRule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                <path
+                  fillRule="evenodd"
+                  d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                  clipRule="evenodd"
+                />
               </svg>
               <span className="font-mono text-sm font-medium text-emerald-400">
                 {interest.coaching.certification}
               </span>
             </div>
-            <p className="font-mono text-xs text-zinc-500">
-              {interest.coaching.organization}
-            </p>
+            <p className="font-mono text-xs text-zinc-500">{interest.coaching.organization}</p>
           </div>
           <div className="text-right">
             <div className="font-mono text-lg font-bold text-emerald-400">
@@ -310,14 +335,14 @@ export function TrailMapCard({
 
       {/* Animation keyframes */}
       <style>{`
-        @keyframes trailSlideIn {
+        @keyframes trailFadeIn {
           0% {
             opacity: 0;
-            transform: translateX(-10px);
+            transform: translateY(-4px);
           }
           100% {
             opacity: 1;
-            transform: translateX(0);
+            transform: translateY(0);
           }
         }
       `}</style>
