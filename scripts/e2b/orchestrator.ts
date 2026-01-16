@@ -2,20 +2,18 @@
 /**
  * E2B Sandbox Orchestrator for Optimize Pipeline
  *
- * Runs accessibility and SEO audits in parallel sandboxes,
- * then runs implementation in a third sandbox.
+ * Runs automated accessibility and SEO audit tools in parallel cloud sandboxes,
+ * then downloads results for local Claude processing.
+ *
+ * No Anthropic API key required - uses your Claude Code Pro plan locally.
  */
 
-import { Sandbox } from 'e2b';
-import { uploadCodebase, downloadSpecs, downloadImplementation, applyDownloadedFiles } from './file-sync.js';
-import {
-  SandboxPoolManager,
-  installDependencies,
-  installClaudeCLI,
-  runClaudeCommand,
-  initGit,
-} from './sandbox-manager.js';
-import type { OrchestratorOptions, AuditResult, DownloadedFile } from './types.js';
+import { writeFile, mkdir } from 'node:fs/promises';
+import { join } from 'node:path';
+import { uploadCodebase } from './file-sync.js';
+import { SandboxPoolManager, installDependencies, initGit } from './sandbox-manager.js';
+import { runFullAuditPipeline } from './tools-runner.js';
+import type { OrchestratorOptions } from './types.js';
 
 const PROJECT_DIR = '/home/user/project';
 
@@ -29,168 +27,106 @@ function parseArgs(): OrchestratorOptions {
     verbose: args.includes('--verbose'),
     timeout: args.includes('--timeout')
       ? parseInt(args[args.indexOf('--timeout') + 1], 10) * 60 * 1000
-      : undefined,
+      : 20 * 60 * 1000, // Default 20 min for tools
   };
 }
 
 /**
  * Validate required environment variables
  */
-function validateEnv(): { e2bApiKey: string; anthropicApiKey: string } {
+function validateEnv(): { e2bApiKey: string } {
   const e2bApiKey = process.env.E2B_API_KEY;
-  const anthropicApiKey = process.env.ANTHROPIC_API_KEY;
 
   if (!e2bApiKey) {
     console.error('Error: E2B_API_KEY environment variable is required');
+    console.error('Get your API key from https://e2b.dev/dashboard');
     process.exit(1);
   }
 
-  if (!anthropicApiKey) {
-    console.error('Error: ANTHROPIC_API_KEY environment variable is required');
-    process.exit(1);
+  // Note: ANTHROPIC_API_KEY not required - we use local Claude
+
+  return { e2bApiKey };
+}
+
+/**
+ * Save reports to local filesystem
+ */
+async function saveReports(
+  reports: Map<string, string>,
+  localDir: string
+): Promise<string[]> {
+  const reportsDir = join(localDir, 'docs', 'audits', 'raw');
+  await mkdir(reportsDir, { recursive: true });
+
+  const savedPaths: string[] = [];
+
+  for (const [filename, content] of reports) {
+    const filepath = join(reportsDir, filename);
+    await writeFile(filepath, content, 'utf-8');
+    savedPaths.push(filepath);
+    console.log(`  Saved: docs/audits/raw/${filename}`);
   }
 
-  return { e2bApiKey, anthropicApiKey };
+  return savedPaths;
 }
 
 /**
- * Set up a sandbox with codebase and dependencies
+ * Generate summary of audit results
  */
-async function setupSandbox(
-  pool: SandboxPoolManager,
-  sessionType: 'accessibility-audit' | 'seo-audit' | 'implementation',
-  localDir: string,
-  anthropicApiKey: string,
-  timeout?: number
-): Promise<Sandbox> {
-  const { sandbox } = await pool.create(sessionType, {}, timeout);
+function generateSummary(reports: Map<string, string>): string {
+  const lines: string[] = [
+    '# Audit Results Summary',
+    '',
+    `Generated: ${new Date().toISOString()}`,
+    '',
+    '## Reports Downloaded',
+    '',
+  ];
 
-  // Upload codebase
-  await uploadCodebase(sandbox, localDir, PROJECT_DIR);
+  for (const [filename, content] of reports) {
+    try {
+      const data = JSON.parse(content);
 
-  // Initialize git for tracking changes
-  await initGit(sandbox, PROJECT_DIR);
+      if (filename === 'axe-results.json') {
+        const violations = data.violations?.length || 0;
+        const passes = data.passes?.length || 0;
+        lines.push(`### axe-core`);
+        lines.push(`- Violations: ${violations}`);
+        lines.push(`- Passes: ${passes}`);
+        lines.push('');
+      }
 
-  // Install project dependencies
-  await installDependencies(sandbox, PROJECT_DIR);
+      if (filename === 'pa11y-results.json') {
+        const issues = Array.isArray(data) ? data.length : data.issues?.length || 0;
+        lines.push(`### pa11y`);
+        lines.push(`- Issues: ${issues}`);
+        lines.push('');
+      }
 
-  // Install Claude CLI
-  await installClaudeCLI(sandbox, anthropicApiKey);
-
-  return sandbox;
-}
-
-/**
- * Run accessibility audit in sandbox
- */
-async function runAccessibilityAudit(
-  sandbox: Sandbox,
-  anthropicApiKey: string
-): Promise<AuditResult> {
-  console.log('\n========== ACCESSIBILITY AUDIT ==========\n');
-
-  try {
-    const result = await runClaudeCommand(
-      sandbox,
-      '/accessibility-audit',
-      PROJECT_DIR,
-      anthropicApiKey
-    );
-
-    if (result.exitCode !== 0) {
-      return {
-        type: 'accessibility',
-        success: false,
-        reportPath: '',
-        specPaths: [],
-        error: `Claude exited with code ${result.exitCode}`,
-      };
+      if (filename === 'lighthouse-results.json') {
+        const categories = data.categories || {};
+        lines.push(`### Lighthouse`);
+        for (const [cat, info] of Object.entries(categories)) {
+          const score = Math.round(((info as any).score || 0) * 100);
+          lines.push(`- ${cat}: ${score}/100`);
+        }
+        lines.push('');
+      }
+    } catch {
+      lines.push(`### ${filename}`);
+      lines.push('- (Could not parse)');
+      lines.push('');
     }
-
-    return {
-      type: 'accessibility',
-      success: true,
-      reportPath: 'docs/accessibility/audits/accessibility_report.md',
-      specPaths: [], // Will be populated when downloading
-    };
-  } catch (err) {
-    return {
-      type: 'accessibility',
-      success: false,
-      reportPath: '',
-      specPaths: [],
-      error: String(err),
-    };
-  }
-}
-
-/**
- * Run SEO audit in sandbox
- */
-async function runSEOAudit(
-  sandbox: Sandbox,
-  anthropicApiKey: string
-): Promise<AuditResult> {
-  console.log('\n========== SEO AUDIT ==========\n');
-
-  try {
-    const result = await runClaudeCommand(
-      sandbox,
-      '/seo-audit',
-      PROJECT_DIR,
-      anthropicApiKey
-    );
-
-    if (result.exitCode !== 0) {
-      return {
-        type: 'seo',
-        success: false,
-        reportPath: '',
-        specPaths: [],
-        error: `Claude exited with code ${result.exitCode}`,
-      };
-    }
-
-    return {
-      type: 'seo',
-      success: true,
-      reportPath: 'docs/seo/audits/seo_report.md',
-      specPaths: [], // Will be populated when downloading
-    };
-  } catch (err) {
-    return {
-      type: 'seo',
-      success: false,
-      reportPath: '',
-      specPaths: [],
-      error: String(err),
-    };
-  }
-}
-
-/**
- * Run implementation in sandbox
- */
-async function runImplementation(
-  sandbox: Sandbox,
-  anthropicApiKey: string
-): Promise<DownloadedFile[]> {
-  console.log('\n========== IMPLEMENTATION ==========\n');
-
-  const result = await runClaudeCommand(
-    sandbox,
-    '/implement-specs',
-    PROJECT_DIR,
-    anthropicApiKey
-  );
-
-  if (result.exitCode !== 0) {
-    console.error(`Implementation exited with code ${result.exitCode}`);
-    return [];
   }
 
-  // Download changed files
-  return downloadImplementation(sandbox, PROJECT_DIR);
+  lines.push('## Next Steps');
+  lines.push('');
+  lines.push('Run the following to generate remediation specs:');
+  lines.push('```');
+  lines.push('claude -p "Read the audit reports in docs/audits/raw/ and generate remediation specs. Write specs to docs/accessibility/specs/pending/ and docs/seo/specs/pending/"');
+  lines.push('```');
+
+  return lines.join('\n');
 }
 
 /**
@@ -198,104 +134,79 @@ async function runImplementation(
  */
 async function main(): Promise<void> {
   const options = parseArgs();
-  const { e2bApiKey, anthropicApiKey } = validateEnv();
+  validateEnv();
   const localDir = process.cwd();
 
-  console.log('E2B Sandbox Optimize Pipeline');
-  console.log('==============================');
-  console.log(`Mode: ${options.auditOnly ? 'Audit only' : 'Full pipeline'}`);
+  console.log('');
+  console.log('========================================');
+  console.log('E2B Parallel Audit Pipeline');
+  console.log('========================================');
+  console.log('');
+  console.log('This runs automated tools in cloud sandboxes.');
+  console.log('No Anthropic API key needed - uses your local Claude.');
+  console.log('');
   console.log(`Local directory: ${localDir}`);
+  console.log(`Timeout: ${options.timeout! / 1000 / 60} minutes`);
   console.log('');
 
   const pool = new SandboxPoolManager();
 
   try {
-    // Phase 1: Create audit sandboxes in parallel
-    console.log('Phase 1: Setting up audit sandboxes...\n');
+    // Phase 1: Create sandbox and upload codebase
+    console.log('Phase 1: Setting up sandbox...\n');
 
-    const [accessibilitySandbox, seoSandbox] = await Promise.all([
-      setupSandbox(pool, 'accessibility-audit', localDir, anthropicApiKey, options.timeout),
-      setupSandbox(pool, 'seo-audit', localDir, anthropicApiKey, options.timeout),
-    ]);
+    const { sandbox } = await pool.create('accessibility-audit', {}, options.timeout);
 
-    // Phase 2: Run audits in parallel
-    console.log('\nPhase 2: Running audits in parallel...\n');
+    // Upload codebase
+    await uploadCodebase(sandbox, localDir, PROJECT_DIR);
 
-    const [accessibilityResult, seoResult] = await Promise.all([
-      runAccessibilityAudit(accessibilitySandbox, anthropicApiKey),
-      runSEOAudit(seoSandbox, anthropicApiKey),
-    ]);
+    // Initialize git (for tracking)
+    await initGit(sandbox, PROJECT_DIR);
 
-    // Download specs from both sandboxes
-    console.log('\nDownloading audit results...\n');
+    // Install project dependencies
+    await installDependencies(sandbox, PROJECT_DIR);
 
-    const [accessibilitySpecs, seoSpecs] = await Promise.all([
-      downloadSpecs(accessibilitySandbox, PROJECT_DIR),
-      downloadSpecs(seoSandbox, PROJECT_DIR),
-    ]);
+    // Phase 2: Run all audits
+    console.log('\nPhase 2: Running audits...\n');
 
-    // Apply specs locally
-    const allSpecs = [...accessibilitySpecs, ...seoSpecs];
-    console.log(`\nApplying ${allSpecs.length} spec files locally...\n`);
-    await applyDownloadedFiles(allSpecs, localDir);
+    const startTime = Date.now();
+    const reports = await runFullAuditPipeline(sandbox, PROJECT_DIR);
+    const duration = ((Date.now() - startTime) / 1000).toFixed(1);
 
-    // Kill audit sandboxes
-    console.log('\nCleaning up audit sandboxes...\n');
-    await Promise.all([
-      pool.kill(accessibilitySandbox.sandboxId),
-      pool.kill(seoSandbox.sandboxId),
-    ]);
+    console.log(`\nAudits completed in ${duration}s`);
 
-    // Report audit results
-    console.log('\n========== AUDIT SUMMARY ==========\n');
-    console.log(`Accessibility: ${accessibilityResult.success ? 'SUCCESS' : 'FAILED'}`);
-    if (!accessibilityResult.success) console.log(`  Error: ${accessibilityResult.error}`);
-    console.log(`SEO: ${seoResult.success ? 'SUCCESS' : 'FAILED'}`);
-    if (!seoResult.success) console.log(`  Error: ${seoResult.error}`);
-    console.log(`Specs downloaded: ${allSpecs.length}`);
+    // Phase 3: Download and save reports
+    console.log('\nPhase 3: Saving reports locally...\n');
 
-    if (options.auditOnly) {
-      console.log('\nAudit-only mode complete.');
-      return;
-    }
+    const savedPaths = await saveReports(reports, localDir);
 
-    // Phase 3: Implementation
-    if (!accessibilityResult.success && !seoResult.success) {
-      console.log('\nBoth audits failed. Skipping implementation.');
-      return;
-    }
+    // Generate summary
+    const summary = generateSummary(reports);
+    const summaryPath = join(localDir, 'docs', 'audits', 'summary.md');
+    await mkdir(join(localDir, 'docs', 'audits'), { recursive: true });
+    await writeFile(summaryPath, summary, 'utf-8');
+    console.log(`  Saved: docs/audits/summary.md`);
 
-    console.log('\nPhase 3: Setting up implementation sandbox...\n');
+    // Cleanup
+    console.log('\nCleaning up sandbox...');
+    await pool.cleanup();
 
-    const implementationSandbox = await setupSandbox(
-      pool,
-      'implementation',
-      localDir,
-      anthropicApiKey,
-      options.timeout
-    );
-
-    // Run implementation
-    const implementationChanges = await runImplementation(
-      implementationSandbox,
-      anthropicApiKey
-    );
-
-    // Apply implementation changes locally
-    if (implementationChanges.length > 0) {
-      console.log(`\nApplying ${implementationChanges.length} implementation changes...\n`);
-      await applyDownloadedFiles(implementationChanges, localDir);
-    }
-
-    // Clean up
-    await pool.kill(implementationSandbox.sandboxId);
-
-    // Final summary
-    console.log('\n========== PIPELINE COMPLETE ==========\n');
-    console.log(`Specs generated: ${allSpecs.length}`);
-    console.log(`Files modified: ${implementationChanges.length}`);
-    console.log('\nChanges have been applied to your local directory.');
-    console.log('Review with: git diff');
+    // Final output
+    console.log('');
+    console.log('========================================');
+    console.log('PIPELINE COMPLETE');
+    console.log('========================================');
+    console.log('');
+    console.log('Reports saved to: docs/audits/raw/');
+    console.log(`  - ${savedPaths.length} report files`);
+    console.log('');
+    console.log('Summary: docs/audits/summary.md');
+    console.log('');
+    console.log('Next: Run local Claude to process results:');
+    console.log('');
+    console.log('  claude -p "Read docs/audits/raw/*.json and generate');
+    console.log('            remediation specs in docs/*/specs/pending/"');
+    console.log('');
 
   } catch (err) {
     console.error('\nPipeline failed:', err);
