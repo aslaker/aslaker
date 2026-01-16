@@ -84,9 +84,17 @@ function JumpLinks({
               type="button"
               key={interest.id}
               onClick={() => scrollToSection(interest.id)}
-              className="group flex items-center gap-2 rounded border border-zinc-800 bg-zinc-900/50 px-3 py-1.5 font-mono text-xs text-zinc-400 transition-all hover:border-lime-500/50 hover:bg-zinc-900 hover:text-lime-400"
+              className="group flex items-center gap-2 rounded border border-zinc-800 bg-zinc-900/50 px-3 py-1.5 font-mono text-xs text-zinc-400 transition-all hover:bg-zinc-900"
+              onMouseEnter={(e) => {
+                e.currentTarget.style.borderColor = 'rgba(var(--theme-primary-dark-rgb), 0.5)'
+                e.currentTarget.style.color = 'var(--theme-primary)'
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.borderColor = ''
+                e.currentTarget.style.color = ''
+              }}
             >
-              <span className="text-zinc-600 transition-colors group-hover:text-lime-500">
+              <span className="text-zinc-600 transition-colors group-hover:text-[var(--theme-primary-dark)]">
                 {config.icon}
               </span>
               {config.label}
@@ -169,24 +177,20 @@ export function AboutGrid({
 
   return (
     <section id="about" className="min-h-screen bg-zinc-950 px-4 py-24 sm:px-6 lg:px-8">
-      <div className="pointer-events-none fixed inset-0 overflow-hidden opacity-[0.03]">
-        <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHRleHQgeD0iMCIgeT0iMTUiIGZvbnQtZmFtaWx5PSJtb25vc3BhY2UiIGZvbnQtc2l6ZT0iMTIiIGZpbGw9IiM4NGNjMTYiPjE8L3RleHQ+PC9zdmc+')] animate-pulse" />
-      </div>
-
       <div className="relative mx-auto max-w-6xl">
         <div
           className={`mb-8 transition-all duration-700 ${
             isVisible ? 'translate-y-0 opacity-100' : '-translate-y-4 opacity-0'
           }`}
         >
-          <div className="inline-block rounded border border-lime-500/30 bg-zinc-900/80 px-4 py-2">
-            <span className="font-mono text-sm text-lime-500">
-              <span className="text-lime-600">adam@portfolio</span>
+          <div className="inline-block rounded bg-zinc-900/80 px-4 py-2" style={{ borderWidth: '1px', borderStyle: 'solid', borderColor: 'rgba(var(--theme-primary-dark-rgb), 0.3)' }}>
+            <span className="font-mono text-sm" style={{ color: 'var(--theme-primary-dark)' }}>
+              <span style={{ color: 'var(--theme-primary-darker)' }}>adam@portfolio</span>
               <span className="text-zinc-500">:</span>
-              <span className="text-emerald-400">~/about</span>
+              <span style={{ color: 'var(--theme-secondary)' }}>~/about</span>
               <span className="text-zinc-500">$ </span>
               <span className="text-zinc-300">cat interests.md</span>
-              <span className="ml-1 inline-block h-4 w-2 animate-pulse bg-lime-400" />
+              <span className="ml-1 inline-block h-4 w-2 animate-pulse" style={{ backgroundColor: 'var(--theme-primary)' }} />
             </span>
           </div>
         </div>
@@ -197,7 +201,7 @@ export function AboutGrid({
           }`}
         >
           <p className="font-mono text-sm leading-relaxed text-zinc-400">
-            <span className="text-lime-600">&gt; </span>
+            <span style={{ color: 'var(--theme-primary-darker)' }}>&gt; </span>
             Beyond the code: the human behind the engineer. Each card reveals
             a different aspect of who I am when I&apos;m not building AI systems.
           </p>
@@ -224,23 +228,30 @@ export function AboutGrid({
           }`}
         >
           <p className="mb-6 font-mono text-xs text-zinc-600">
-            <span className="text-lime-600">[</span>
+            <span style={{ color: 'var(--theme-primary-darker)' }}>[</span>
             Hover over cards to explore more details
-            <span className="text-lime-600">]</span>
+            <span style={{ color: 'var(--theme-primary-darker)' }}>]</span>
           </p>
 
           {/* Transition message */}
           <p className="mb-6 font-mono text-sm text-zinc-400">
-            <span className="text-lime-600">&gt; </span>
+            <span style={{ color: 'var(--theme-primary-darker)' }}>&gt; </span>
             Now that you know me, let&apos;s talk about what we can build together.
           </p>
 
           {/* Primary CTA */}
           <button
             onClick={onContinueToConsulting}
-            className="group inline-flex items-center gap-2 bg-lime-400 px-6 py-3 font-mono text-sm uppercase tracking-widest text-zinc-900 transition-all duration-300 hover:bg-lime-300 hover:shadow-[0_0_30px_rgba(163,230,53,0.4)]"
+            className="group inline-flex items-center gap-2 px-6 py-3 font-mono text-sm uppercase tracking-widest text-zinc-900 transition-all duration-300"
+            style={{ backgroundColor: 'var(--theme-primary)' }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.boxShadow = '0 0 30px rgba(var(--theme-primary-rgb), 0.4)'
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.boxShadow = 'none'
+            }}
           >
-            <span className="text-lime-700 transition-colors group-hover:text-lime-600">
+            <span style={{ color: 'var(--theme-primary-darker)' }}>
               &gt;
             </span>
             Explore Services

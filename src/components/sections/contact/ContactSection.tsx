@@ -24,8 +24,8 @@ export function ContactSection({
           className="absolute inset-0"
           style={{
             backgroundImage: `
-              linear-gradient(rgba(163, 230, 53, 0.3) 1px, transparent 1px),
-              linear-gradient(90deg, rgba(163, 230, 53, 0.3) 1px, transparent 1px)
+              linear-gradient(rgba(var(--theme-primary-rgb), 0.3) 1px, transparent 1px),
+              linear-gradient(90deg, rgba(var(--theme-primary-rgb), 0.3) 1px, transparent 1px)
             `,
             backgroundSize: '60px 60px',
           }}
@@ -38,14 +38,14 @@ export function ContactSection({
             isVisible ? 'translate-y-0 opacity-100' : '-translate-y-4 opacity-0'
           }`}
         >
-          <div className="inline-block rounded border border-lime-500/30 bg-zinc-900/80 px-4 py-2">
-            <span className="font-mono text-sm text-lime-500">
-              <span className="text-lime-600">adam@portfolio</span>
+          <div className="inline-block rounded bg-zinc-900/80 px-4 py-2" style={{ borderWidth: '1px', borderStyle: 'solid', borderColor: 'rgba(var(--theme-primary-dark-rgb), 0.3)' }}>
+            <span className="font-mono text-sm" style={{ color: 'var(--theme-primary-dark)' }}>
+              <span style={{ color: 'var(--theme-primary-darker)' }}>adam@portfolio</span>
               <span className="text-zinc-500">:</span>
-              <span className="text-emerald-400">~/contact</span>
+              <span style={{ color: 'var(--theme-secondary)' }}>~/contact</span>
               <span className="text-zinc-500">$ </span>
               <span className="text-zinc-300">./reach-out.sh</span>
-              <span className="ml-1 inline-block h-4 w-2 animate-pulse bg-lime-400" />
+              <span className="ml-1 inline-block h-4 w-2 animate-pulse" style={{ backgroundColor: 'var(--theme-primary)' }} />
             </span>
           </div>
         </div>
@@ -56,7 +56,7 @@ export function ContactSection({
           }`}
         >
           <h1 className="mb-4 text-3xl font-medium text-zinc-100 sm:text-4xl">
-            <span className="text-lime-500"># </span>
+            <span style={{ color: 'var(--theme-primary-dark)' }}># </span>
             Let&apos;s Build Something
           </h1>
           <p className="mb-8 max-w-lg text-lg leading-relaxed text-zinc-400">
@@ -71,16 +71,29 @@ export function ContactSection({
             isVisible ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'
           }`}
         >
-          <div className="group relative overflow-hidden rounded-lg border border-zinc-800 bg-zinc-900/50 p-8 transition-all duration-300 hover:border-lime-500/30 hover:shadow-[0_0_40px_rgba(163,230,53,0.05)]">
+          <div
+            className="group relative overflow-hidden rounded-lg border border-zinc-800 bg-zinc-900/50 p-8 transition-all duration-300"
+            onMouseEnter={(e) => {
+              e.currentTarget.style.borderColor = 'rgba(var(--theme-primary-dark-rgb), 0.3)'
+              e.currentTarget.style.boxShadow = '0 0 40px rgba(var(--theme-primary-rgb), 0.05)'
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.borderColor = ''
+              e.currentTarget.style.boxShadow = 'none'
+            }}
+          >
             <div className="absolute right-0 top-0 h-20 w-20 overflow-hidden">
-              <div className="absolute -right-10 -top-10 h-20 w-20 rotate-45 bg-gradient-to-b from-lime-500/20 to-transparent" />
+              <div className="absolute -right-10 -top-10 h-20 w-20 rotate-45" style={{ background: 'linear-gradient(to bottom, rgba(var(--theme-primary-dark-rgb), 0.2), transparent)' }} />
             </div>
 
-            <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-lime-500/0 to-emerald-500/0 opacity-0 transition-opacity duration-500 group-hover:opacity-5" />
+            <div className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-5" style={{ background: 'linear-gradient(to bottom right, rgba(var(--theme-primary-rgb), 0.1), rgba(var(--theme-secondary-rgb), 0.1))' }} />
 
             <div className="relative">
               <div className="mb-6 flex items-center gap-3">
-                <div className="flex h-10 w-10 items-center justify-center rounded border border-zinc-700/50 bg-zinc-800/50 text-lime-500 transition-all duration-300 group-hover:border-lime-500/50 group-hover:shadow-[0_0_15px_rgba(163,230,53,0.2)]">
+                <div
+                  className="flex h-10 w-10 items-center justify-center rounded border border-zinc-700/50 bg-zinc-800/50 transition-all duration-300"
+                  style={{ color: 'var(--theme-primary-dark)' }}
+                >
                   <svg
                     viewBox="0 0 24 24"
                     fill="none"
@@ -113,11 +126,20 @@ export function ContactSection({
               <button
                 type="button"
                 onClick={onContactClick}
-                className="group/btn relative inline-flex items-center gap-2 overflow-hidden rounded border-none bg-lime-500 px-8 py-4 font-mono text-sm font-medium uppercase tracking-widest text-zinc-900 transition-all duration-300 hover:bg-lime-400 hover:shadow-[0_0_40px_rgba(163,230,53,0.4)]"
+                className="group/btn relative inline-flex items-center gap-2 overflow-hidden rounded border-none px-8 py-4 font-mono text-sm font-medium uppercase tracking-widest text-zinc-900 transition-all duration-300"
+                style={{ backgroundColor: 'var(--theme-primary-dark)' }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.backgroundColor = 'var(--theme-primary)'
+                  e.currentTarget.style.boxShadow = '0 0 40px rgba(var(--theme-primary-rgb), 0.4)'
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.backgroundColor = 'var(--theme-primary-dark)'
+                  e.currentTarget.style.boxShadow = 'none'
+                }}
               >
                 <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent transition-transform duration-700 group-hover/btn:translate-x-full" />
                 <span className="relative flex items-center gap-2">
-                  <span className="text-lime-700 transition-colors group-hover/btn:text-lime-600">
+                  <span style={{ color: 'var(--theme-primary-darker)' }}>
                     &gt;
                   </span>
                   Get in Touch
@@ -125,7 +147,10 @@ export function ContactSection({
               </button>
             </div>
 
-            <div className="absolute bottom-0 left-0 h-px w-0 bg-gradient-to-r from-lime-500 to-emerald-500 transition-all duration-500 group-hover:w-full" />
+            <div
+              className="absolute bottom-0 left-0 h-px w-0 transition-all duration-500 group-hover:w-full"
+              style={{ background: `linear-gradient(to right, var(--theme-primary), var(--theme-secondary))` }}
+            />
           </div>
         </div>
 
@@ -135,14 +160,16 @@ export function ContactSection({
           }`}
         >
           <p className="mb-4 font-mono text-xs text-zinc-500">
-            <span className="text-lime-600">[</span>
+            <span style={{ color: 'var(--theme-primary-darker)' }}>[</span>
             Or reach out directly
-            <span className="text-lime-600">]</span>
+            <span style={{ color: 'var(--theme-primary-darker)' }}>]</span>
           </p>
           <div className="flex justify-center gap-6">
             <a
               href="mailto:hello@adamslaker.dev"
-              className="group inline-flex items-center gap-2 font-mono text-sm text-zinc-400 transition-colors hover:text-lime-400"
+              className="group inline-flex items-center gap-2 font-mono text-sm text-zinc-400 transition-colors"
+              onMouseEnter={(e) => e.currentTarget.style.color = 'var(--theme-primary)'}
+              onMouseLeave={(e) => e.currentTarget.style.color = ''}
             >
               <svg
                 viewBox="0 0 24 24"
@@ -163,7 +190,9 @@ export function ContactSection({
               href="https://linkedin.com/in/adam-slaker"
               target="_blank"
               rel="noopener noreferrer"
-              className="group inline-flex items-center gap-2 font-mono text-sm text-zinc-400 transition-colors hover:text-lime-400"
+              className="group inline-flex items-center gap-2 font-mono text-sm text-zinc-400 transition-colors"
+              onMouseEnter={(e) => e.currentTarget.style.color = 'var(--theme-primary)'}
+              onMouseLeave={(e) => e.currentTarget.style.color = ''}
             >
               <svg
                 viewBox="0 0 24 24"
@@ -187,9 +216,9 @@ export function ContactSection({
           }`}
         >
           <p className="font-mono text-xs text-zinc-600">
-            <span className="text-lime-600">[</span>
+            <span style={{ color: 'var(--theme-primary-darker)' }}>[</span>
             Currently accepting new projects
-            <span className="text-lime-600">]</span>
+            <span style={{ color: 'var(--theme-primary-darker)' }}>]</span>
           </p>
         </div>
       </div>

@@ -57,7 +57,7 @@ function TrailMarker({
       }}
     >
       <span className={`font-mono text-xs ${config.textColor}`}>{config.icon}</span>
-      <span className="font-mono text-sm text-zinc-300 group-hover/trail:text-lime-400">
+      <span className="font-mono text-sm text-zinc-300 transition-colors group-hover/trail:[color:var(--theme-primary)]">
         {trail.name}
       </span>
     </div>
@@ -85,11 +85,13 @@ function AreaAccordion({
           onToggle()
         }}
         aria-expanded={isExpanded}
-        className="group/area flex w-full items-center justify-between px-4 py-2.5 transition-colors hover:bg-zinc-800/30 focus:outline-none focus:ring-2 focus:ring-lime-500/50 focus:ring-offset-1 focus:ring-offset-zinc-950"
+        className="group/area flex w-full items-center justify-between px-4 py-2.5 transition-colors hover:bg-zinc-800/30 focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-offset-zinc-950"
+        style={{ '--tw-ring-color': 'rgba(var(--theme-primary-dark-rgb), 0.5)' } as React.CSSProperties}
       >
         <div className="flex items-center gap-2">
           <svg
-            className="h-4 w-4 text-lime-500"
+            className="h-4 w-4"
+            style={{ color: 'var(--theme-primary-dark)' }}
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
@@ -107,7 +109,7 @@ function AreaAccordion({
               d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
             />
           </svg>
-          <span className="font-mono text-sm font-medium text-zinc-300 group-hover/area:text-lime-400">
+          <span className="font-mono text-sm font-medium text-zinc-300 transition-colors group-hover/area:[color:var(--theme-primary)]">
             {area.name}
           </span>
           <span className="font-mono text-xs text-zinc-600">
@@ -115,9 +117,10 @@ function AreaAccordion({
           </span>
         </div>
         <svg
-          className={`h-4 w-4 text-lime-500 transition-transform duration-300 ${
+          className={`h-4 w-4 transition-transform duration-300 ${
             isExpanded ? 'rotate-180' : ''
           }`}
+          style={{ color: 'var(--theme-primary-dark)' }}
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
@@ -140,7 +143,7 @@ function AreaAccordion({
         <div className="overflow-hidden">
           <div className="border-t border-zinc-800 px-4 py-3">
             <div className="mb-2 font-mono text-xs text-zinc-500">
-              <span className="text-lime-600">&gt;</span> ls -la ./trails/{areaSlug}
+              <span style={{ color: 'var(--theme-primary-darker)' }}>&gt;</span> ls -la ./trails/{areaSlug}
             </div>
             <div className="grid grid-cols-1 gap-1 sm:grid-cols-2">
               {area.trails.map((trail, idx) => (
@@ -194,10 +197,26 @@ export function TrailMapCard({
     <div
       onClick={onClick}
       onMouseEnter={onHover}
-      className="group relative flex h-full w-full flex-col rounded-lg border border-lime-500/30 bg-zinc-950 p-5 text-left transition-all duration-300 hover:border-lime-400/60 hover:shadow-[0_0_30px_rgba(132,204,22,0.15)] sm:p-6"
+      className="group relative flex h-full w-full flex-col rounded-lg bg-zinc-950 p-5 text-left transition-all duration-300 sm:p-6"
+      style={{
+        borderWidth: '1px',
+        borderStyle: 'solid',
+        borderColor: 'rgba(var(--theme-primary-dark-rgb), 0.3)',
+      }}
+      onMouseOver={(e) => {
+        e.currentTarget.style.borderColor = 'rgba(var(--theme-primary-rgb), 0.6)'
+        e.currentTarget.style.boxShadow = '0 0 30px rgba(var(--theme-primary-dark-rgb), 0.15)'
+      }}
+      onMouseOut={(e) => {
+        e.currentTarget.style.borderColor = 'rgba(var(--theme-primary-dark-rgb), 0.3)'
+        e.currentTarget.style.boxShadow = 'none'
+      }}
     >
       <div className="pointer-events-none absolute inset-0 rounded-lg bg-[repeating-linear-gradient(0deg,transparent,transparent_2px,rgba(0,0,0,0.1)_2px,rgba(0,0,0,0.1)_4px)] opacity-50" />
-      <div className="pointer-events-none absolute inset-0 rounded-lg bg-gradient-to-b from-lime-500/5 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+      <div
+        className="pointer-events-none absolute inset-0 rounded-lg opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+        style={{ background: 'linear-gradient(to bottom, rgba(var(--theme-primary-dark-rgb), 0.05), transparent)' }}
+      />
 
       <div className="pointer-events-none absolute inset-0 rounded-lg opacity-5">
         <svg className="h-full w-full" viewBox="0 0 100 100" preserveAspectRatio="none">
@@ -208,7 +227,7 @@ export function TrailMapCard({
                 stroke="currentColor"
                 strokeWidth="0.5"
                 fill="none"
-                className="text-lime-500"
+                style={{ color: 'var(--theme-primary-dark)' }}
               />
             </pattern>
           </defs>
@@ -216,21 +235,25 @@ export function TrailMapCard({
         </svg>
       </div>
 
-      <div className="mb-4 flex items-center gap-2 border-b border-lime-500/20 pb-3">
+      <div className="mb-4 flex items-center gap-2 pb-3" style={{ borderBottomWidth: '1px', borderBottomStyle: 'solid', borderBottomColor: 'rgba(var(--theme-primary-dark-rgb), 0.2)' }}>
         <div className="flex gap-1.5">
           <span className="h-2.5 w-2.5 rounded-full bg-red-500/70" />
           <span className="h-2.5 w-2.5 rounded-full bg-yellow-500/70" />
-          <span className="h-2.5 w-2.5 rounded-full bg-lime-500/70" />
+          <span className="h-2.5 w-2.5 rounded-full" style={{ backgroundColor: 'rgba(var(--theme-primary-dark-rgb), 0.7)' }} />
         </div>
-        <span className="truncate font-mono text-xs text-lime-500/50">~/about/trails.gpx</span>
+        <span className="truncate font-mono text-xs" style={{ color: 'rgba(var(--theme-primary-dark-rgb), 0.5)' }}>~/about/trails.gpx</span>
       </div>
 
       <div className="mb-5 flex items-center justify-between">
         <div className="flex items-center gap-4">
-          <div className="flex h-14 w-14 items-center justify-center rounded border border-lime-500/20 bg-zinc-900 sm:h-16 sm:w-16">
+          <div
+            className="flex h-14 w-14 items-center justify-center rounded bg-zinc-900 sm:h-16 sm:w-16"
+            style={{ borderWidth: '1px', borderStyle: 'solid', borderColor: 'rgba(var(--theme-primary-dark-rgb), 0.2)' }}
+          >
             <svg
               viewBox="0 0 24 24"
-              className="h-8 w-8 text-lime-400 sm:h-10 sm:w-10"
+              className="h-8 w-8 sm:h-10 sm:w-10"
+              style={{ color: 'var(--theme-primary)' }}
               fill="none"
               stroke="currentColor"
               strokeWidth="1.5"
@@ -244,8 +267,8 @@ export function TrailMapCard({
             </svg>
           </div>
           <div>
-            <h3 className="font-mono text-base font-bold tracking-tight text-lime-400 group-hover:text-lime-300 sm:text-lg">
-              <span className="text-lime-600">&gt; </span>
+            <h3 className="font-mono text-base font-bold tracking-tight sm:text-lg" style={{ color: 'var(--theme-primary)' }}>
+              <span style={{ color: 'var(--theme-primary-darker)' }}>&gt; </span>
               {interest.title}
             </h3>
             <span className="font-mono text-xs uppercase tracking-widest text-zinc-500">
@@ -256,12 +279,12 @@ export function TrailMapCard({
 
         <div className="hidden items-center gap-4 sm:flex">
           <div className="text-right">
-            <div className="font-mono text-xl font-bold text-lime-400">{allTrails.length}</div>
+            <div className="font-mono text-xl font-bold" style={{ color: 'var(--theme-primary)' }}>{allTrails.length}</div>
             <div className="font-mono text-xs text-zinc-500">trails</div>
           </div>
           <div className="h-8 w-px bg-zinc-800" />
           <div className="text-right">
-            <div className="font-mono text-xl font-bold text-emerald-400">
+            <div className="font-mono text-xl font-bold" style={{ color: 'var(--theme-secondary)' }}>
               {exploredAreas.length}
             </div>
             <div className="font-mono text-xs text-zinc-500">areas</div>
@@ -284,7 +307,7 @@ export function TrailMapCard({
 
       {/* Terminal command header */}
       <div className="mb-3 font-mono text-xs text-zinc-500">
-        <span className="text-lime-600">&gt;</span> ls ./trails
+        <span style={{ color: 'var(--theme-primary-darker)' }}>&gt;</span> ls ./trails
       </div>
 
       {/* Area accordions */}
@@ -302,30 +325,38 @@ export function TrailMapCard({
       {/* Bucket list indicator */}
       {unexploredAreas.length > 0 && (
         <div className="mb-4 font-mono text-xs text-zinc-600">
-          <span className="text-lime-600">+</span> {unexploredAreas.length} area
+          <span style={{ color: 'var(--theme-primary-darker)' }}>+</span> {unexploredAreas.length} area
           {unexploredAreas.length !== 1 ? 's' : ''} on the bucket list
         </div>
       )}
 
-      <div className="mt-auto rounded border border-emerald-500/30 bg-emerald-950/30 px-4 py-3">
+      <div
+        className="mt-auto rounded px-4 py-3"
+        style={{
+          borderWidth: '1px',
+          borderStyle: 'solid',
+          borderColor: 'rgba(var(--theme-secondary-dark-rgb), 0.3)',
+          backgroundColor: 'rgba(var(--theme-secondary-dark-rgb), 0.1)',
+        }}
+      >
         <div className="flex items-center justify-between">
           <div>
             <div className="mb-1 flex items-center gap-2">
-              <svg className="h-4 w-4 text-emerald-400" fill="currentColor" viewBox="0 0 20 20">
+              <svg className="h-4 w-4" style={{ color: 'var(--theme-secondary)' }} fill="currentColor" viewBox="0 0 20 20">
                 <path
                   fillRule="evenodd"
                   d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
                   clipRule="evenodd"
                 />
               </svg>
-              <span className="font-mono text-sm font-medium text-emerald-400">
+              <span className="font-mono text-sm font-medium" style={{ color: 'var(--theme-secondary)' }}>
                 {interest.coaching.certification}
               </span>
             </div>
             <p className="font-mono text-xs text-zinc-500">{interest.coaching.organization}</p>
           </div>
           <div className="text-right">
-            <div className="font-mono text-lg font-bold text-emerald-400">
+            <div className="font-mono text-lg font-bold" style={{ color: 'var(--theme-secondary)' }}>
               {interest.coaching.yearsExperience}+
             </div>
             <div className="font-mono text-xs text-zinc-500">years coaching</div>

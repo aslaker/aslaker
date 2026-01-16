@@ -48,21 +48,21 @@ export function Hero({
         <div
           className="absolute inset-0 opacity-30"
           style={{
-            background: 'radial-gradient(ellipse 80% 50% at 50% 50%, rgba(163, 230, 53, 0.15) 0%, transparent 50%)',
+            background: 'radial-gradient(ellipse 80% 50% at 50% 50%, rgba(var(--theme-primary-rgb), 0.15) 0%, transparent 50%)',
             animation: 'wave 8s ease-in-out infinite',
           }}
         />
         <div
           className="absolute inset-0 opacity-20"
           style={{
-            background: 'radial-gradient(ellipse 60% 40% at 60% 60%, rgba(52, 211, 153, 0.12) 0%, transparent 50%)',
+            background: 'radial-gradient(ellipse 60% 40% at 60% 60%, rgba(var(--theme-secondary-rgb), 0.12) 0%, transparent 50%)',
             animation: 'wave 12s ease-in-out infinite reverse',
           }}
         />
         <div
           className="absolute inset-0 opacity-15"
           style={{
-            background: 'radial-gradient(ellipse 70% 60% at 40% 40%, rgba(163, 230, 53, 0.1) 0%, transparent 50%)',
+            background: 'radial-gradient(ellipse 70% 60% at 40% 40%, rgba(var(--theme-primary-rgb), 0.1) 0%, transparent 50%)',
             animation: 'wave 10s ease-in-out infinite 2s',
           }}
         />
@@ -71,7 +71,7 @@ export function Hero({
         <div
           className="absolute inset-0 pointer-events-none opacity-[0.03]"
           style={{
-            backgroundImage: 'repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(163, 230, 53, 0.5) 2px, rgba(163, 230, 53, 0.5) 4px)',
+            backgroundImage: 'repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(var(--theme-primary-rgb), 0.5) 2px, rgba(var(--theme-primary-rgb), 0.5) 4px)',
           }}
         />
 
@@ -91,16 +91,17 @@ export function Hero({
       {/* Content */}
       <div className="relative z-10 max-w-4xl mx-auto px-6 text-center">
         {/* Terminal-style prefix */}
-        <div className="mb-8 font-mono text-lime-500/60 text-sm tracking-wider">
-          <span className="text-emerald-400">&gt;</span> initializing portfolio...
+        <div className="mb-8 font-mono text-sm tracking-wider" style={{ color: 'rgba(var(--theme-primary-dark-rgb), 0.6)' }}>
+          <span style={{ color: 'var(--theme-secondary)' }}>&gt;</span> initializing portfolio...
         </div>
 
         {/* Name with typing effect */}
         <h1 className="font-mono text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-zinc-100 mb-4 tracking-tight">
           <span className="relative">
             <span
-              className="absolute inset-0 blur-lg bg-lime-400/20"
+              className="absolute inset-0 blur-lg"
               style={{
+                background: 'rgba(var(--theme-primary-rgb), 0.2)',
                 opacity: nameComplete ? 0.6 : 0,
                 transition: 'opacity 0.5s ease-out',
               }}
@@ -119,9 +120,10 @@ export function Hero({
         <div className="h-12 sm:h-14 md:h-16 mb-6">
           {nameComplete && (
             <h2
-              className="font-mono text-xl sm:text-2xl md:text-3xl text-lime-400 tracking-wide"
+              className="font-mono text-xl sm:text-2xl md:text-3xl tracking-wide"
               style={{
-                textShadow: '0 0 20px rgba(163, 230, 53, 0.4), 0 0 40px rgba(163, 230, 53, 0.2)',
+                color: 'var(--theme-primary)',
+                textShadow: '0 0 20px rgba(var(--theme-primary-rgb), 0.4), 0 0 40px rgba(var(--theme-primary-rgb), 0.2)',
               }}
             >
               <TypingText
@@ -155,22 +157,48 @@ export function Hero({
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
             <button
               onClick={onPrimaryCtaClick}
-              className="group relative px-8 py-4 font-mono text-sm uppercase tracking-widest text-zinc-900 bg-lime-400 rounded-none overflow-hidden transition-all duration-300 hover:bg-lime-300 hover:shadow-[0_0_30px_rgba(163,230,53,0.4)]"
+              className="group relative px-8 py-4 font-mono text-sm uppercase tracking-widest text-zinc-900 rounded-none overflow-hidden transition-all duration-300"
+              style={{
+                backgroundColor: 'var(--theme-primary)',
+                boxShadow: '0 0 0 rgba(var(--theme-primary-rgb), 0)',
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.boxShadow = '0 0 30px rgba(var(--theme-primary-rgb), 0.4)'
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.boxShadow = '0 0 0 rgba(var(--theme-primary-rgb), 0)'
+              }}
             >
               <span className="relative z-10 flex items-center gap-2">
-                <span className="text-lime-700 group-hover:text-lime-600">&gt;</span>
+                <span style={{ color: 'var(--theme-primary-darker)' }}>&gt;</span>
                 {hero.primaryCta.label}
               </span>
               {/* Glitch effect on hover */}
-              <div className="absolute inset-0 bg-emerald-400 translate-x-full group-hover:translate-x-0 transition-transform duration-300 -z-0" />
+              <div className="absolute inset-0 translate-x-full group-hover:translate-x-0 transition-transform duration-300 -z-0" style={{ backgroundColor: 'var(--theme-secondary)' }} />
             </button>
 
             <button
               onClick={onSecondaryCtaClick}
-              className="group px-8 py-4 font-mono text-sm uppercase tracking-widest text-lime-400 border border-lime-400/50 rounded-none transition-all duration-300 hover:border-lime-400 hover:bg-lime-400/10 hover:shadow-[0_0_20px_rgba(163,230,53,0.2)]"
+              className="group px-8 py-4 font-mono text-sm uppercase tracking-widest rounded-none transition-all duration-300"
+              style={{
+                color: 'var(--theme-primary)',
+                borderWidth: '1px',
+                borderStyle: 'solid',
+                borderColor: 'rgba(var(--theme-primary-rgb), 0.5)',
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.borderColor = 'var(--theme-primary)'
+                e.currentTarget.style.backgroundColor = 'rgba(var(--theme-primary-rgb), 0.1)'
+                e.currentTarget.style.boxShadow = '0 0 20px rgba(var(--theme-primary-rgb), 0.2)'
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.borderColor = 'rgba(var(--theme-primary-rgb), 0.5)'
+                e.currentTarget.style.backgroundColor = 'transparent'
+                e.currentTarget.style.boxShadow = 'none'
+              }}
             >
               <span className="flex items-center gap-2">
-                <span className="text-emerald-400 group-hover:text-lime-300">&gt;</span>
+                <span style={{ color: 'var(--theme-secondary)' }}>&gt;</span>
                 {hero.secondaryCta.label}
               </span>
             </button>
@@ -185,7 +213,16 @@ export function Hero({
                   <button
                     key={link.id}
                     onClick={() => handleSocialClick(link)}
-                    className="p-3 text-zinc-500 hover:text-lime-400 transition-all duration-300 hover:shadow-[0_0_15px_rgba(163,230,53,0.3)] rounded-sm"
+                    className="p-3 text-zinc-500 transition-all duration-300 rounded-sm"
+                    style={{ '--hover-color': 'var(--theme-primary)' } as React.CSSProperties}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.color = 'var(--theme-primary)'
+                      e.currentTarget.style.boxShadow = '0 0 15px rgba(var(--theme-primary-rgb), 0.3)'
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.color = ''
+                      e.currentTarget.style.boxShadow = 'none'
+                    }}
                     aria-label={link.platform}
                   >
                     <Icon className="w-5 h-5" />
@@ -205,8 +242,11 @@ export function Hero({
           <div className="flex flex-col items-center gap-2 text-zinc-600 font-mono text-xs">
             <span className="tracking-widest uppercase">scroll</span>
             <div
-              className="w-px h-8 bg-gradient-to-b from-lime-400/50 to-transparent"
-              style={{ animation: 'pulse 2s ease-in-out infinite' }}
+              className="w-px h-8"
+              style={{
+                background: 'linear-gradient(to bottom, rgba(var(--theme-primary-rgb), 0.5), transparent)',
+                animation: 'pulse 2s ease-in-out infinite',
+              }}
             />
           </div>
         </div>
