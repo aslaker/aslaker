@@ -10,10 +10,41 @@ Automatically update the GitHub profile README to reflect current projects and r
 ## Process
 
 1. **Read site-data.ts** - Get current projects and writings from `src/data/site-data.ts`
-2. **Group projects by phase** - Organize into "Building Now" and "Strategic Projects"
-3. **Get recent writings** - Sort by date and take the most recent 3-5
-4. **Update README sections** - Replace content between marker comments
-5. **Commit if changed** - Only commit if there are actual changes
+2. **Only use exported (uncommented) arrays** - Ignore any commented-out code blocks
+3. **Use exact `title` field** - ALWAYS use the project's `title` field exactly as written, never derive names from IDs or URLs
+4. **Group projects by phase** - Organize into "Building Now" and "Strategic Projects"
+5. **Get recent writings** - Sort by date and take the most recent 3-5 (if any exist in exported array)
+6. **Update README sections** - Replace content between marker comments
+7. **Commit if changed** - Only commit if there are actual changes
+
+## Critical Rules
+
+### Use Project Titles Exactly
+
+**ALWAYS use the `title` field from the project object.** Never derive the project name from:
+- The project `id` (e.g., "tasterra" should NOT become "Tasterra")
+- The `demoUrl` domain (e.g., "tasterra.io" should NOT become "Tasterra")
+- The `githubUrl` repo name
+
+Example: If site-data.ts has:
+```typescript
+{
+  id: "tasterra",
+  title: "Pre-Launch B2B SaaS",  // <-- USE THIS
+  demoUrl: "https://tasterra.io",
+  ...
+}
+```
+
+The README should show: `**Pre-Launch B2B SaaS** - description *(building)*`
+
+NOT: `**[Tasterra](https://tasterra.io)** - description *(building)*`
+
+### Only Use Uncommented Code
+
+Only read data from **exported arrays** that are actively in the code. Commented-out sections (prefixed with `//`) should be completely ignored.
+
+If `writings` is exported as an empty array `[]`, do not include any writings in the README.
 
 ## Section Markers
 
@@ -54,12 +85,13 @@ Maintain the existing two-column table format with terminal aesthetic:
 
 ### Building Now
 - **[Project Title](url)** - Short description *(phase)*
+- **Project Title** - Short description *(phase)*  <!-- No link if no public URL -->
 
 </td>
 <td width="50%" valign="top">
 
 ### Strategic Projects
-- **[Project Title](url)** - Short description *(phase)*
+- **Project Title** - Short description *(phase)*  <!-- Usually no link for strategic projects -->
 
 </td>
 </tr>
@@ -68,7 +100,7 @@ Maintain the existing two-column table format with terminal aesthetic:
 
 ### Thinking About Section
 
-Create a terminal-styled section for recent writings:
+Create a terminal-styled section for recent writings. **Only include if writings array is non-empty:**
 
 ```markdown
 ## `> tail -f ./thinking_about.log`
@@ -79,6 +111,8 @@ Recent research and explorations:
 |-------|------|-----------|
 | **[Article Title](link)** - Brief excerpt | `Tag1`, `Tag2` | X min |
 ```
+
+If the writings array is empty (`[]`), **omit this entire section** from the README.
 
 ## Data Sources
 
@@ -115,7 +149,11 @@ Read from `src/data/site-data.ts`:
 - Use emoji sparingly (only where already present in README)
 - Keep descriptions concise (one line each)
 - Include phase in parentheses for projects
-- Link to demo URL if available, otherwise GitHub URL
+- **ALWAYS use the exact `title` field** - never derive names from IDs, URLs, or repo names
+- Link logic for projects:
+  - If `demoUrl` exists → `**[Title](demoUrl)**`
+  - Else if `githubUrl` exists → `**[Title](githubUrl)**`
+  - Else (no public URL) → `**Title**` (no link, just bold)
 - For writings, link to the site (https://adamslaker.dev/writings/[slug])
 
 ## Example Output
@@ -123,22 +161,27 @@ Read from `src/data/site-data.ts`:
 ### Active Quests
 ```markdown
 ### Building Now
-- **[Tasterra](https://tasterra.io)** - AI-powered sensory QA platform *(building)*
-- **[Ephemeris](https://github.com/aslaker/ephemeris)** - AI-enabled ISS tracker *(iterating)*
+- **Pre-Launch B2B SaaS** - AI-powered sensory QA platform for food & beverage *(building)*
+- **[Ephemeris ISS Tracker](https://ephemeris.observer)** - Real-time ISS visualization with predictive pass notifications *(iterating)*
 - **[Auto-Claude](https://github.com/AndyMik90/Auto-Claude)** - Autonomous multi-agent coding framework *(iterating)*
 
 ### Strategic Projects
-- **Maintainer HQ** - Open source project health dashboard *(architecture)*
+- **Maintainer HQ** - Command center for open source maintainers *(architecture)*
 - **CrewAI Idea Pipeline** - Multi-agent workflow for idea organization *(architecture)*
 ```
 
-### Thinking About
+Note: The first project has NO link because it has no public URL yet (demoUrl is null, and it's pre-launch). Use the exact `title` field ("Pre-Launch B2B SaaS"), not "Tasterra".
+
+### Thinking About (when writings exist)
 ```markdown
 | Topic | Tags | Read Time |
 |-------|------|-----------|
 | **[Building Autonomous Agents with Claude](https://adamslaker.dev/writings/building-autonomous-agents-claude)** - Lessons from Auto-Claude | `AI`, `Agents`, `Claude` | 8 min |
 | **[Terraform Patterns for AI Workloads](https://adamslaker.dev/writings/terraform-patterns-ai-workloads)** - Infrastructure patterns | `DevOps`, `AI`, `Terraform` | 6 min |
 ```
+
+### Thinking About (when writings array is empty)
+When the `writings` array is empty, omit the entire "Thinking About" section from the README.
 
 ## Error Handling
 
