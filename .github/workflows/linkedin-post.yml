@@ -22,7 +22,6 @@ jobs:
         with:
           anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
           prompt: "/linkedin-post ${{ github.event.pull_request.number }} ${{ github.event.pull_request.title }}"
-          claude_args: "--max-turns 10"
 
       - name: Commit LinkedIn draft
         run: |
