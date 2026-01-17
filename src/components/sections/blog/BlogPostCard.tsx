@@ -19,7 +19,6 @@ export function BlogPostCard({ writing, onTagClick, onClick }: BlogPostCardProps
       onClick={onClick}
       onKeyDown={handleKeyDown}
       tabIndex={0}
-      role="button"
       aria-label={`Read article: ${writing.title}`}
       className="group relative cursor-pointer overflow-hidden rounded-lg border border-zinc-800/50 bg-zinc-900/50 transition-all duration-300 hover:border-lime-500/30 hover:bg-zinc-900 focus:outline-none focus:ring-2 focus:ring-lime-500/50 focus:ring-offset-2 focus:ring-offset-zinc-950"
     >
