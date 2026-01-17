@@ -54,8 +54,8 @@ When I'm not crafting code or wrangling LLMs, you'll find me rolling dice at the
 <td width="50%" valign="top">
 
 ### Building Now
-- **[Tasterra](https://tasterra.io)** - AI-powered sensory QA platform for food & beverage *(building)*
-- **[Ephemeris](https://github.com/aslaker/ephemeris)** - AI-enabled ISS tracker with offline-first architecture *(iterating)*
+- **Pre-Launch B2B SaaS** - AI-powered platform for the food & beverage industry *(building)*
+- **[Ephemeris ISS Tracker](https://ephemeris.observer)** - Real-time ISS visualization with predictive pass notifications *(iterating)*
 - **[Auto-Claude](https://github.com/AndyMik90/Auto-Claude)** - Autonomous multi-agent coding framework *(iterating)*
 
 </td>
@@ -141,20 +141,6 @@ When I'm not crafting code or wrangling LLMs, you'll find me rolling dice at the
 ! PayloadCMS and headless CMS patterns
 - Rust (paused, pivoted to Go)
 ```
-
----
-
-## `> tail -f ./thinking_about.log`
-
-<!-- BEGIN THINKING_ABOUT -->
-Recent research and explorations:
-
-| Topic | Tags | Read Time |
-|-------|------|-----------|
-| **[Building Autonomous Agents with Claude](https://adamslaker.dev/writings/building-autonomous-agents-claude)** - Lessons from Auto-Claude | `AI`, `Agents`, `Claude` | 8 min |
-| **[Terraform Patterns for AI Workloads](https://adamslaker.dev/writings/terraform-patterns-ai-workloads)** - Infrastructure patterns for AI | `DevOps`, `AI`, `Terraform` | 6 min |
-| **[Type-Safe LLM Outputs: Zod Schemas](https://adamslaker.dev/writings/type-safe-llm-outputs-zod-schemas)** - Bringing type safety to AI | `TypeScript`, `AI`, `Zod` | 5 min |
-<!-- END THINKING_ABOUT -->
 
 ---
 
