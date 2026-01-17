@@ -24,6 +24,8 @@ jobs:
           anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
           github_token: ${{ secrets.PAT_TOKEN }}
           prompt: "/linkedin-post ${{ github.event.pull_request.number }} ${{ github.event.pull_request.title }}"
+          claude_args: |
+            --allowedTools "Write,Bash(gh:*),Bash(git:*),Bash(mkdir:*)"
 
       - name: Commit LinkedIn draft
         env:
