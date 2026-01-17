@@ -13,6 +13,7 @@ const icons = {
       stroke="currentColor"
       strokeWidth="1.5"
       className="h-6 w-6"
+      aria-hidden="true"
     >
       <path d="M12 4.5C10.5 4.5 9 5.5 9 7c0 1-1 2-2 2-1.5 0-2.5 1.5-2.5 3s1 3 2.5 3c1 0 2 1 2 2 0 1.5 1.5 2.5 3 2.5s3-1 3-2.5c0-1 1-2 2-2 1.5 0 2.5-1.5 2.5-3s-1-3-2.5-3c-1 0-2-1-2-2 0-1.5-1.5-2.5-3-2.5z" />
       <path d="M12 8v4M10 10h4" strokeLinecap="round" />
@@ -25,6 +26,7 @@ const icons = {
       stroke="currentColor"
       strokeWidth="1.5"
       className="h-6 w-6"
+      aria-hidden="true"
     >
       <circle cx="12" cy="12" r="10" />
       <ellipse cx="12" cy="12" rx="4" ry="10" />
@@ -40,6 +42,7 @@ const icons = {
       stroke="currentColor"
       strokeWidth="1.5"
       className="h-6 w-6"
+      aria-hidden="true"
     >
       <circle cx="9" cy="7" r="3" />
       <circle cx="17" cy="7" r="2.5" />
@@ -54,6 +57,7 @@ const icons = {
       stroke="currentColor"
       strokeWidth="1.5"
       className="h-6 w-6"
+      aria-hidden="true"
     >
       <rect x="9" y="2" width="6" height="11" rx="3" />
       <path d="M5 10a7 7 0 0 0 14 0" />

@@ -222,7 +222,7 @@ export function BlogDetail({
           <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/50 to-transparent" />
           <img
             src={writing.headerImage}
-            alt=""
+            alt={`Header image for ${writing.title}`}
             className="h-full w-full object-cover"
           />
           {/* Scanline overlay */}
@@ -234,6 +234,7 @@ export function BlogDetail({
         {/* Back button */}
         <button
           onClick={() => onBack?.()}
+          aria-label="Go back to all posts"
           className="group mb-8 flex items-center gap-2 font-mono text-sm text-zinc-500 transition-colors hover:text-lime-400"
         >
           <svg
@@ -242,6 +243,7 @@ export function BlogDetail({
             viewBox="0 0 24 24"
             stroke="currentColor"
             strokeWidth={2}
+            aria-hidden="true"
           >
             <path strokeLinecap="round" strokeLinejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
           </svg>
@@ -264,6 +266,7 @@ export function BlogDetail({
                 viewBox="0 0 24 24"
                 stroke="currentColor"
                 strokeWidth={2}
+                aria-hidden="true"
               >
                 <path
                   strokeLinecap="round"
@@ -343,6 +346,7 @@ export function BlogDetail({
           <div className="flex items-center justify-between">
             <button
               onClick={() => onBack?.()}
+              aria-label="Go back to all posts"
               className="group flex items-center gap-2 font-mono text-sm text-zinc-500 transition-colors hover:text-lime-400"
             >
               <svg
@@ -351,6 +355,7 @@ export function BlogDetail({
                 viewBox="0 0 24 24"
                 stroke="currentColor"
                 strokeWidth={2}
+                aria-hidden="true"
               >
                 <path strokeLinecap="round" strokeLinejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
               </svg>
