@@ -1,3 +1,4 @@
+import { useEffect, useRef, useCallback } from 'react'
 import type { Project } from '../../../types'
 import { PhaseIndicator } from './PhaseIndicator'
 
@@ -14,12 +15,72 @@ export function ProjectModal({
   onGitHubClick,
   onDemoClick,
 }: ProjectModalProps) {
+  const modalRef = useRef<HTMLDivElement>(null)
+  const previousActiveElement = useRef<HTMLElement | null>(null)
+
+  // Handle escape key press
+  useEffect(() => {
+    if (!project) return
+
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        onClose?.()
+      }
+    }
+
+    document.addEventListener('keydown', handleEscape)
+    return () => document.removeEventListener('keydown', handleEscape)
+  }, [project, onClose])
+
+  // Focus trap and focus management
+  useEffect(() => {
+    if (!project || !modalRef.current) return
+
+    // Store the previously focused element
+    previousActiveElement.current = document.activeElement as HTMLElement
+
+    // Focus the modal container
+    modalRef.current.focus()
+
+    // Prevent body scroll
+    document.body.style.overflow = 'hidden'
+
+    return () => {
+      document.body.style.overflow = ''
+      // Restore focus to the previously focused element
+      previousActiveElement.current?.focus()
+    }
+  }, [project])
+
+  // Focus trap handler
+  const handleKeyDown = useCallback((e: React.KeyboardEvent) => {
+    if (e.key !== 'Tab' || !modalRef.current) return
+
+    const focusableElements = modalRef.current.querySelectorAll<HTMLElement>(
+      'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+    )
+    const firstElement = focusableElements[0]
+    const lastElement = focusableElements[focusableElements.length - 1]
+
+    if (e.shiftKey && document.activeElement === firstElement) {
+      e.preventDefault()
+      lastElement?.focus()
+    } else if (!e.shiftKey && document.activeElement === lastElement) {
+      e.preventDefault()
+      firstElement?.focus()
+    }
+  }, [])
+
   if (!project) return null
 
   return (
     <div
       className="fixed inset-0 z-50 flex items-center justify-center p-4"
       onClick={onClose}
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="project-modal-title"
+      onKeyDown={handleKeyDown}
     >
       {/* Backdrop with matrix rain effect */}
       <div className="absolute inset-0 bg-zinc-950/95 backdrop-blur-sm">
@@ -29,7 +90,9 @@ export function ProjectModal({
 
       {/* Modal container */}
       <div
-        className="relative max-h-[90vh] w-full max-w-2xl overflow-hidden rounded-lg bg-zinc-950"
+        ref={modalRef}
+        tabIndex={-1}
+        className="relative max-h-[90vh] w-full max-w-2xl overflow-hidden rounded-lg bg-zinc-950 focus:outline-none"
         onClick={(e) => e.stopPropagation()}
         style={{
           animation: 'modalSlideIn 0.3s ease-out',
@@ -86,7 +149,7 @@ export function ProjectModal({
               </div>
 
               <div className="flex-1">
-                <h2 className="mb-2 font-mono text-2xl font-bold" style={{ color: 'var(--theme-primary)' }}>
+                <h2 id="project-modal-title" className="mb-2 font-mono text-2xl font-bold" style={{ color: 'var(--theme-primary)' }}>
                   <span style={{ color: 'var(--theme-primary-darker)' }}>$ </span>
                   {project.title}
                 </h2>
@@ -201,6 +264,7 @@ export function ProjectModal({
                   className="h-4 w-4"
                   fill="currentColor"
                   viewBox="0 0 24 24"
+                  aria-hidden="true"
                 >
                   <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
                 </svg>
@@ -238,6 +302,7 @@ export function ProjectModal({
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
+                  aria-hidden="true"
                 >
                   <path
                     strokeLinecap="round"

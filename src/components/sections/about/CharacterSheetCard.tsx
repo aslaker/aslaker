@@ -55,15 +55,29 @@ export function CharacterSheetCard({
   const leftTraits = interest.traits.slice(0, midpoint)
   const rightTraits = interest.traits.slice(midpoint)
 
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault()
+      onClick?.()
+    }
+  }
+
   return (
     <div
       onClick={onClick}
+      onKeyDown={handleKeyDown}
       onMouseEnter={onHover}
-      className="group relative flex h-full w-full flex-col rounded-lg bg-zinc-950 p-5 text-left transition-all duration-300 sm:p-6"
+      onFocus={onHover}
+      tabIndex={0}
+      role="button"
+      aria-label={`View ${interest.title} character sheet details`}
+      className="group relative flex h-full w-full cursor-pointer flex-col rounded-lg bg-zinc-950 p-5 text-left transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-zinc-950 sm:p-6"
       style={{
         borderWidth: '1px',
         borderStyle: 'solid',
         borderColor: 'rgba(var(--theme-primary-dark-rgb), 0.3)',
+        // @ts-expect-error CSS custom property for focus ring
+        '--tw-ring-color': 'rgba(var(--theme-primary-dark-rgb), 0.5)',
       }}
       onMouseOver={(e) => {
         e.currentTarget.style.borderColor = 'rgba(var(--theme-primary-rgb), 0.6)'
@@ -104,6 +118,7 @@ export function CharacterSheetCard({
             fill="none"
             stroke="currentColor"
             strokeWidth="1.5"
+            aria-hidden="true"
           >
             <polygon points="12,2 22,8.5 22,15.5 12,22 2,15.5 2,8.5" />
             <line x1="12" y1="2" x2="12" y2="22" />

@@ -85,6 +85,7 @@ function AreaAccordion({
           onToggle()
         }}
         aria-expanded={isExpanded}
+        aria-label={`${isExpanded ? 'Collapse' : 'Expand'} ${area.name} trails`}
         className="group/area flex w-full items-center justify-between px-4 py-2.5 transition-colors hover:bg-zinc-800/30 focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-offset-zinc-950"
         style={{ '--tw-ring-color': 'rgba(var(--theme-primary-dark-rgb), 0.5)' } as React.CSSProperties}
       >
@@ -95,6 +96,7 @@ function AreaAccordion({
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
+            aria-hidden="true"
           >
             <path
               strokeLinecap="round"
@@ -124,6 +126,7 @@ function AreaAccordion({
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
+          aria-hidden="true"
         >
           <path
             strokeLinecap="round"
@@ -181,6 +184,13 @@ export function TrailMapCard({
     })
   }
 
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault()
+      onClick?.()
+    }
+  }
+
   const allTrails = interest.areas.flatMap((a) => a.trails)
   const difficultyCounts = allTrails.reduce(
     (acc, trail) => {
@@ -196,12 +206,19 @@ export function TrailMapCard({
   return (
     <div
       onClick={onClick}
+      onKeyDown={handleKeyDown}
       onMouseEnter={onHover}
-      className="group relative flex h-full w-full flex-col rounded-lg bg-zinc-950 p-5 text-left transition-all duration-300 sm:p-6"
+      onFocus={onHover}
+      tabIndex={0}
+      role="button"
+      aria-label={`View ${interest.title} trail guide details`}
+      className="group relative flex h-full w-full cursor-pointer flex-col rounded-lg bg-zinc-950 p-5 text-left transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-zinc-950 sm:p-6"
       style={{
         borderWidth: '1px',
         borderStyle: 'solid',
         borderColor: 'rgba(var(--theme-primary-dark-rgb), 0.3)',
+        // @ts-expect-error CSS custom property for focus ring
+        '--tw-ring-color': 'rgba(var(--theme-primary-dark-rgb), 0.5)',
       }}
       onMouseOver={(e) => {
         e.currentTarget.style.borderColor = 'rgba(var(--theme-primary-rgb), 0.6)'
@@ -218,7 +235,7 @@ export function TrailMapCard({
         style={{ background: 'linear-gradient(to bottom, rgba(var(--theme-primary-dark-rgb), 0.05), transparent)' }}
       />
 
-      <div className="pointer-events-none absolute inset-0 rounded-lg opacity-5">
+      <div className="pointer-events-none absolute inset-0 rounded-lg opacity-5" aria-hidden="true">
         <svg className="h-full w-full" viewBox="0 0 100 100" preserveAspectRatio="none">
           <defs>
             <pattern id="topo" patternUnits="userSpaceOnUse" width="20" height="20">
@@ -257,6 +274,7 @@ export function TrailMapCard({
               fill="none"
               stroke="currentColor"
               strokeWidth="1.5"
+              aria-hidden="true"
             >
               <circle cx="5" cy="17" r="3" />
               <circle cx="19" cy="17" r="3" />
@@ -342,7 +360,7 @@ export function TrailMapCard({
         <div className="flex items-center justify-between">
           <div>
             <div className="mb-1 flex items-center gap-2">
-              <svg className="h-4 w-4" style={{ color: 'var(--theme-secondary)' }} fill="currentColor" viewBox="0 0 20 20">
+              <svg className="h-4 w-4" style={{ color: 'var(--theme-secondary)' }} fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
                 <path
                   fillRule="evenodd"
                   d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"

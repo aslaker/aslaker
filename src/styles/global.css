@@ -141,3 +141,38 @@
 	clip-path: inset(50%);
 	white-space: nowrap;
 }
+
+/* Reduced motion support for users who prefer reduced motion (WCAG 2.3.3) */
+@media (prefers-reduced-motion: reduce) {
+	*,
+	*::before,
+	*::after {
+		animation-duration: 0.01ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.01ms !important;
+		scroll-behavior: auto !important;
+	}
+
+	/* Disable specific animations */
+	.matrix-cell,
+	.animate-pulse,
+	.animate-spin,
+	.animate-blink,
+	.animate-wave {
+		animation: none !important;
+	}
+}
+
+/* Focus visible styles for keyboard navigation (WCAG 2.4.7) */
+:focus-visible {
+	outline: 2px solid var(--theme-primary, #a3e635);
+	outline-offset: 2px;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+	:root {
+		--theme-primary: #c6ff00;
+		--theme-secondary: #00ffaa;
+	}
+}
