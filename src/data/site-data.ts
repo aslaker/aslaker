@@ -7,7 +7,9 @@ import type {
 	LocalTechLabsCallout,
 	MountainBikingInterest,
 	NavigationItem,
+	PhaseMetadata,
 	Project,
+	ProjectPhase,
 	Service,
 	SocialLink,
 	TopicOption,
@@ -70,6 +72,15 @@ export const socialLinks: SocialLink[] = [
 // Projects
 // =============================================================================
 
+export const PROJECT_PHASES: Record<ProjectPhase, PhaseMetadata> = {
+	concept: { label: 'Concept', order: 1, color: 'zinc', isActive: true },
+	design: { label: 'Design', order: 2, color: 'purple', isActive: true },
+	architecture: { label: 'Architecture', order: 3, color: 'blue', isActive: true },
+	building: { label: 'Building', order: 4, color: 'amber', isActive: true },
+	deployed: { label: 'Deployed', order: 5, color: 'lime', isActive: false },
+	iterating: { label: 'Iterating', order: 6, color: 'emerald', isActive: false },
+};
+
 export const projects: Project[] = [
 	{
 		id: "ephemeris-iss-tracker",
@@ -91,6 +102,7 @@ export const projects: Project[] = [
 		screenshots: [],
 		githubUrl: "https://github.com/aslaker/ephemeris",
 		demoUrl: "https://ephemeris.observer",
+		phase: "iterating",
 	},
 	{
 		id: "auto-claude",
@@ -111,6 +123,7 @@ export const projects: Project[] = [
 		screenshots: [],
 		githubUrl: "https://github.com/AndyMik90/Auto-Claude",
 		demoUrl: null,
+		phase: "iterating",
 	},
 	{
 		id: "tasterra",
@@ -125,6 +138,37 @@ export const projects: Project[] = [
 		screenshots: [],
 		githubUrl: null,
 		demoUrl: null,
+		phase: "building",
+	},
+	{
+		id: "maintainer-hq",
+		title: "Maintainer HQ",
+		shortDescription:
+			"A command center for open source maintainers to view issues, PRs, and track project health with dynamically generated scores based on GitHub activity and Discord sentiment.",
+		fullDescription:
+			"Maintainer HQ gives open source maintainers the ability to manage multiple repos from a single dashboard. Drill into any repo to see its health at a glance—issues, pull requests, CI/CD workflows, and contributor insights all in one place.\n\nThe goal is to replace the noise of GitHub with a focused experience designed specifically for maintainers. Instead of context-switching between tabs and notifications, spend your time where it matters: understanding your project's pulse and making decisions.\n\nHealth scores are dynamically generated from GitHub activity patterns and community sentiment from Discord, giving you signal without the noise.",
+		logoUrl: "/projects/maintainer-hq/logo.svg",
+		tags: ["Open Source", "Developer Tools", "AI/ML", "Full-Stack"],
+		technologies: ["React", "TanStack Start", "Convex", "TypeScript"],
+		screenshots: [],
+		githubUrl: null,
+		demoUrl: null,
+		phase: "architecture",
+	},
+	{
+		id: "crewai-idea-pipeline",
+		title: "CrewAI Idea Pipeline",
+		shortDescription:
+			"A multi-agent workflow that captures notes, classifies them as features or bugs, and auto-organizes them into Linear projects.",
+		fullDescription:
+			"CrewAI Idea Pipeline is an intelligent note-processing system powered by multiple AI agents working in coordination. Capture ideas anywhere, and agents handle classification, prioritization, and organization automatically.\n\nThe pipeline uses SQLite for persistent storage and integrates directly with Linear to create properly tagged and organized issues. Each agent specializes in a specific task—classification, enrichment, or project assignment—creating a seamless flow from raw thought to actionable ticket.\n\nBuilt as an experiment in multi-agent orchestration patterns and practical AI workflow automation.",
+		logoUrl: "/projects/crewai-idea-pipeline/logo.svg",
+		tags: ["AI/ML", "Agentic", "Automation", "Developer Tools"],
+		technologies: ["Python", "CrewAI", "SQLite", "Linear API"],
+		screenshots: [],
+		githubUrl: null,
+		demoUrl: null,
+		phase: "architecture",
 	},
 ];
 
@@ -390,249 +434,253 @@ export const interests = [
 // Blog / Writings
 // =============================================================================
 
-export const writings: Writing[] = [
-	{
-		id: "writing-001",
-		slug: "building-autonomous-agents-with-claude",
-		title: "Building Autonomous Agents with Claude: Lessons from Auto-Claude",
-		excerpt:
-			"After months of building Auto-Claude, I've learned that the key to effective autonomous agents isn't more sophisticated prompting—it's knowing when to hand control back to humans.",
-		content: `# Building Autonomous Agents with Claude: Lessons from Auto-Claude
+// TODO: Uncomment when blog content is ready for README sync
+// export const writings: Writing[] = [
+// 	{
+// 		id: "writing-001",
+// 		slug: "building-autonomous-agents-with-claude",
+// 		title: "Building Autonomous Agents with Claude: Lessons from Auto-Claude",
+// 		excerpt:
+// 			"After months of building Auto-Claude, I've learned that the key to effective autonomous agents isn't more sophisticated prompting—it's knowing when to hand control back to humans.",
+// 		content: `# Building Autonomous Agents with Claude: Lessons from Auto-Claude
+//
+// After months of building Auto-Claude, I've learned that the key to effective autonomous agents isn't more sophisticated prompting—it's knowing when to hand control back to humans.
+//
+// ## The Autonomy Spectrum
+//
+// When I started building Auto-Claude, I imagined a fully autonomous system that could handle complex multi-step tasks without intervention. What I discovered was that the most effective agents operate on a spectrum of autonomy.
+//
+// \`\`\`typescript
+// type AutonomyLevel = 'full' | 'supervised' | 'assisted' | 'manual'
+//
+// interface AgentDecision {
+//   action: string
+//   confidence: number
+//   autonomyThreshold: number
+// }
+//
+// function shouldProceed(decision: AgentDecision): boolean {
+//   return decision.confidence >= decision.autonomyThreshold
+// }
+// \`\`\`
+//
+// ## Key Takeaways
+//
+// 1. **Confidence calibration matters more than capability** - An agent that knows when it doesn't know is more valuable than one that always tries.
+//
+// 2. **Human checkpoints aren't failures** - They're features. Build them into your agent's decision tree.
+//
+// 3. **Context windows are precious** - Every token spent on unnecessary context is a token not spent on reasoning.
+//
+// ## What's Next
+//
+// In my next post, I'll dive into the specific patterns I use for context management in long-running agent sessions.`,
+// 		thumbnailImage: "/images/blog/autonomous-agents-thumb.jpg",
+// 		headerImage: "/images/blog/autonomous-agents-header.jpg",
+// 		publishedAt: "2024-12-15",
+// 		readTime: 8,
+// 		tags: ["Agentic AI", "Claude", "TypeScript"],
+// 	},
+// 	{
+// 		id: "writing-002",
+// 		slug: "terraform-patterns-for-ai-workloads",
+// 		title:
+// 			"Terraform Patterns for AI Workloads: GPU Instances Without the Pain",
+// 		excerpt:
+// 			"GPU instances are expensive and tricky to manage. Here's how I structure Terraform modules to spin up AI infrastructure on-demand without burning through cloud credits.",
+// 		content: `# Terraform Patterns for AI Workloads
+//
+// GPU instances are expensive and tricky to manage. Here's how I structure Terraform modules to spin up AI infrastructure on-demand without burning through cloud credits.
+//
+// ## The Problem
+//
+// Running AI workloads in the cloud means dealing with:
+// - Spot instance interruptions
+// - GPU availability across regions
+// - Cost optimization for bursty workloads
+//
+// ## My Approach
+//
+// \`\`\`hcl
+// module "ai_compute" {
+//   source = "./modules/gpu-cluster"
+//
+//   instance_type    = "g5.xlarge"
+//   spot_enabled     = true
+//   fallback_regions = ["us-east-1", "us-west-2", "eu-west-1"]
+//
+//   auto_shutdown = {
+//     enabled      = true
+//     idle_minutes = 30
+//   }
+// }
+// \`\`\`
+//
+// The key insight is treating GPU compute as ephemeral by default. Everything persists to S3, and instances spin up only when needed.
+//
+// ## Cost Savings
+//
+// This pattern reduced our inference costs by 73% compared to reserved instances, with only a 2-minute cold start penalty.`,
+// 		thumbnailImage: "/images/blog/terraform-gpu-thumb.jpg",
+// 		headerImage: "/images/blog/terraform-gpu-header.jpg",
+// 		publishedAt: "2024-11-28",
+// 		readTime: 6,
+// 		tags: ["Cloud Ops", "Terraform", "AI Infrastructure"],
+// 	},
+// 	{
+// 		id: "writing-003",
+// 		slug: "type-safe-llm-outputs",
+// 		title: "Type-Safe LLM Outputs: Zod Schemas for Structured Generation",
+// 		excerpt:
+// 			"LLMs are notoriously unpredictable. Here's how I use Zod schemas to enforce structure on AI outputs and catch malformed responses before they break my app.",
+// 		content: `# Type-Safe LLM Outputs
+//
+// LLMs are notoriously unpredictable. Here's how I use Zod schemas to enforce structure on AI outputs and catch malformed responses before they break my app.
+//
+// ## The Challenge
+//
+// When you ask an LLM to return JSON, you might get:
+// - Valid JSON (great!)
+// - JSON with markdown code fences (common)
+// - Partial JSON (timeout or token limit)
+// - An apology instead of JSON (thanks, safety filters)
+//
+// ## The Solution
+//
+// \`\`\`typescript
+// import { z } from 'zod'
+//
+// const TaskSchema = z.object({
+//   title: z.string().min(1).max(200),
+//   priority: z.enum(['low', 'medium', 'high']),
+//   subtasks: z.array(z.string()).default([]),
+//   dueDate: z.string().datetime().optional()
+// })
+//
+// type Task = z.infer<typeof TaskSchema>
+//
+// async function parseAIResponse(raw: string): Task {
+//   // Strip markdown fences if present
+//   const cleaned = raw.replace(/\`\`\`json\\n?|\`\`\`\\n?/g, '')
+//
+//   const parsed = JSON.parse(cleaned)
+//   return TaskSchema.parse(parsed)
+// }
+// \`\`\`
+//
+// ## Going Further
+//
+// Combine this with retry logic and you get resilient AI integrations that gracefully handle the chaos of LLM outputs.`,
+// 		thumbnailImage: null,
+// 		headerImage: "/images/blog/zod-schemas-header.jpg",
+// 		publishedAt: "2024-11-10",
+// 		readTime: 5,
+// 		tags: ["TypeScript", "Agentic AI", "Zod"],
+// 	},
+// 	{
+// 		id: "writing-004",
+// 		slug: "why-i-stopped-using-langchain",
+// 		title: "Why I Stopped Using LangChain (And What I Use Instead)",
+// 		excerpt:
+// 			"LangChain is powerful but often overkill. For most agentic applications, a simpler approach with direct API calls and custom orchestration gives you more control with less complexity.",
+// 		content: `# Why I Stopped Using LangChain
+//
+// LangChain is powerful but often overkill. For most agentic applications, a simpler approach with direct API calls and custom orchestration gives you more control with less complexity.
+//
+// ## The Abstraction Tax
+//
+// LangChain abstracts away the details of working with LLMs. That's great for getting started, but it becomes a liability when:
+//
+// 1. You need to debug why your agent is behaving unexpectedly
+// 2. You want fine-grained control over prompts and context
+// 3. You're optimizing for token usage and latency
+//
+// ## My Alternative Stack
+//
+// - **Direct API calls** to Claude/OpenAI with a thin wrapper
+// - **Custom state machines** for agent orchestration
+// - **Zod** for output validation
+// - **Simple function calling** instead of complex tool abstractions
+//
+// ## When LangChain Makes Sense
+//
+// I still reach for LangChain when:
+// - Rapid prototyping with unfamiliar models
+// - Using their excellent document loaders
+// - Building RAG pipelines with their vector store integrations
+//
+// But for production agentic systems? I prefer knowing exactly what's happening under the hood.`,
+// 		thumbnailImage: null,
+// 		headerImage: null,
+// 		publishedAt: "2024-10-22",
+// 		readTime: 7,
+// 		tags: ["Agentic AI", "Architecture", "Opinion"],
+// 	},
+// 	{
+// 		id: "writing-005",
+// 		slug: "real-time-iss-tracking-with-react",
+// 		title: "Real-Time ISS Tracking with React: Building Ephemeris",
+// 		excerpt:
+// 			"A deep dive into building Ephemeris, my open-source ISS tracker. From orbital mechanics APIs to smooth React animations, here's how it all comes together.",
+// 		content: `# Real-Time ISS Tracking with React
+//
+// A deep dive into building Ephemeris, my open-source ISS tracker. From orbital mechanics APIs to smooth React animations, here's how it all comes together.
+//
+// ## The Vision
+//
+// I wanted to build something that makes space feel accessible. The ISS orbits Earth every 90 minutes, and I wanted people to be able to see exactly where it is at any moment.
+//
+// ## Data Sources
+//
+// Ephemeris pulls from multiple APIs:
+// - **N2YO** for real-time TLE data
+// - **Open Notify** for crew information
+// - **Custom calculations** for pass predictions
+//
+// \`\`\`typescript
+// interface ISSPosition {
+//   latitude: number
+//   longitude: number
+//   altitude: number // kilometers
+//   velocity: number // km/s
+//   timestamp: number
+// }
+//
+// async function getCurrentPosition(): Promise<ISSPosition> {
+//   const response = await fetch(
+//     'https://api.n2yo.com/rest/v1/satellite/positions/25544'
+//   )
+//   // Transform and return...
+// }
+// \`\`\`
+//
+// ## Smooth Animations
+//
+// The tricky part is making the ISS marker move smoothly between API updates. I use linear interpolation based on the known velocity:
+//
+// \`\`\`typescript
+// function interpolatePosition(
+//   start: ISSPosition,
+//   elapsed: number
+// ): ISSPosition {
+//   // ISS moves ~7.66 km/s
+//   // Calculate new lat/lng based on elapsed time
+// }
+// \`\`\`
+//
+// ## Try It Out
+//
+// Ephemeris is open source. Check it out on GitHub and watch the ISS fly over your location.`,
+// 		thumbnailImage: "/images/blog/ephemeris-thumb.jpg",
+// 		headerImage: "/images/blog/ephemeris-header.jpg",
+// 		publishedAt: "2024-09-15",
+// 		readTime: 10,
+// 		tags: ["React", "Open Source", "TypeScript"],
+// 	},
+// ];
 
-After months of building Auto-Claude, I've learned that the key to effective autonomous agents isn't more sophisticated prompting—it's knowing when to hand control back to humans.
-
-## The Autonomy Spectrum
-
-When I started building Auto-Claude, I imagined a fully autonomous system that could handle complex multi-step tasks without intervention. What I discovered was that the most effective agents operate on a spectrum of autonomy.
-
-\`\`\`typescript
-type AutonomyLevel = 'full' | 'supervised' | 'assisted' | 'manual'
-
-interface AgentDecision {
-  action: string
-  confidence: number
-  autonomyThreshold: number
-}
-
-function shouldProceed(decision: AgentDecision): boolean {
-  return decision.confidence >= decision.autonomyThreshold
-}
-\`\`\`
-
-## Key Takeaways
-
-1. **Confidence calibration matters more than capability** - An agent that knows when it doesn't know is more valuable than one that always tries.
-
-2. **Human checkpoints aren't failures** - They're features. Build them into your agent's decision tree.
-
-3. **Context windows are precious** - Every token spent on unnecessary context is a token not spent on reasoning.
-
-## What's Next
-
-In my next post, I'll dive into the specific patterns I use for context management in long-running agent sessions.`,
-		thumbnailImage: "/images/blog/autonomous-agents-thumb.jpg",
-		headerImage: "/images/blog/autonomous-agents-header.jpg",
-		publishedAt: "2024-12-15",
-		readTime: 8,
-		tags: ["Agentic AI", "Claude", "TypeScript"],
-	},
-	{
-		id: "writing-002",
-		slug: "terraform-patterns-for-ai-workloads",
-		title:
-			"Terraform Patterns for AI Workloads: GPU Instances Without the Pain",
-		excerpt:
-			"GPU instances are expensive and tricky to manage. Here's how I structure Terraform modules to spin up AI infrastructure on-demand without burning through cloud credits.",
-		content: `# Terraform Patterns for AI Workloads
-
-GPU instances are expensive and tricky to manage. Here's how I structure Terraform modules to spin up AI infrastructure on-demand without burning through cloud credits.
-
-## The Problem
-
-Running AI workloads in the cloud means dealing with:
-- Spot instance interruptions
-- GPU availability across regions
-- Cost optimization for bursty workloads
-
-## My Approach
-
-\`\`\`hcl
-module "ai_compute" {
-  source = "./modules/gpu-cluster"
-
-  instance_type    = "g5.xlarge"
-  spot_enabled     = true
-  fallback_regions = ["us-east-1", "us-west-2", "eu-west-1"]
-
-  auto_shutdown = {
-    enabled      = true
-    idle_minutes = 30
-  }
-}
-\`\`\`
-
-The key insight is treating GPU compute as ephemeral by default. Everything persists to S3, and instances spin up only when needed.
-
-## Cost Savings
-
-This pattern reduced our inference costs by 73% compared to reserved instances, with only a 2-minute cold start penalty.`,
-		thumbnailImage: "/images/blog/terraform-gpu-thumb.jpg",
-		headerImage: "/images/blog/terraform-gpu-header.jpg",
-		publishedAt: "2024-11-28",
-		readTime: 6,
-		tags: ["Cloud Ops", "Terraform", "AI Infrastructure"],
-	},
-	{
-		id: "writing-003",
-		slug: "type-safe-llm-outputs",
-		title: "Type-Safe LLM Outputs: Zod Schemas for Structured Generation",
-		excerpt:
-			"LLMs are notoriously unpredictable. Here's how I use Zod schemas to enforce structure on AI outputs and catch malformed responses before they break my app.",
-		content: `# Type-Safe LLM Outputs
-
-LLMs are notoriously unpredictable. Here's how I use Zod schemas to enforce structure on AI outputs and catch malformed responses before they break my app.
-
-## The Challenge
-
-When you ask an LLM to return JSON, you might get:
-- Valid JSON (great!)
-- JSON with markdown code fences (common)
-- Partial JSON (timeout or token limit)
-- An apology instead of JSON (thanks, safety filters)
-
-## The Solution
-
-\`\`\`typescript
-import { z } from 'zod'
-
-const TaskSchema = z.object({
-  title: z.string().min(1).max(200),
-  priority: z.enum(['low', 'medium', 'high']),
-  subtasks: z.array(z.string()).default([]),
-  dueDate: z.string().datetime().optional()
-})
-
-type Task = z.infer<typeof TaskSchema>
-
-async function parseAIResponse(raw: string): Task {
-  // Strip markdown fences if present
-  const cleaned = raw.replace(/\`\`\`json\\n?|\`\`\`\\n?/g, '')
-
-  const parsed = JSON.parse(cleaned)
-  return TaskSchema.parse(parsed)
-}
-\`\`\`
-
-## Going Further
-
-Combine this with retry logic and you get resilient AI integrations that gracefully handle the chaos of LLM outputs.`,
-		thumbnailImage: null,
-		headerImage: "/images/blog/zod-schemas-header.jpg",
-		publishedAt: "2024-11-10",
-		readTime: 5,
-		tags: ["TypeScript", "Agentic AI", "Zod"],
-	},
-	{
-		id: "writing-004",
-		slug: "why-i-stopped-using-langchain",
-		title: "Why I Stopped Using LangChain (And What I Use Instead)",
-		excerpt:
-			"LangChain is powerful but often overkill. For most agentic applications, a simpler approach with direct API calls and custom orchestration gives you more control with less complexity.",
-		content: `# Why I Stopped Using LangChain
-
-LangChain is powerful but often overkill. For most agentic applications, a simpler approach with direct API calls and custom orchestration gives you more control with less complexity.
-
-## The Abstraction Tax
-
-LangChain abstracts away the details of working with LLMs. That's great for getting started, but it becomes a liability when:
-
-1. You need to debug why your agent is behaving unexpectedly
-2. You want fine-grained control over prompts and context
-3. You're optimizing for token usage and latency
-
-## My Alternative Stack
-
-- **Direct API calls** to Claude/OpenAI with a thin wrapper
-- **Custom state machines** for agent orchestration
-- **Zod** for output validation
-- **Simple function calling** instead of complex tool abstractions
-
-## When LangChain Makes Sense
-
-I still reach for LangChain when:
-- Rapid prototyping with unfamiliar models
-- Using their excellent document loaders
-- Building RAG pipelines with their vector store integrations
-
-But for production agentic systems? I prefer knowing exactly what's happening under the hood.`,
-		thumbnailImage: null,
-		headerImage: null,
-		publishedAt: "2024-10-22",
-		readTime: 7,
-		tags: ["Agentic AI", "Architecture", "Opinion"],
-	},
-	{
-		id: "writing-005",
-		slug: "real-time-iss-tracking-with-react",
-		title: "Real-Time ISS Tracking with React: Building Ephemeris",
-		excerpt:
-			"A deep dive into building Ephemeris, my open-source ISS tracker. From orbital mechanics APIs to smooth React animations, here's how it all comes together.",
-		content: `# Real-Time ISS Tracking with React
-
-A deep dive into building Ephemeris, my open-source ISS tracker. From orbital mechanics APIs to smooth React animations, here's how it all comes together.
-
-## The Vision
-
-I wanted to build something that makes space feel accessible. The ISS orbits Earth every 90 minutes, and I wanted people to be able to see exactly where it is at any moment.
-
-## Data Sources
-
-Ephemeris pulls from multiple APIs:
-- **N2YO** for real-time TLE data
-- **Open Notify** for crew information
-- **Custom calculations** for pass predictions
-
-\`\`\`typescript
-interface ISSPosition {
-  latitude: number
-  longitude: number
-  altitude: number // kilometers
-  velocity: number // km/s
-  timestamp: number
-}
-
-async function getCurrentPosition(): Promise<ISSPosition> {
-  const response = await fetch(
-    'https://api.n2yo.com/rest/v1/satellite/positions/25544'
-  )
-  // Transform and return...
-}
-\`\`\`
-
-## Smooth Animations
-
-The tricky part is making the ISS marker move smoothly between API updates. I use linear interpolation based on the known velocity:
-
-\`\`\`typescript
-function interpolatePosition(
-  start: ISSPosition,
-  elapsed: number
-): ISSPosition {
-  // ISS moves ~7.66 km/s
-  // Calculate new lat/lng based on elapsed time
-}
-\`\`\`
-
-## Try It Out
-
-Ephemeris is open source. Check it out on GitHub and watch the ISS fly over your location.`,
-		thumbnailImage: "/images/blog/ephemeris-thumb.jpg",
-		headerImage: "/images/blog/ephemeris-header.jpg",
-		publishedAt: "2024-09-15",
-		readTime: 10,
-		tags: ["React", "Open Source", "TypeScript"],
-	},
-];
+// Empty array for now - uncomment writings above when ready
+export const writings: Writing[] = [];
 
 export const blogTags: string[] = [
 	"Agentic AI",

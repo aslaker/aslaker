@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <!-- Background circle -->
+  <circle cx="32" cy="32" r="30" fill="#18181b" stroke="#84cc16" stroke-width="2"/>
+
+  <!-- Dashboard grid representation -->
+  <rect x="14" y="14" width="14" height="14" rx="2" fill="#84cc16" opacity="0.8"/>
+  <rect x="30" y="14" width="20" height="6" rx="1" fill="#84cc16" opacity="0.6"/>
+  <rect x="30" y="22" width="20" height="6" rx="1" fill="#84cc16" opacity="0.4"/>
+
+  <!-- Health indicator bars -->
+  <rect x="14" y="30" width="36" height="4" rx="1" fill="#84cc16" opacity="0.3"/>
+  <rect x="14" y="30" width="28" height="4" rx="1" fill="#10b981"/>
+
+  <rect x="14" y="36" width="36" height="4" rx="1" fill="#84cc16" opacity="0.3"/>
+  <rect x="14" y="36" width="20" height="4" rx="1" fill="#f59e0b"/>
+
+  <rect x="14" y="42" width="36" height="4" rx="1" fill="#84cc16" opacity="0.3"/>
+  <rect x="14" y="42" width="32" height="4" rx="1" fill="#84cc16"/>
+
+  <!-- HQ text hint -->
+  <text x="32" y="54" text-anchor="middle" font-family="monospace" font-size="8" font-weight="bold" fill="#84cc16">HQ</text>
+</svg>

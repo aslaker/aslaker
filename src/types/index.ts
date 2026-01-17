@@ -3,6 +3,27 @@
 // =============================================================================
 
 /**
+ * Project lifecycle phases from concept to iteration.
+ */
+export type ProjectPhase =
+  | 'concept'
+  | 'design'
+  | 'architecture'
+  | 'building'
+  | 'deployed'
+  | 'iterating'
+
+/**
+ * Metadata for each project phase including display info and styling.
+ */
+export interface PhaseMetadata {
+  label: string
+  order: number
+  color: 'zinc' | 'purple' | 'blue' | 'amber' | 'lime' | 'emerald'
+  isActive: boolean
+}
+
+/**
  * A featured technical project showcasing work in AI/agentic engineering,
  * full-stack development, or open source contributions.
  */
@@ -17,6 +38,7 @@ export interface Project {
   screenshots: string[]
   githubUrl: string | null
   demoUrl: string | null
+  phase: ProjectPhase
 }
 
 /**

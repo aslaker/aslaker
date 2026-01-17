@@ -6,6 +6,21 @@
 /* User-selectable fonts (the non-LLM choices) */
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Sora:wght@300;400;500;600;700&family=Manrope:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Bricolage+Grotesque:wght@300;400;500;600;700&display=swap');
 
+/* Default theme colors - will be overridden by ThemeContext */
+:root {
+	--theme-primary: #a3e635;       /* lime-400 */
+	--theme-primary-dark: #84cc16;  /* lime-500 */
+	--theme-primary-darker: #65a30d; /* lime-600 */
+	--theme-secondary: #34d399;     /* emerald-400 */
+	--theme-secondary-dark: #10b981; /* emerald-500 */
+
+	/* RGB values for rgba() usage */
+	--theme-primary-rgb: 163, 230, 53;
+	--theme-primary-dark-rgb: 132, 204, 22;
+	--theme-secondary-rgb: 52, 211, 153;
+	--theme-secondary-dark-rgb: 16, 185, 129;
+}
+
 /* Theme configuration for Tailwind v4 */
 @theme {
 	/* Fonts - uses CSS variable set by FontContext, defaults to Outfit */
@@ -19,14 +34,15 @@
 	--color-emerald-400: #34d399;
 	--color-emerald-500: #10b981;
 
-	/* Custom shadows */
-	--shadow-glow-lime: 0 0 20px rgba(163, 230, 53, 0.3), 0 0 40px rgba(163, 230, 53, 0.1);
-	--shadow-glow-emerald: 0 0 20px rgba(16, 185, 129, 0.2);
+	/* Custom shadows - use theme variables */
+	--shadow-glow-primary: 0 0 20px rgba(var(--theme-primary-rgb), 0.3), 0 0 40px rgba(var(--theme-primary-rgb), 0.1);
+	--shadow-glow-secondary: 0 0 20px rgba(var(--theme-secondary-dark-rgb), 0.2);
 
 	/* Custom animations */
 	--animate-wave: wave 8s ease-in-out infinite;
 	--animate-blink: blink 1s step-end infinite;
 	--animate-pulse-glow: pulse-glow 2s ease-in-out infinite;
+	--animate-phase-pulse: phase-pulse 1.5s ease-in-out infinite;
 
 	@keyframes wave {
 		0%, 100% {
@@ -48,10 +64,19 @@
 
 	@keyframes pulse-glow {
 		0%, 100% {
-			box-shadow: 0 0 20px rgba(163, 230, 53, 0.3);
+			box-shadow: 0 0 20px rgba(var(--theme-primary-rgb), 0.3);
 		}
 		50% {
-			box-shadow: 0 0 30px rgba(163, 230, 53, 0.5);
+			box-shadow: 0 0 30px rgba(var(--theme-primary-rgb), 0.5);
+		}
+	}
+
+	@keyframes phase-pulse {
+		0%, 100% {
+			opacity: 1;
+		}
+		50% {
+			opacity: 0.5;
 		}
 	}
 }
@@ -93,12 +118,12 @@
 }
 
 @layer utilities {
-	.text-glow-lime {
-		text-shadow: 0 0 20px rgba(163, 230, 53, 0.4), 0 0 40px rgba(163, 230, 53, 0.2);
+	.text-glow-primary {
+		text-shadow: 0 0 20px rgba(var(--theme-primary-rgb), 0.4), 0 0 40px rgba(var(--theme-primary-rgb), 0.2);
 	}
 
-	.text-glow-emerald {
-		text-shadow: 0 0 20px rgba(16, 185, 129, 0.3);
+	.text-glow-secondary {
+		text-shadow: 0 0 20px rgba(var(--theme-secondary-dark-rgb), 0.3);
 	}
 }
 
