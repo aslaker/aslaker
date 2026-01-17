@@ -7,6 +7,12 @@ description: Generate a LinkedIn post draft based on recent PR changes
 
 Generate a professional LinkedIn post about recent changes to the portfolio site.
 
+## Variables
+
+PR_NUMBER = $ARGUMENTS
+PR_TITLE = $ARGUMENTS
+
+
 ## Process
 
 1. **Gather context** - Read the most recent merged PR or current git diff to understand what changed
@@ -45,7 +51,7 @@ Generate a professional LinkedIn post about recent changes to the portfolio site
 ```markdown
 # LinkedIn Post Draft
 
-**PR:** #[number] - [title]
+**PR:** #[PR_NUMBER] - [PR_TITLE]
 **Generated:** [YYYY-MM-DD]
 
 ---
@@ -75,7 +81,7 @@ What signals do you look for when evaluating someone's side projects?
 
 ### Bad Example (don't do this)
 ```
-Excited to announce I've added a new feature to my portfolio! 🎉
+Excited to announce I've added a new feature to my portfolio!
 
 I implemented a project phase system using React and TypeScript. It shows different phases like concept, design, building etc.
 

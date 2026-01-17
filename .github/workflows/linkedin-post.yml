@@ -1,4 +1,4 @@
-name: Generate LinkedIn Post & Sync README
+name: Generate LinkedIn Post
 
 on:
   pull_request:
@@ -6,74 +6,27 @@ on:
     branches: [main]
 
 jobs:
-  generate-content:
+  generate-linkedin-post:
     if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
+      - uses: anthropics/claude-code-action@v1
         with:
-          node-version: '20'
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          prompt: "/linkedin-post ${{ github.event.pull_request.number }} ${{ github.event.pull_request.title }}"
+          claude_args: "--max-turns 10"
 
-      - name: Install Claude Code CLI
-        run: npm install -g @anthropic-ai/claude-code
-
-      - name: Create linkedin-drafts directory
-        run: mkdir -p linkedin-drafts
-
-      - name: Generate LinkedIn post draft
-        env:
-          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-          PR_NUMBER: ${{ github.event.pull_request.number }}
-          PR_TITLE: ${{ github.event.pull_request.title }}
-          PR_BODY: ${{ github.event.pull_request.body }}
+      - name: Commit LinkedIn draft
         run: |
-          # Create a slug from the PR title (sanitized via env var)
-          SLUG=$(echo "$PR_TITLE" | tr '[:upper:]' '[:lower:]' | sed 's/[^a-z0-9]/-/g' | sed 's/--*/-/g' | sed 's/^-//' | sed 's/-$//' | cut -c1-50)
-          DATE=$(date +%Y-%m-%d)
-          FILENAME="linkedin-drafts/${DATE}-${SLUG}.md"
-
-          # Create prompt file to avoid injection
-          cat > /tmp/prompt.txt << 'PROMPT_END'
-          Use the linkedin-post skill to generate a LinkedIn post draft.
-
-          Look at the git diff for the most recent merge to understand the changes:
-          git diff HEAD~1
-
-          PROMPT_END
-
-          # Append PR info safely
-          echo "PR Number: $PR_NUMBER" >> /tmp/prompt.txt
-          echo "PR Title: $PR_TITLE" >> /tmp/prompt.txt
-          echo "Save the draft to: $FILENAME" >> /tmp/prompt.txt
-
-          # Run Claude Code
-          claude -p "$(cat /tmp/prompt.txt)" --allowedTools "Read,Grep,Glob,Bash,Write" --max-turns 10
-
-      - name: Sync README with current projects
-        env:
-          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-        run: |
-          claude -p "Use the sync-readme skill to update README.md with current projects and writings from site-data.ts. Update the content between the marker comments." --allowedTools "Read,Grep,Glob,Edit,Write" --max-turns 15
-
-      - name: Commit and push changes
-        env:
-          PR_NUMBER: ${{ github.event.pull_request.number }}
-        run: |
-          git config --local user.email "github-actions[bot]@users.noreply.github.com"
-          git config --local user.name "github-actions[bot]"
-
-          # Check if there are changes to commit
-          if [ -n "$(git status linkedin-drafts README.md --porcelain)" ]; then
-            git add linkedin-drafts/ README.md
-            git commit -m "Auto-update: LinkedIn draft and README sync for PR #$PR_NUMBER"
-            git push
-          else
-            echo "No changes to commit"
-          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add linkedin-drafts/
+          git diff --staged --quiet || git commit -m "chore: add LinkedIn draft for PR #${{ github.event.pull_request.number }}"
+          git push

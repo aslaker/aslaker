@@ -29,7 +29,7 @@ Automatically update the GitHub profile README to reflect current projects and r
 Example: If site-data.ts has:
 ```typescript
 {
-  id: "tasterra",
+  id: "demo-app",
   title: "Pre-Launch B2B SaaS",  // <-- USE THIS
   demoUrl: "https://tasterra.io",
   ...
@@ -38,7 +38,7 @@ Example: If site-data.ts has:
 
 The README should show: `**Pre-Launch B2B SaaS** - description *(building)*`
 
-NOT: `**[Tasterra](https://tasterra.io)** - description *(building)*`
+NOT: `**[Demo App](https://demo-app.io)** - description *(building)*`
 
 ### Only Use Uncommented Code
 
