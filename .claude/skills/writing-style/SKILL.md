@@ -7,6 +7,8 @@ description: Apply Adam's voice and style when drafting articles, posts, or docu
 
 Apply this style guide when drafting any content: articles, LinkedIn posts, documentation, or technical writing.
 
+**Before drafting, read `SAMPLES.md` for concrete examples of this voice in action.**
+
 ## Voice
 
 - **Calm, firm, blunt, funny.** Say what you mean. Don't hedge.

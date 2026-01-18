@@ -23,7 +23,7 @@ PR_TITLE = $ARGUMENTS
 
 ## Process
 
-1. **Load style guide** - Read `.claude/skills/writing-style/SKILL.md` and apply its voice and style rules throughout
+1. **Load style guide** - Read `.claude/skills/writing-style/SKILL.md` and `.claude/skills/writing-style/SAMPLES.md` for voice, rules, and concrete examples
 2. **Gather context** - Read the most recent merged PR or current git diff to understand what changed
 3. **Identify the story** - What problem does this solve? What's interesting about the implementation?
 4. **Draft the post** - Write a LinkedIn-appropriate post following the guidelines below
