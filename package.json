@@ -9,7 +9,11 @@
     "deploy": "npm run build && wrangler deploy",
     "astro": "astro",
     "test": "vitest",
-    "test:run": "vitest run"
+    "test:run": "vitest run",
+    "optimize": "./scripts/run-optimize.sh",
+    "optimize:auto": "./scripts/run-optimize-auto.sh",
+    "optimize:e2b": "tsx scripts/e2b/orchestrator.ts",
+    "optimize:e2b:audit-only": "tsx scripts/e2b/orchestrator.ts --audit-only"
   },
   "dependencies": {
     "@astrojs/cloudflare": "^12.6.12",
@@ -19,6 +23,7 @@
     "@astrojs/sitemap": "^3.6.1",
     "@tailwindcss/postcss": "^4.1.18",
     "astro": "^5.16.7",
+    "focus-trap-react": "^11.0.6",
     "lucide-react": "^0.562.0",
     "react": "^19.2.3",
     "react-dom": "^19.2.3",
@@ -29,8 +34,13 @@
     "@testing-library/dom": "^10.4.1",
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.1",
+    "@types/archiver": "^6.0.0",
+    "@types/node": "^22.0.0",
     "@vitejs/plugin-react": "^5.1.2",
+    "archiver": "^7.0.0",
+    "e2b": "^1.0.0",
     "jsdom": "^27.4.0",
+    "tsx": "^4.0.0",
     "vitest": "^4.0.16"
   }
 }
