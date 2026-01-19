@@ -12,8 +12,8 @@
     "test:run": "vitest run",
     "optimize": "./scripts/run-optimize.sh",
     "optimize:auto": "./scripts/run-optimize-auto.sh",
-    "optimize:e2b": "tsx scripts/e2b/orchestrator.ts",
-    "optimize:e2b:audit-only": "tsx scripts/e2b/orchestrator.ts --audit-only"
+    "optimize:e2b": "bun .claude/skills/optimize-e2b/scripts/run-audit.ts --verbose",
+    "optimize:e2b:url": "bun .claude/skills/optimize-e2b/scripts/run-audit.ts --verbose --url"
   },
   "dependencies": {
     "@astrojs/cloudflare": "^12.6.12",
@@ -40,7 +40,7 @@
     "archiver": "^7.0.0",
     "e2b": "^1.0.0",
     "jsdom": "^27.4.0",
-    "tsx": "^4.0.0",
+    "tsx": "^4.21.0",
     "vitest": "^4.0.16"
   }
 }

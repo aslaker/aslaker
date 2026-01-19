@@ -56,7 +56,7 @@ export function ProjectCard({ project, index, onSelect }: ProjectCardProps) {
       </h3>
 
       {/* Short description */}
-      <p className="mb-5 line-clamp-2 font-mono text-xs leading-relaxed text-zinc-400 group-hover:text-zinc-300 sm:text-sm sm:leading-relaxed">
+      <p className="mb-5 line-clamp-2 font-mono text-xs leading-relaxed text-zinc-300 sm:text-sm sm:leading-relaxed">
         {project.shortDescription}
       </p>
 

@@ -161,7 +161,7 @@ export function TrailMapCard({
               <span className="text-lime-600">&gt; </span>
               {interest.title}
             </h3>
-            <span className="font-mono text-xs uppercase tracking-widest text-zinc-500">
+            <span className="font-mono text-xs uppercase tracking-widest text-zinc-400">
               Trail Guide
             </span>
           </div>

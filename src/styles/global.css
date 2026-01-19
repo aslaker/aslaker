@@ -116,3 +116,34 @@
 	clip-path: inset(50%);
 	white-space: nowrap;
 }
+
+/* Make sr-only elements visible when focused */
+.focus\:not-sr-only:focus {
+	position: static !important;
+	width: auto;
+	height: auto;
+	padding: inherit;
+	margin: inherit;
+	overflow: visible;
+	clip: auto;
+	clip-path: none;
+	white-space: normal;
+}
+
+/* Respect user's motion preferences */
+@media (prefers-reduced-motion: reduce) {
+	*,
+	*::before,
+	*::after {
+		animation-duration: 0.01ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.01ms !important;
+		scroll-behavior: auto !important;
+	}
+
+	.animate-blink,
+	.animate-pulse,
+	.animate-wave {
+		animation: none !important;
+	}
+}

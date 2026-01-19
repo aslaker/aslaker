@@ -34,6 +34,14 @@ export function AppShell({
 
   return (
     <div className="min-h-screen bg-zinc-950 text-zinc-100">
+      {/* Skip Link - visually hidden until focused */}
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:rounded focus:bg-lime-500 focus:px-4 focus:py-2 focus:font-mono focus:text-sm focus:font-medium focus:text-zinc-900 focus:outline-none focus:ring-2 focus:ring-lime-400 focus:ring-offset-2 focus:ring-offset-zinc-950"
+      >
+        Skip to main content
+      </a>
+
       {/* Header */}
       <header className="fixed top-0 left-0 right-0 z-30 border-b border-zinc-800/50 bg-zinc-950 md:bg-zinc-950/90 backdrop-blur-sm md:backdrop-blur-md">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
@@ -78,7 +86,9 @@ export function AppShell({
       </header>
 
       {/* Main Content */}
-      <main>{children}</main>
+      <main id="main-content" tabIndex={-1}>
+        {children}
+      </main>
     </div>
   )
 }

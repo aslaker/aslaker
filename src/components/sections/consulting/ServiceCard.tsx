@@ -85,7 +85,7 @@ export function ServiceCard({ service, index }: ServiceCardProps) {
         {service.title}
       </h3>
 
-      <p className="mb-4 grow text-sm leading-relaxed text-zinc-400 transition-colors duration-300 group-hover:text-zinc-300">
+      <p className="mb-4 grow text-sm leading-relaxed text-zinc-300">
         {service.description}
       </p>
 

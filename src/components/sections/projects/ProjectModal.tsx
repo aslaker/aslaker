@@ -1,3 +1,5 @@
+import { useEffect, useRef } from 'react'
+import FocusTrap from 'focus-trap-react'
 import type { Project } from '../../../types'
 
 interface ProjectModalProps {
@@ -13,7 +15,23 @@ export function ProjectModal({
   onGitHubClick,
   onDemoClick,
 }: ProjectModalProps) {
+  const closeButtonRef = useRef<HTMLButtonElement>(null)
+
+  useEffect(() => {
+    if (project) {
+      // Prevent body scroll when modal is open
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = ''
+    }
+    return () => {
+      document.body.style.overflow = ''
+    }
+  }, [project])
+
   if (!project) return null
+
+  const modalTitleId = `project-modal-title-${project.id}`
 
   return (
     <div
@@ -21,26 +39,38 @@ export function ProjectModal({
       onClick={onClose}
     >
       {/* Backdrop with matrix rain effect */}
-      <div className="absolute inset-0 bg-zinc-950/95 backdrop-blur-sm">
+      <div className="absolute inset-0 bg-zinc-950/95 backdrop-blur-sm" aria-hidden="true">
         {/* Animated scanlines */}
         <div className="absolute inset-0 bg-[repeating-linear-gradient(0deg,transparent,transparent_2px,rgba(132,204,22,0.03)_2px,rgba(132,204,22,0.03)_4px)] animate-pulse" />
       </div>
 
-      {/* Modal container */}
-      <div
-        className="relative max-h-[90vh] w-full max-w-2xl overflow-hidden rounded-lg border border-lime-500/40 bg-zinc-950 shadow-[0_0_60px_rgba(132,204,22,0.2)]"
-        onClick={(e) => e.stopPropagation()}
-        style={{
-          animation: 'modalSlideIn 0.3s ease-out',
+      {/* Focus Trap */}
+      <FocusTrap
+        focusTrapOptions={{
+          initialFocus: () => closeButtonRef.current,
+          escapeDeactivates: true,
+          onDeactivate: onClose,
         }}
       >
+        {/* Modal container */}
+        <div
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby={modalTitleId}
+          className="relative max-h-[90vh] w-full max-w-2xl overflow-hidden rounded-lg border border-lime-500/40 bg-zinc-950 shadow-[0_0_60px_rgba(132,204,22,0.2)]"
+          onClick={(e) => e.stopPropagation()}
+          style={{
+            animation: 'modalSlideIn 0.3s ease-out',
+          }}
+        >
         {/* Terminal header bar */}
         <div className="flex items-center justify-between border-b border-lime-500/30 bg-zinc-900/80 px-4 py-3">
           <div className="flex items-center gap-3">
-            <div className="flex gap-1.5">
+            <div className="flex gap-1.5" aria-hidden="true">
               <button
+                ref={closeButtonRef}
                 onClick={onClose}
-                className="h-3 w-3 rounded-full bg-red-500 transition-colors hover:bg-red-400"
+                className="h-3 w-3 rounded-full bg-red-500 transition-colors hover:bg-red-400 focus:outline-none focus:ring-2 focus:ring-red-400 focus:ring-offset-1 focus:ring-offset-zinc-900"
                 aria-label="Close modal"
               />
               <span className="h-3 w-3 rounded-full bg-yellow-500/50" />
@@ -52,7 +82,8 @@ export function ProjectModal({
           </div>
           <button
             onClick={onClose}
-            className="font-mono text-xs text-zinc-500 transition-colors hover:text-lime-400"
+            className="font-mono text-xs text-zinc-500 transition-colors hover:text-lime-400 focus:outline-none focus:text-lime-400"
+            aria-label="Close modal (Escape key)"
           >
             [ESC]
           </button>
@@ -79,8 +110,8 @@ export function ProjectModal({
               </div>
 
               <div className="flex-1">
-                <h2 className="mb-2 font-mono text-2xl font-bold text-lime-400">
-                  <span className="text-lime-600">$ </span>
+                <h2 id={modalTitleId} className="mb-2 font-mono text-2xl font-bold text-lime-400">
+                  <span className="text-lime-600" aria-hidden="true">$ </span>
                   {project.title}
                 </h2>
                 <p className="font-mono text-sm leading-relaxed text-zinc-400">
@@ -223,7 +254,8 @@ export function ProjectModal({
             }
           }
         `}</style>
-      </div>
+        </div>
+      </FocusTrap>
     </div>
   )
 }

@@ -111,7 +111,7 @@ export function ProjectsGrid({
 						isVisible ? "translate-y-0 opacity-100" : "-translate-y-4 opacity-0"
 					}`}
 				>
-					<span className="font-mono text-xs text-zinc-600">
+					<span className="font-mono text-xs text-zinc-400">
 						total {projects.length}
 					</span>
 				</div>
@@ -134,7 +134,7 @@ export function ProjectsGrid({
 						isVisible ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"
 					}`}
 				>
-					<p className="mb-6 font-mono text-xs text-zinc-600">
+					<p className="mb-6 font-mono text-xs text-zinc-400">
 						<span className="text-lime-600">[</span>
 						Click a project to view details
 						<span className="text-lime-600">]</span>

@@ -55,11 +55,11 @@ export function ContactSection({
             isVisible ? 'translate-y-0 opacity-100' : '-translate-y-4 opacity-0'
           }`}
         >
-          <h1 className="mb-4 text-3xl font-medium text-zinc-100 sm:text-4xl">
-            <span className="text-lime-500"># </span>
+          <h2 className="mb-4 text-3xl font-medium text-zinc-100 sm:text-4xl">
+            <span className="text-lime-500" aria-hidden="true"># </span>
             Let&apos;s Build Something
-          </h1>
-          <p className="mb-8 max-w-lg text-lg leading-relaxed text-zinc-400">
+          </h2>
+          <p className="mb-8 max-w-lg text-lg leading-relaxed text-zinc-300">
             Whether you&apos;re looking to integrate AI into your product, need a
             technical partner, or want to explore what&apos;s possible—I&apos;d love to
             hear from you.
@@ -99,13 +99,13 @@ export function ContactSection({
                   <h2 className="font-mono text-lg font-medium text-zinc-100">
                     Start a Conversation
                   </h2>
-                  <p className="text-sm text-zinc-500">
+                  <p className="text-sm text-zinc-400">
                     Response within 24 hours
                   </p>
                 </div>
               </div>
 
-              <p className="mb-6 text-zinc-400">
+              <p className="mb-6 text-zinc-300">
                 Click below to open the contact form. Share your project details, and
                 we&apos;ll schedule a time to chat about how I can help.
               </p>

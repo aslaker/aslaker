@@ -96,7 +96,10 @@ export function Hero({
         </div>
 
         {/* Name with typing effect */}
-        <h1 className="font-mono text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-zinc-100 mb-4 tracking-tight">
+        <h1
+          className="font-mono text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-zinc-100 mb-4 tracking-tight"
+          aria-label={hero.name}
+        >
           <span className="relative">
             <span
               className="absolute inset-0 blur-lg bg-lime-400/20"
@@ -147,7 +150,7 @@ export function Hero({
           }`}
         >
           {/* Tagline */}
-          <p className="text-lg sm:text-xl text-zinc-400 mb-10 max-w-2xl mx-auto font-light leading-relaxed">
+          <p className="text-lg sm:text-xl text-zinc-300 mb-10 max-w-2xl mx-auto font-light leading-relaxed">
             {hero.tagline}
           </p>
 

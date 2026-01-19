@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { useReducedMotion } from '../../../hooks/useReducedMotion'
 
 interface TypingTextProps {
   text: string
@@ -17,20 +18,29 @@ export function TypingText({
   className = '',
   showCursor = true,
 }: TypingTextProps) {
+  const prefersReducedMotion = useReducedMotion()
   const [displayedText, setDisplayedText] = useState('')
   const [isTyping, setIsTyping] = useState(false)
   const [isComplete, setIsComplete] = useState(false)
 
   useEffect(() => {
+    // If reduced motion is preferred, show full text immediately
+    if (prefersReducedMotion) {
+      setDisplayedText(text)
+      setIsComplete(true)
+      onComplete?.()
+      return
+    }
+
     const startTimeout = setTimeout(() => {
       setIsTyping(true)
     }, delay)
 
     return () => clearTimeout(startTimeout)
-  }, [delay])
+  }, [delay, prefersReducedMotion, text, onComplete])
 
   useEffect(() => {
-    if (!isTyping) return
+    if (!isTyping || prefersReducedMotion) return
 
     if (displayedText.length < text.length) {
       const timeout = setTimeout(() => {
@@ -41,7 +51,7 @@ export function TypingText({
       setIsComplete(true)
       onComplete?.()
     }
-  }, [isTyping, displayedText, text, speed, onComplete])
+  }, [isTyping, displayedText, text, speed, onComplete, prefersReducedMotion])
 
   return (
     <span className={className}>
@@ -53,7 +63,8 @@ export function TypingText({
             bg-lime-400
           `}
           style={{
-            animation: isComplete ? 'blink 1s step-end infinite' : 'none',
+            animation: !prefersReducedMotion && isComplete ? 'blink 1s step-end infinite' : 'none',
+            opacity: prefersReducedMotion ? 1 : undefined,
           }}
         />
       )}

@@ -1,0 +1,67 @@
+{
+  "name": "@e2b-tools/core",
+  "version": "0.1.0",
+  "description": "Core utilities for e2b sandbox operations",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./sandbox": {
+      "types": "./dist/sandbox/index.d.ts",
+      "import": "./dist/sandbox/index.js"
+    },
+    "./sync": {
+      "types": "./dist/sync/index.d.ts",
+      "import": "./dist/sync/index.js"
+    },
+    "./runner": {
+      "types": "./dist/runner/index.d.ts",
+      "import": "./dist/runner/index.js"
+    },
+    "./config": {
+      "types": "./dist/config/index.d.ts",
+      "import": "./dist/config/index.js"
+    },
+    "./parallel": {
+      "types": "./dist/parallel/index.d.ts",
+      "import": "./dist/parallel/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "clean": "rm -rf dist",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "dependencies": {
+    "e2b": "^1.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.0",
+    "typescript": "^5.3.0",
+    "vitest": "^2.0.0"
+  },
+  "peerDependencies": {
+    "e2b": ">=1.0.0"
+  },
+  "keywords": [
+    "e2b",
+    "sandbox",
+    "cloud",
+    "isolated"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-org/e2b-tools",
+    "directory": "packages/core"
+  },
+  "license": "MIT"
+}

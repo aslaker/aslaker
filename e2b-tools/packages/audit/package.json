@@ -1,0 +1,55 @@
+{
+  "name": "@e2b-tools/audit",
+  "version": "0.1.0",
+  "description": "Accessibility and SEO auditing in e2b sandboxes",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "bin": {
+    "e2b-audit": "./dist/cli/index.js"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./cli": {
+      "types": "./dist/cli/index.d.ts",
+      "import": "./dist/cli/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "clean": "rm -rf dist",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "dependencies": {
+    "@e2b-tools/core": "^0.1.0",
+    "e2b": "^1.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.0",
+    "typescript": "^5.3.0",
+    "vitest": "^2.0.0"
+  },
+  "keywords": [
+    "e2b",
+    "audit",
+    "accessibility",
+    "seo",
+    "lighthouse",
+    "axe-core",
+    "pa11y"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-org/e2b-tools",
+    "directory": "packages/audit"
+  },
+  "license": "MIT"
+}

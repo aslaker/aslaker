@@ -1,5 +1,6 @@
 import { Menu, X } from "lucide-react";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
+import FocusTrap from "focus-trap-react";
 import type { NavigationItem, SocialLink } from "../../types";
 import { FontSelector } from "./FontSelector";
 import { SocialLinks } from "./SocialLinks";
@@ -16,6 +17,7 @@ export function MobileMenu({
 	onNavigate,
 }: MobileMenuProps) {
 	const [isOpen, setIsOpen] = useState(false);
+	const menuButtonRef = useRef<HTMLButtonElement>(null);
 
 	const handleNavigate = (href: string) => {
 		setIsOpen(false);
@@ -30,13 +32,23 @@ export function MobileMenu({
 		}
 	};
 
+	// Return focus to menu button when closed
+	useEffect(() => {
+		if (!isOpen) {
+			menuButtonRef.current?.focus();
+		}
+	}, [isOpen]);
+
 	return (
 		<>
 			{/* Hamburger Button */}
 			<button
+				ref={menuButtonRef}
 				onClick={() => setIsOpen(!isOpen)}
 				className="flex h-10 w-10 items-center justify-center rounded-lg text-zinc-400 transition-colors hover:bg-zinc-800 hover:text-zinc-100"
 				aria-label={isOpen ? "Close menu" : "Open menu"}
+				aria-expanded={isOpen}
+				aria-controls="mobile-menu-panel"
 			>
 				{isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
 			</button>
@@ -46,17 +58,30 @@ export function MobileMenu({
 				<div
 					className="fixed inset-0 z-40 bg-zinc-950"
 					onClick={() => setIsOpen(false)}
+					aria-hidden="true"
 				/>
 			)}
 
 			{/* Slide-out Panel */}
-			<div
-				className={`
-          fixed right-0 top-0 bottom-0 z-50 w-72 transform shadow-2xl transition-transform duration-300 ease-in-out
-          ${isOpen ? "translate-x-0" : "translate-x-full"}
+			{isOpen && (
+				<FocusTrap
+					focusTrapOptions={{
+						allowOutsideClick: true,
+						returnFocusOnDeactivate: true,
+						escapeDeactivates: true,
+						onDeactivate: () => setIsOpen(false),
+					}}
+				>
+					<div
+						id="mobile-menu-panel"
+						role="dialog"
+						aria-modal="true"
+						aria-label="Navigation menu"
+						className={`
+          fixed right-0 top-0 bottom-0 z-50 w-72 transform shadow-2xl transition-transform duration-300 ease-in-out translate-x-0
         `}
-				style={{ backgroundColor: "#18181b", minHeight: "100vh" }}
-			>
+						style={{ backgroundColor: "#18181b", minHeight: "100vh" }}
+					>
 				{/* Panel Header */}
 				<div className="flex h-16 items-center justify-between border-b border-zinc-800 px-4">
 					<span className="font-heading text-sm text-zinc-400">Navigation</span>
@@ -113,7 +138,9 @@ export function MobileMenu({
 					</span>
 					<FontSelector variant="full" />
 				</div>
-			</div>
+					</div>
+				</FocusTrap>
+			)}
 		</>
 	);
 }

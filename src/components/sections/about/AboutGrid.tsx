@@ -74,7 +74,7 @@ function JumpLinks({
       }`}
     >
       <div className="flex flex-wrap items-center gap-2">
-        <span className="font-mono text-xs text-zinc-600">jump to:</span>
+        <span className="font-mono text-xs text-zinc-400">jump to:</span>
         {interests.map((interest) => {
           const config = jumpLinkConfig[interest.id]
           if (!config) return null
@@ -84,9 +84,9 @@ function JumpLinks({
               type="button"
               key={interest.id}
               onClick={() => scrollToSection(interest.id)}
-              className="group flex items-center gap-2 rounded border border-zinc-800 bg-zinc-900/50 px-3 py-1.5 font-mono text-xs text-zinc-400 transition-all hover:border-lime-500/50 hover:bg-zinc-900 hover:text-lime-400"
+              className="group flex items-center gap-2 rounded border border-zinc-800 bg-zinc-900/50 px-3 py-1.5 font-mono text-xs text-zinc-300 transition-all hover:border-lime-500/50 hover:bg-zinc-900 hover:text-lime-400"
             >
-              <span className="text-zinc-600 transition-colors group-hover:text-lime-500">
+              <span className="text-zinc-400 transition-colors group-hover:text-lime-500">
                 {config.icon}
               </span>
               {config.label}
@@ -174,6 +174,7 @@ export function AboutGrid({
       </div>
 
       <div className="relative mx-auto max-w-6xl">
+        <h2 className="sr-only">My Interests</h2>
         <div
           className={`mb-8 transition-all duration-700 ${
             isVisible ? 'translate-y-0 opacity-100' : '-translate-y-4 opacity-0'
@@ -196,7 +197,7 @@ export function AboutGrid({
             isVisible ? 'translate-y-0 opacity-100' : '-translate-y-4 opacity-0'
           }`}
         >
-          <p className="font-mono text-sm leading-relaxed text-zinc-400">
+          <p className="font-mono text-sm leading-relaxed text-zinc-300">
             <span className="text-lime-600">&gt; </span>
             Beyond the code: the human behind the engineer. Each card reveals
             a different aspect of who I am when I&apos;m not building AI systems.

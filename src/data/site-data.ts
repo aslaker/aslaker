@@ -23,8 +23,8 @@ export const navigationItems: NavigationItem[] = [
 	{ label: "Projects", href: "#projects" },
 	{ label: "About", href: "#about" },
 	{ label: "Consulting", href: "#consulting" },
+	{ label: "Blog", href: "/blog" },
 	{ label: "Contact", href: "#contact" },
-	// { label: "Blog", href: "/blog" }, // TODO: Uncomment when blog content is ready
 ];
 
 // =============================================================================
