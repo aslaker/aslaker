@@ -81,7 +81,7 @@ export function ServiceCard({ service, index }: ServiceCardProps) {
         {icons[service.icon]}
       </div>
 
-      <h3 className="mb-3 font-mono text-lg font-medium text-zinc-100 transition-colors duration-300 group-hover:text-lime-50">
+      <h3 className="mb-3 font-mono text-lg font-medium text-zinc-50 transition-colors duration-300 group-hover:text-lime-50">
         {service.title}
       </h3>
 
@@ -89,7 +89,7 @@ export function ServiceCard({ service, index }: ServiceCardProps) {
         {service.description}
       </p>
 
-      <div className="inline-block self-start rounded border border-dashed border-zinc-700 bg-zinc-800/30 px-3 py-1.5 font-mono text-xs text-zinc-500 transition-all duration-300 group-hover:border-lime-500/30 group-hover:text-zinc-400">
+      <div className="inline-block self-start rounded border border-dashed border-zinc-700 bg-zinc-800/30 px-3 py-1.5 font-mono text-xs text-zinc-400 transition-all duration-300 group-hover:border-lime-500/30 group-hover:text-zinc-300">
         {service.placeholder}
       </div>
 

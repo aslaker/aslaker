@@ -188,7 +188,7 @@ export function Hero({
                   <button
                     key={link.id}
                     onClick={() => handleSocialClick(link)}
-                    className="p-3 text-zinc-500 hover:text-lime-400 transition-all duration-300 hover:shadow-[0_0_15px_rgba(163,230,53,0.3)] rounded-sm"
+                    className="p-3 text-zinc-400 hover:text-lime-400 transition-all duration-300 hover:shadow-[0_0_15px_rgba(163,230,53,0.3)] rounded-sm"
                     aria-label={link.platform}
                   >
                     <Icon className="w-5 h-5" />
@@ -205,7 +205,7 @@ export function Hero({
             showContent ? 'opacity-100' : 'opacity-0'
           }`}
         >
-          <div className="flex flex-col items-center gap-2 text-zinc-600 font-mono text-xs">
+          <div className="flex flex-col items-center gap-2 text-zinc-400 font-mono text-xs">
             <span className="tracking-widest uppercase">scroll</span>
             <div
               className="w-px h-8 bg-gradient-to-b from-lime-400/50 to-transparent"
