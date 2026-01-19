@@ -96,11 +96,9 @@ export function Hero({
         </div>
 
         {/* Name with typing effect */}
-        <h1
-          className="font-mono text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-zinc-100 mb-4 tracking-tight"
-          aria-label={hero.name}
-        >
-          <span className="relative">
+        <h1 className="font-mono text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-zinc-100 mb-4 tracking-tight">
+          <span className="sr-only">{hero.name}</span>
+          <span className="relative" aria-hidden="true">
             <span
               className="absolute inset-0 blur-lg"
               style={{
@@ -173,7 +171,7 @@ export function Hero({
               }}
             >
               <span className="relative z-10 flex items-center gap-2">
-                <span style={{ color: 'var(--theme-primary-darker)' }}>&gt;</span>
+                <span style={{ color: 'var(--theme-primary-darker)' }} aria-hidden="true">&gt;</span>
                 {hero.primaryCta.label}
               </span>
               {/* Glitch effect on hover */}
@@ -201,7 +199,7 @@ export function Hero({
               }}
             >
               <span className="flex items-center gap-2">
-                <span style={{ color: 'var(--theme-secondary)' }}>&gt;</span>
+                <span style={{ color: 'var(--theme-secondary)' }} aria-hidden="true">&gt;</span>
                 {hero.secondaryCta.label}
               </span>
             </button>

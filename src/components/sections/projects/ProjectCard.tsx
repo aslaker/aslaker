@@ -83,9 +83,9 @@ export function ProjectCard({ project, index, onSelect }: ProjectCardProps) {
 
       {/* Title */}
       <h3 className="mb-3 font-mono text-base font-bold tracking-tight sm:text-lg" style={{ color: 'var(--theme-primary)' }}>
-        <span style={{ color: 'var(--theme-primary-darker)' }}>&gt; </span>
+        <span style={{ color: 'var(--theme-primary-darker)' }} aria-hidden="true">&gt; </span>
         {project.title}
-        <span className="ml-1 inline-block h-4 w-2 animate-pulse" style={{ backgroundColor: 'var(--theme-primary)' }} />
+        <span className="ml-1 inline-block h-4 w-2 animate-pulse" style={{ backgroundColor: 'var(--theme-primary)' }} aria-hidden="true" />
       </h3>
 
       {/* Short description */}
@@ -122,12 +122,12 @@ export function ProjectCard({ project, index, onSelect }: ProjectCardProps) {
             >
               {tech}
               {idx < Math.min(project.technologies.length - 1, 3) && (
-                <span style={{ color: 'var(--theme-primary-darker)' }}> | </span>
+                <span style={{ color: 'var(--theme-primary-darker)' }} aria-hidden="true"> | </span>
               )}
             </span>
           ))}
           {project.technologies.length > 4 && (
-            <span className="font-mono text-xs text-zinc-600">
+            <span className="font-mono text-xs text-zinc-400">
               +{project.technologies.length - 4}
             </span>
           )}

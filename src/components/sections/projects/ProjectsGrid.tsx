@@ -68,6 +68,9 @@ export function ProjectsGrid({
 			className="min-h-screen bg-zinc-950 px-4 py-24 sm:px-6 lg:px-8"
 		>
 			<div className="relative mx-auto max-w-4xl">
+				{/* Section heading for accessibility */}
+				<h2 className="sr-only">Projects</h2>
+
 				{/* Terminal header */}
 				<div
 					className={`mb-8 transition-all duration-700 ${
@@ -93,7 +96,7 @@ export function ProjectsGrid({
 					}`}
 				>
 					<p className="font-mono text-sm leading-relaxed text-zinc-400">
-						<span style={{ color: 'var(--theme-primary-darker)' }}>&gt; </span>
+						<span style={{ color: 'var(--theme-primary-darker)' }} aria-hidden="true">&gt; </span>
 						Featured projects showcasing AI/agentic engineering, full-stack
 						development, and open source contributions. Click any project to
 						explore further.
@@ -129,10 +132,10 @@ export function ProjectsGrid({
 						isVisible ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"
 					}`}
 				>
-					<p className="mb-6 font-mono text-xs text-zinc-600">
-						<span style={{ color: 'var(--theme-primary-darker)' }}>[</span>
+					<p className="mb-6 font-mono text-xs text-zinc-400">
+						<span style={{ color: 'var(--theme-primary-darker)' }} aria-hidden="true">[</span>
 						Click a project to view details
-						<span style={{ color: 'var(--theme-primary-darker)' }}>]</span>
+						<span style={{ color: 'var(--theme-primary-darker)' }} aria-hidden="true">]</span>
 					</p>
 
 					{/* Primary CTA */}
@@ -176,9 +179,9 @@ export function ProjectsGrid({
 								e.currentTarget.style.color = ''
 							}}
 						>
-							<span style={{ color: 'var(--theme-primary-darker)' }}>[</span>
+							<span style={{ color: 'var(--theme-primary-darker)' }} aria-hidden="true">[</span>
 							View more on GitHub
-							<span style={{ color: 'var(--theme-primary-darker)' }}>]</span>
+							<span style={{ color: 'var(--theme-primary-darker)' }} aria-hidden="true">]</span>
 						</a>
 					</div>
 				</div>

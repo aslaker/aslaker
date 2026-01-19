@@ -106,7 +106,7 @@ export function ConsultingSection({
           >
             <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent transition-transform duration-700 group-hover:translate-x-full" />
             <span className="relative flex items-center gap-2">
-              <span style={{ color: 'var(--theme-primary-darker)' }}>
+              <span style={{ color: 'var(--theme-primary-darker)' }} aria-hidden="true">
                 &gt;
               </span>
               {cta.text}
@@ -137,7 +137,7 @@ export function ConsultingSection({
               className="group inline-flex items-center gap-1 font-mono text-sm transition-colors"
               style={{ color: 'var(--theme-secondary)' }}
             >
-              <span className="text-zinc-600 transition-colors group-hover:text-[var(--theme-secondary-dark)]">
+              <span className="text-zinc-400 transition-colors group-hover:text-[var(--theme-secondary-dark)]" aria-hidden="true">
                 →
               </span>
               {localTechLabsCallout.linkText}
@@ -159,10 +159,10 @@ export function ConsultingSection({
             isVisible ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'
           }`}
         >
-          <p className="font-mono text-xs text-zinc-600">
-            <span style={{ color: 'var(--theme-primary-darker)' }}>[</span>
+          <p className="font-mono text-xs text-zinc-400">
+            <span style={{ color: 'var(--theme-primary-darker)' }} aria-hidden="true">[</span>
             Ready to build something great together?
-            <span style={{ color: 'var(--theme-primary-darker)' }}>]</span>
+            <span style={{ color: 'var(--theme-primary-darker)' }} aria-hidden="true">]</span>
           </p>
         </div>
       </div>

@@ -125,7 +125,7 @@ export function ScorecardCard({
           </div>
           <div>
             <h3 className="font-mono text-base font-bold tracking-tight sm:text-lg" style={{ color: 'var(--theme-primary)' }}>
-              <span style={{ color: 'var(--theme-primary-darker)' }}>&gt; </span>
+              <span style={{ color: 'var(--theme-primary-darker)' }} aria-hidden="true">&gt; </span>
               {interest.title}
             </h3>
             <span className="font-mono text-xs uppercase tracking-widest text-zinc-400">

@@ -153,13 +153,13 @@ export function PortfolioApp() {
         <footer className="border-t border-zinc-800 bg-zinc-950 py-8">
           <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
             <div className="flex flex-col items-center justify-between gap-4 sm:flex-row">
-              <p className="font-mono text-xs text-zinc-600">
-                <span style={{ color: 'var(--theme-primary-darker)' }}>&gt;</span> adamslaker.dev
-                <span className="text-zinc-700"> | </span>
+              <p className="font-mono text-xs text-zinc-400">
+                <span style={{ color: 'var(--theme-primary-darker)' }} aria-hidden="true">&gt;</span> adamslaker.dev
+                <span className="text-zinc-500" aria-hidden="true"> | </span>
                 Built with Astro, React, and Tailwind CSS
               </p>
-              <p className="font-mono text-xs text-zinc-600">
-                <span style={{ color: 'var(--theme-secondary-dark)' }}>&copy;</span> {new Date().getFullYear()} Adam Slaker
+              <p className="font-mono text-xs text-zinc-400">
+                <span style={{ color: 'var(--theme-secondary-dark)' }} aria-hidden="true">&copy;</span> {new Date().getFullYear()} Adam Slaker
               </p>
             </div>
           </div>

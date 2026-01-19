@@ -173,7 +173,7 @@ export function ContactSection({ onContactClick }: ContactSectionProps) {
 							>
 								<div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent transition-transform duration-700 group-hover/btn:translate-x-full" />
 								<span className="relative flex items-center gap-2">
-									<span style={{ color: "var(--theme-primary-darker)" }}>
+									<span style={{ color: "var(--theme-primary-darker)" }} aria-hidden="true">
 										&gt;
 									</span>
 									Get in Touch
@@ -195,10 +195,10 @@ export function ContactSection({ onContactClick }: ContactSectionProps) {
 						isVisible ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"
 					}`}
 				>
-					<p className="mb-4 font-mono text-xs text-zinc-500">
-						<span style={{ color: "var(--theme-primary-darker)" }}>[</span>
+					<p className="mb-4 font-mono text-xs text-zinc-400">
+						<span style={{ color: "var(--theme-primary-darker)" }} aria-hidden="true">[</span>
 						Or reach out directly
-						<span style={{ color: "var(--theme-primary-darker)" }}>]</span>
+						<span style={{ color: "var(--theme-primary-darker)" }} aria-hidden="true">]</span>
 					</p>
 					<div className="flex justify-center gap-6">
 						<a

@@ -4,7 +4,6 @@ import type { MountainBikingInterest, RidingArea, Trail } from '../../../types'
 interface TrailMapCardProps {
   interest: MountainBikingInterest
   onHover?: () => void
-  onClick?: () => void
 }
 
 const difficultyConfig = {
@@ -145,8 +144,8 @@ function AreaAccordion({
       >
         <div className="overflow-hidden">
           <div className="border-t border-zinc-800 px-4 py-3">
-            <div className="mb-2 font-mono text-xs text-zinc-500">
-              <span style={{ color: 'var(--theme-primary-darker)' }}>&gt;</span> ls -la ./trails/{areaSlug}
+            <div className="mb-2 font-mono text-xs text-zinc-400">
+              <span style={{ color: 'var(--theme-primary-darker)' }} aria-hidden="true">&gt;</span> ls -la ./trails/{areaSlug}
             </div>
             <div className="grid grid-cols-1 gap-1 sm:grid-cols-2">
               {area.trails.map((trail, idx) => (
@@ -168,7 +167,6 @@ function AreaAccordion({
 export function TrailMapCard({
   interest,
   onHover,
-  onClick,
 }: TrailMapCardProps) {
   const [expandedAreas, setExpandedAreas] = useState<Set<string>>(new Set())
 
@@ -182,13 +180,6 @@ export function TrailMapCard({
       }
       return next
     })
-  }
-
-  const handleKeyDown = (e: React.KeyboardEvent) => {
-    if (e.key === 'Enter' || e.key === ' ') {
-      e.preventDefault()
-      onClick?.()
-    }
   }
 
   const allTrails = interest.areas.flatMap((a) => a.trails)
@@ -205,20 +196,12 @@ export function TrailMapCard({
 
   return (
     <div
-      onClick={onClick}
-      onKeyDown={handleKeyDown}
       onMouseEnter={onHover}
-      onFocus={onHover}
-      tabIndex={0}
-      role="button"
-      aria-label={`View ${interest.title} trail guide details`}
-      className="group relative flex h-full w-full cursor-pointer flex-col rounded-lg bg-zinc-950 p-5 text-left transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-zinc-950 sm:p-6"
+      className="group relative flex h-full w-full flex-col rounded-lg bg-zinc-950 p-5 text-left transition-all duration-300 sm:p-6"
       style={{
         borderWidth: '1px',
         borderStyle: 'solid',
         borderColor: 'rgba(var(--theme-primary-dark-rgb), 0.3)',
-        // @ts-expect-error CSS custom property for focus ring
-        '--tw-ring-color': 'rgba(var(--theme-primary-dark-rgb), 0.5)',
       }}
       onMouseOver={(e) => {
         e.currentTarget.style.borderColor = 'rgba(var(--theme-primary-rgb), 0.6)'
@@ -286,7 +269,7 @@ export function TrailMapCard({
           </div>
           <div>
             <h3 className="font-mono text-base font-bold tracking-tight sm:text-lg" style={{ color: 'var(--theme-primary)' }}>
-              <span style={{ color: 'var(--theme-primary-darker)' }}>&gt; </span>
+              <span style={{ color: 'var(--theme-primary-darker)' }} aria-hidden="true">&gt; </span>
               {interest.title}
             </h3>
             <span className="font-mono text-xs uppercase tracking-widest text-zinc-400">
@@ -324,8 +307,8 @@ export function TrailMapCard({
       </div>
 
       {/* Terminal command header */}
-      <div className="mb-3 font-mono text-xs text-zinc-500">
-        <span style={{ color: 'var(--theme-primary-darker)' }}>&gt;</span> ls ./trails
+      <div className="mb-3 font-mono text-xs text-zinc-400">
+        <span style={{ color: 'var(--theme-primary-darker)' }} aria-hidden="true">&gt;</span> ls ./trails
       </div>
 
       {/* Area accordions */}

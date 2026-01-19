@@ -143,7 +143,6 @@ function InterestCard({
         <TrailMapCard
           interest={interest}
           onHover={onHover}
-          onClick={onClick}
         />
       )
     }
@@ -202,7 +201,7 @@ export function AboutGrid({
           }`}
         >
           <p className="font-mono text-sm leading-relaxed text-zinc-400">
-            <span style={{ color: 'var(--theme-primary-darker)' }}>&gt; </span>
+            <span style={{ color: 'var(--theme-primary-darker)' }} aria-hidden="true">&gt; </span>
             Beyond the code: the human behind the engineer. Each card reveals
             a different aspect of who I am when I&apos;m not building AI systems.
           </p>
@@ -228,15 +227,15 @@ export function AboutGrid({
             isVisible ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'
           }`}
         >
-          <p className="mb-6 font-mono text-xs text-zinc-600">
-            <span style={{ color: 'var(--theme-primary-darker)' }}>[</span>
+          <p className="mb-6 font-mono text-xs text-zinc-400">
+            <span style={{ color: 'var(--theme-primary-darker)' }} aria-hidden="true">[</span>
             Hover over cards to explore more details
-            <span style={{ color: 'var(--theme-primary-darker)' }}>]</span>
+            <span style={{ color: 'var(--theme-primary-darker)' }} aria-hidden="true">]</span>
           </p>
 
           {/* Transition message */}
           <p className="mb-6 font-mono text-sm text-zinc-400">
-            <span style={{ color: 'var(--theme-primary-darker)' }}>&gt; </span>
+            <span style={{ color: 'var(--theme-primary-darker)' }} aria-hidden="true">&gt; </span>
             Now that you know me, let&apos;s talk about what we can build together.
           </p>
 
@@ -252,7 +251,7 @@ export function AboutGrid({
               e.currentTarget.style.boxShadow = 'none'
             }}
           >
-            <span style={{ color: 'var(--theme-primary-darker)' }}>
+            <span style={{ color: 'var(--theme-primary-darker)' }} aria-hidden="true">
               &gt;
             </span>
             Explore Services
