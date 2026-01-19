@@ -151,12 +151,24 @@ export function ContactModal({
       aria-modal="true"
       aria-labelledby="contact-modal-title"
     >
-      <div
-        ref={modalRef}
-        className={`relative w-full max-w-lg overflow-hidden rounded-lg border border-zinc-800 bg-zinc-900 shadow-2xl shadow-lime-500/5 transition-all duration-300 ${
-          isVisible ? 'translate-y-0 scale-100 opacity-100' : 'translate-y-8 scale-95 opacity-0'
-        }`}
+      <FocusTrap
+        active={isOpen}
+        focusTrapOptions={{
+          allowOutsideClick: true,
+          returnFocusOnDeactivate: true,
+          escapeDeactivates: true,
+          onDeactivate: onClose,
+        }}
       >
+        <div
+          ref={modalRef}
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="contact-modal-title"
+          className={`relative w-full max-w-lg overflow-hidden rounded-lg border border-zinc-800 bg-zinc-900 shadow-2xl shadow-lime-500/5 transition-all duration-300 ${
+            isVisible ? 'translate-y-0 scale-100 opacity-100' : 'translate-y-8 scale-95 opacity-0'
+          }`}
+        >
         <div className="flex items-center justify-between border-b border-zinc-800 bg-zinc-900/80 px-4 py-3">
           <div className="flex items-center gap-2">
             <div className="flex gap-1.5">
@@ -435,23 +447,24 @@ export function ContactModal({
             </div>
           )}
         </div>
-      </div>
 
-      <style>{`
-        @keyframes fadeIn {
-          from {
-            opacity: 0;
-            transform: translateX(10px);
+        <style>{`
+          @keyframes fadeIn {
+            from {
+              opacity: 0;
+              transform: translateX(10px);
+            }
+            to {
+              opacity: 1;
+              transform: translateX(0);
+            }
           }
-          to {
-            opacity: 1;
-            transform: translateX(0);
+          .animate-fadeIn {
+            animation: fadeIn 0.3s ease-out;
           }
-        }
-        .animate-fadeIn {
-          animation: fadeIn 0.3s ease-out;
-        }
-      `}</style>
+        `}</style>
+      </div>
+      </FocusTrap>
     </div>
   )
 }

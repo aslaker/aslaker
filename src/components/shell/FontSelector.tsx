@@ -45,7 +45,7 @@ export function FontSelector({ variant = 'compact' }: FontSelectorProps) {
           <div className="flex items-center gap-3">
             <Type className="h-4 w-4 text-zinc-500 transition-colors group-hover:text-lime-400" />
             <div>
-              <div className="text-xs text-zinc-500">Don't like the font?</div>
+              <div className="text-xs text-zinc-400">Don't like the font?</div>
               <div className="text-sm font-medium text-zinc-200" style={{ fontFamily: currentFont.family }}>
                 {currentFont.name}
               </div>
@@ -76,7 +76,7 @@ export function FontSelector({ variant = 'compact' }: FontSelectorProps) {
                     <div className="text-sm font-medium" style={{ fontFamily: font.family }}>
                       {font.name}
                     </div>
-                    <div className="text-xs text-zinc-500">{font.description}</div>
+                    <div className="text-xs text-zinc-400">{font.description}</div>
                   </div>
                   {currentFont.id === font.id && (
                     <span className="h-2 w-2 rounded-full bg-lime-400" />

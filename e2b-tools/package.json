@@ -1,0 +1,45 @@
+{
+  "name": "e2b-tools",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Run isolated workflows in e2b cloud sandboxes",
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "build": "npm run build --workspaces",
+    "test": "npm run test --workspaces --if-present",
+    "lint": "npm run lint --workspaces --if-present",
+    "clean": "npm run clean --workspaces --if-present",
+    "typecheck": "npm run typecheck --workspaces --if-present",
+    "e2b:build:dev": "cd audit-node22-chrome && npx tsx build.dev.ts",
+    "e2b:build:prod": "cd audit-node22-chrome && npx tsx build.prod.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-org/e2b-tools"
+  },
+  "keywords": [
+    "e2b",
+    "sandbox",
+    "audit",
+    "accessibility",
+    "seo",
+    "testing",
+    "security"
+  ],
+  "author": "Adam Slaker",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^20.10.0",
+    "typescript": "^5.3.0",
+    "vitest": "^2.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "dependencies": {
+    "e2b": "^2.10.2",
+    "tsx": "^4.21.0"
+  }
+}

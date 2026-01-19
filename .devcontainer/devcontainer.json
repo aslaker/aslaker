@@ -1,0 +1,13 @@
+{
+  "name": "aslaker-optimize",
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
+  "workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind",
+  "workspaceFolder": "/workspace",
+  "mounts": [
+    "source=${localEnv:HOME}/.claude,target=/home/pwuser/.claude,type=bind"
+  ],
+  "remoteUser": "pwuser",
+  "postCreateCommand": "npm install"
+}

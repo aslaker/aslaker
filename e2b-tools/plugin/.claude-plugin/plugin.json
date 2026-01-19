@@ -1,0 +1,21 @@
+{
+  "name": "@e2b-tools/claude-plugin",
+  "version": "0.1.0",
+  "description": "Run isolated workflows in e2b cloud sandboxes - accessibility audits, SEO checks, testing, and security scanning",
+  "author": "Adam Slaker",
+  "repository": "https://github.com/aslaker/e2b-tools",
+  "license": "MIT",
+  "commands": [
+    "commands/*.md"
+  ],
+  "skills": [
+    "skills/*/SKILL.md"
+  ],
+  "agents": [
+    "agents/*.md"
+  ],
+  "requirements": {
+    "env": ["E2B_API_KEY"],
+    "npm": ["@e2b-tools/core", "@e2b-tools/audit"]
+  }
+}

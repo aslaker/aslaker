@@ -2,9 +2,10 @@
 import "../styles/global.css";
 import { PortfolioApp } from "../components/PortfolioApp";
 
-const title = "Adam Slaker | Principal Agentic Engineer";
+const title = "Adam Slaker | AI Consultant & Agentic Engineer";
 const description =
-	"Building intelligent systems that think, adapt, and ship. Explore my projects, consulting services, and get in touch.";
+	"AI consultant helping startups build intelligent systems. Strategic consulting, fractional CTO services, and agentic AI development. Let's build something together.";
+const canonicalUrl = "https://adamslaker.dev/";
 ---
 
 <!doctype html>
@@ -15,11 +16,14 @@ const description =
 		<meta name="description" content={description} />
 		<meta name="generator" content={Astro.generator} />
 
+		<!-- Canonical URL -->
+		<link rel="canonical" href={canonicalUrl} />
+
 		<!-- Open Graph -->
 		<meta property="og:title" content={title} />
 		<meta property="og:description" content={description} />
 		<meta property="og:type" content="website" />
-		<meta property="og:url" content="https://adamslaker.dev" />
+		<meta property="og:url" content={canonicalUrl} />
 
 		<!-- Twitter -->
 		<meta name="twitter:card" content="summary_large_image" />

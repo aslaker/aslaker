@@ -97,7 +97,8 @@ export function Hero({
 
         {/* Name with typing effect */}
         <h1 className="font-mono text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-zinc-100 mb-4 tracking-tight">
-          <span className="relative">
+          <span className="sr-only">{hero.name}</span>
+          <span className="relative" aria-hidden="true">
             <span
               className="absolute inset-0 blur-lg"
               style={{
@@ -149,7 +150,7 @@ export function Hero({
           }`}
         >
           {/* Tagline */}
-          <p className="text-lg sm:text-xl text-zinc-400 mb-10 max-w-2xl mx-auto font-light leading-relaxed">
+          <p className="text-lg sm:text-xl text-zinc-300 mb-10 max-w-2xl mx-auto font-light leading-relaxed">
             {hero.tagline}
           </p>
 
@@ -170,7 +171,7 @@ export function Hero({
               }}
             >
               <span className="relative z-10 flex items-center gap-2">
-                <span style={{ color: 'var(--theme-primary-darker)' }}>&gt;</span>
+                <span style={{ color: 'var(--theme-primary-darker)' }} aria-hidden="true">&gt;</span>
                 {hero.primaryCta.label}
               </span>
               {/* Glitch effect on hover */}
@@ -198,7 +199,7 @@ export function Hero({
               }}
             >
               <span className="flex items-center gap-2">
-                <span style={{ color: 'var(--theme-secondary)' }}>&gt;</span>
+                <span style={{ color: 'var(--theme-secondary)' }} aria-hidden="true">&gt;</span>
                 {hero.secondaryCta.label}
               </span>
             </button>
@@ -239,7 +240,7 @@ export function Hero({
             showContent ? 'opacity-100' : 'opacity-0'
           }`}
         >
-          <div className="flex flex-col items-center gap-2 text-zinc-600 font-mono text-xs">
+          <div className="flex flex-col items-center gap-2 text-zinc-400 font-mono text-xs">
             <span className="tracking-widest uppercase">scroll</span>
             <div
               className="w-px h-8"
