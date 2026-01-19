@@ -7,29 +7,32 @@ description: Generate a LinkedIn post draft based on recent PR changes
 
 Generate a professional LinkedIn post about recent changes to the portfolio site.
 
+## Style Foundation
+
+This skill applies the voice and style from the writing-style skill adapted for LinkedIn's shorter format. Key points:
+
+- **Voice**: Calm, firm, blunt, funny. Strong opinions, weakly held.
+- **Humor**: 1-2 light jokes or asides (scaled down from long-form's 2-5)
+- **Boundaries**: No calling out individuals, no dunking, say what you'd say in person
+- **Deliverable**: Even short posts should give readers something concrete
+
 ## Variables
 
 PR_NUMBER = $ARGUMENTS
 PR_TITLE = $ARGUMENTS
 
-
 ## Process
 
-1. **Gather context** - Read the most recent merged PR or current git diff to understand what changed
-2. **Identify the story** - What problem does this solve? What's interesting about the implementation?
-3. **Draft the post** - Write a LinkedIn-appropriate post following the guidelines below
-4. **Save the draft** - Write to `linkedin-drafts/YYYY-MM-DD-<slug>.md`
+1. **Load style guide** - Read `.claude/skills/writing-style/SKILL.md` and `.claude/skills/writing-style/SAMPLES.md` for voice, rules, and concrete examples
+2. **Gather context** - Read the most recent merged PR or current git diff to understand what changed
+3. **Identify the story** - What problem does this solve? What's interesting about the implementation?
+4. **Draft the post** - Write a LinkedIn-appropriate post following the guidelines below
+5. **Save the draft** - Write to `linkedin-drafts/YYYY-MM-DD-<slug>.md`
 
 ## Post Guidelines
 
-### Tone
-- Professional but personable
-- Authentic voice - write like a real person, not a corporate account
-- Confident without being boastful
-- Focus on learnings and insights, not just announcements
-
 ### Structure (150-300 words)
-1. **Hook** (1-2 sentences) - Start with something interesting or a question
+1. **Hook** (1-2 sentences) - Blunt opener or question that stops the scroll
 2. **Context** (1-2 sentences) - What did you build/change?
 3. **The interesting part** (2-4 sentences) - Why does it matter? What did you learn?
 4. **Call to action** (1 sentence) - Ask a question or invite engagement
@@ -45,6 +48,8 @@ PR_TITLE = $ARGUMENTS
 - Overly technical jargon without explanation
 - Self-congratulatory language
 - Generic statements like "excited to announce"
+- Em dashes (use commas or periods instead)
+- Vague claims without concrete examples
 
 ## Draft File Format
 
