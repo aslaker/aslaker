@@ -7,10 +7,20 @@ export function BlogPostCard({ writing, onTagClick, onClick }: BlogPostCardProps
     year: 'numeric',
   })
 
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault()
+      onClick?.()
+    }
+  }
+
   return (
     <article
       onClick={onClick}
-      className="group relative cursor-pointer overflow-hidden rounded-lg border border-zinc-800/50 bg-zinc-900/50 transition-all duration-300 hover:border-lime-500/30 hover:bg-zinc-900"
+      onKeyDown={handleKeyDown}
+      tabIndex={0}
+      aria-label={`Read article: ${writing.title}`}
+      className="group relative cursor-pointer overflow-hidden rounded-lg border border-zinc-800/50 bg-zinc-900/50 transition-all duration-300 hover:border-lime-500/30 hover:bg-zinc-900 focus:outline-none focus:ring-2 focus:ring-lime-500/50 focus:ring-offset-2 focus:ring-offset-zinc-950"
     >
       {/* Glow effect on hover */}
       <div className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
@@ -24,7 +34,7 @@ export function BlogPostCard({ writing, onTagClick, onClick }: BlogPostCardProps
             <div className="absolute inset-0 bg-gradient-to-t from-zinc-900 via-transparent to-transparent sm:bg-gradient-to-r" />
             <img
               src={writing.thumbnailImage}
-              alt=""
+              alt={`Thumbnail for ${writing.title}`}
               className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
             />
             {/* Scanline overlay */}
@@ -48,6 +58,7 @@ export function BlogPostCard({ writing, onTagClick, onClick }: BlogPostCardProps
                 viewBox="0 0 24 24"
                 stroke="currentColor"
                 strokeWidth={2}
+                aria-hidden="true"
               >
                 <path
                   strokeLinecap="round"

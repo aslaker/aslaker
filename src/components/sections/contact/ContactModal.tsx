@@ -1,5 +1,4 @@
-import { useState, useEffect, useRef } from 'react'
-import FocusTrap from 'focus-trap-react'
+import { useState, useEffect, useRef, useCallback } from 'react'
 import type { ContactFormData, TopicOption, TopicValue, CalendarConfig } from '../../../types'
 
 type ModalStep = 'form' | 'calendar' | 'success'
@@ -34,6 +33,8 @@ export function ContactModal({
   })
   const [isVisible, setIsVisible] = useState(false)
   const modalRef = useRef<HTMLDivElement>(null)
+  const previousActiveElement = useRef<HTMLElement | null>(null)
+  const firstInputRef = useRef<HTMLInputElement>(null)
 
   useEffect(() => {
     if (isOpen) {
@@ -73,6 +74,41 @@ export function ContactModal({
     return () => document.removeEventListener('keydown', handleEscape)
   }, [isOpen, onClose])
 
+  // Focus management
+  useEffect(() => {
+    if (isOpen) {
+      // Store the previously focused element
+      previousActiveElement.current = document.activeElement as HTMLElement
+      // Focus the first input after a short delay to allow animation
+      const timer = setTimeout(() => {
+        firstInputRef.current?.focus()
+      }, 100)
+      return () => clearTimeout(timer)
+    } else {
+      // Restore focus to the previously focused element
+      previousActiveElement.current?.focus()
+    }
+  }, [isOpen])
+
+  // Focus trap handler
+  const handleKeyDown = useCallback((e: React.KeyboardEvent) => {
+    if (e.key !== 'Tab' || !modalRef.current) return
+
+    const focusableElements = modalRef.current.querySelectorAll<HTMLElement>(
+      'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+    )
+    const firstElement = focusableElements[0]
+    const lastElement = focusableElements[focusableElements.length - 1]
+
+    if (e.shiftKey && document.activeElement === firstElement) {
+      e.preventDefault()
+      lastElement?.focus()
+    } else if (!e.shiftKey && document.activeElement === lastElement) {
+      e.preventDefault()
+      firstElement?.focus()
+    }
+  }, [])
+
   const handleBackdropClick = (e: React.MouseEvent) => {
     if (e.target === e.currentTarget) {
       onClose()
@@ -110,6 +146,10 @@ export function ContactModal({
         isVisible ? 'bg-zinc-950/90 backdrop-blur-sm' : 'bg-transparent'
       }`}
       onClick={handleBackdropClick}
+      onKeyDown={handleKeyDown}
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="contact-modal-title"
     >
       <FocusTrap
         active={isOpen}
@@ -193,6 +233,7 @@ export function ContactModal({
                       name<span className="text-lime-500">*</span>
                     </label>
                     <input
+                      ref={firstInputRef}
                       type="text"
                       id="name"
                       name="name"
@@ -269,6 +310,7 @@ export function ContactModal({
                         fill="none"
                         stroke="currentColor"
                         viewBox="0 0 24 24"
+                        aria-hidden="true"
                       >
                         <path
                           strokeLinecap="round"
@@ -313,6 +355,7 @@ export function ContactModal({
                           className="h-4 w-4 animate-spin"
                           fill="none"
                           viewBox="0 0 24 24"
+                          aria-hidden="true"
                         >
                           <circle
                             className="opacity-25"
@@ -350,6 +393,7 @@ export function ContactModal({
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
+                  aria-hidden="true"
                 >
                   <path
                     strokeLinecap="round"

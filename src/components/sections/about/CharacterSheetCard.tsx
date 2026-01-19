@@ -14,22 +14,28 @@ function StatBar({ trait }: { trait: Trait }) {
   return (
     <div className="group/stat">
       <div className="mb-1.5 flex items-center justify-between">
-        <span className="font-mono text-xs uppercase tracking-wider text-zinc-400 group-hover/stat:text-lime-400">
+        <span
+          className="font-mono text-xs uppercase tracking-wider text-zinc-400 transition-colors"
+          style={{ ['--hover-color' as string]: 'var(--theme-primary)' }}
+        >
           {trait.name}
         </span>
         <div className="flex items-center gap-2">
-          <span className="font-mono text-xs text-emerald-400">
+          <span className="font-mono text-xs" style={{ color: 'var(--theme-secondary)' }}>
             ({modifierString})
           </span>
-          <span className="font-mono text-sm font-bold text-lime-400">
+          <span className="font-mono text-sm font-bold" style={{ color: 'var(--theme-primary)' }}>
             {trait.value}
           </span>
         </div>
       </div>
       <div className="relative h-2.5 overflow-hidden rounded-full bg-zinc-800/80">
         <div
-          className="absolute inset-y-0 left-0 rounded-full bg-gradient-to-r from-lime-600 to-lime-400 transition-all duration-500"
-          style={{ width: `${percentage}%` }}
+          className="absolute inset-y-0 left-0 rounded-full transition-all duration-500"
+          style={{
+            width: `${percentage}%`,
+            background: `linear-gradient(to right, var(--theme-primary-darker), var(--theme-primary))`,
+          }}
         />
         <div className="absolute inset-0 bg-[repeating-linear-gradient(0deg,transparent,transparent_1px,rgba(0,0,0,0.3)_1px,rgba(0,0,0,0.3)_2px)]" />
       </div>
@@ -49,35 +55,70 @@ export function CharacterSheetCard({
   const leftTraits = interest.traits.slice(0, midpoint)
   const rightTraits = interest.traits.slice(midpoint)
 
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault()
+      onClick?.()
+    }
+  }
+
   return (
     <div
       onClick={onClick}
+      onKeyDown={handleKeyDown}
       onMouseEnter={onHover}
-      className="group relative flex h-full w-full flex-col rounded-lg border border-lime-500/30 bg-zinc-950 p-5 text-left transition-all duration-300 hover:border-lime-400/60 hover:shadow-[0_0_30px_rgba(132,204,22,0.15)] sm:p-6"
+      onFocus={onHover}
+      tabIndex={0}
+      role="button"
+      aria-label={`View ${interest.title} character sheet details`}
+      className="group relative flex h-full w-full cursor-pointer flex-col rounded-lg bg-zinc-950 p-5 text-left transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-zinc-950 sm:p-6"
+      style={{
+        borderWidth: '1px',
+        borderStyle: 'solid',
+        borderColor: 'rgba(var(--theme-primary-dark-rgb), 0.3)',
+        // @ts-expect-error CSS custom property for focus ring
+        '--tw-ring-color': 'rgba(var(--theme-primary-dark-rgb), 0.5)',
+      }}
+      onMouseOver={(e) => {
+        e.currentTarget.style.borderColor = 'rgba(var(--theme-primary-rgb), 0.6)'
+        e.currentTarget.style.boxShadow = '0 0 30px rgba(var(--theme-primary-dark-rgb), 0.15)'
+      }}
+      onMouseOut={(e) => {
+        e.currentTarget.style.borderColor = 'rgba(var(--theme-primary-dark-rgb), 0.3)'
+        e.currentTarget.style.boxShadow = 'none'
+      }}
     >
       <div className="pointer-events-none absolute inset-0 rounded-lg bg-[repeating-linear-gradient(0deg,transparent,transparent_2px,rgba(0,0,0,0.1)_2px,rgba(0,0,0,0.1)_4px)] opacity-50" />
-      <div className="pointer-events-none absolute inset-0 rounded-lg bg-gradient-to-b from-lime-500/5 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+      <div
+        className="pointer-events-none absolute inset-0 rounded-lg opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+        style={{ background: 'linear-gradient(to bottom, rgba(var(--theme-primary-dark-rgb), 0.05), transparent)' }}
+      />
       <div className="pointer-events-none absolute inset-0 rounded-lg bg-gradient-to-br from-amber-950/5 via-transparent to-transparent opacity-30" />
 
-      <div className="mb-4 flex items-center gap-2 border-b border-lime-500/20 pb-3">
+      <div className="mb-4 flex items-center gap-2 pb-3" style={{ borderBottomWidth: '1px', borderBottomStyle: 'solid', borderBottomColor: 'rgba(var(--theme-primary-dark-rgb), 0.2)' }}>
         <div className="flex gap-1.5">
           <span className="h-2.5 w-2.5 rounded-full bg-red-500/70" />
           <span className="h-2.5 w-2.5 rounded-full bg-yellow-500/70" />
-          <span className="h-2.5 w-2.5 rounded-full bg-lime-500/70" />
+          <span className="h-2.5 w-2.5 rounded-full" style={{ backgroundColor: 'rgba(var(--theme-primary-dark-rgb), 0.7)' }} />
         </div>
-        <span className="truncate font-mono text-xs text-lime-500/50">
+        <span className="truncate font-mono text-xs" style={{ color: 'rgba(var(--theme-primary-dark-rgb), 0.5)' }}>
           ~/about/character_sheet.md
         </span>
       </div>
 
       <div className="mb-5 flex items-center gap-4">
-        <div className="flex h-14 w-14 items-center justify-center rounded border border-lime-500/20 bg-zinc-900 sm:h-16 sm:w-16">
+        <div
+          className="flex h-14 w-14 items-center justify-center rounded bg-zinc-900 sm:h-16 sm:w-16"
+          style={{ borderWidth: '1px', borderStyle: 'solid', borderColor: 'rgba(var(--theme-primary-dark-rgb), 0.2)' }}
+        >
           <svg
             viewBox="0 0 24 24"
-            className="h-8 w-8 text-lime-400 sm:h-10 sm:w-10"
+            className="h-8 w-8 sm:h-10 sm:w-10"
+            style={{ color: 'var(--theme-primary)' }}
             fill="none"
             stroke="currentColor"
             strokeWidth="1.5"
+            aria-hidden="true"
           >
             <polygon points="12,2 22,8.5 22,15.5 12,22 2,15.5 2,8.5" />
             <line x1="12" y1="2" x2="12" y2="22" />
@@ -86,8 +127,8 @@ export function CharacterSheetCard({
           </svg>
         </div>
         <div>
-          <h3 className="font-mono text-base font-bold tracking-tight text-lime-400 group-hover:text-lime-300 sm:text-lg">
-            <span className="text-lime-600">&gt; </span>
+          <h3 className="font-mono text-base font-bold tracking-tight sm:text-lg" style={{ color: 'var(--theme-primary)' }}>
+            <span style={{ color: 'var(--theme-primary-darker)' }}>&gt; </span>
             {interest.title}
           </h3>
           <span className="font-mono text-xs uppercase tracking-widest text-zinc-400">
@@ -112,9 +153,9 @@ export function CharacterSheetCard({
       {interest.flavorText && (
         <div className="mt-auto border-t border-zinc-800 pt-4">
           <p className="font-mono text-xs italic text-zinc-500">
-            <span className="text-lime-600">&quot;</span>
+            <span style={{ color: 'var(--theme-primary-darker)' }}>&quot;</span>
             {interest.flavorText}
-            <span className="text-lime-600">&quot;</span>
+            <span style={{ color: 'var(--theme-primary-darker)' }}>&quot;</span>
           </p>
         </div>
       )}

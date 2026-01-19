@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { FontProvider } from '../context/FontContext'
+import { ThemeProvider } from '../context/ThemeContext'
 import { AppShell } from './shell'
 import { Hero } from './sections/hero'
 import { ProjectsGrid } from './sections/projects'
@@ -7,6 +8,7 @@ import { AboutGrid } from './sections/about'
 import { ConsultingSection } from './sections/consulting'
 import { ContactSection, ContactModal } from './sections/contact'
 import { SectionDivider } from './ui/SectionDivider'
+import { MatrixBackground } from './common/MatrixBackground'
 import type { ContactFormData } from '../types'
 import {
   navigationItems,
@@ -96,8 +98,10 @@ export function PortfolioApp() {
   }
 
   return (
-    <FontProvider>
-      <AppShell navigationItems={navigationItems} socialLinks={socialLinks}>
+    <ThemeProvider>
+      <FontProvider>
+        <MatrixBackground />
+        <AppShell navigationItems={navigationItems} socialLinks={socialLinks}>
         <Hero
           hero={hero}
           socialLinks={socialLinks}
@@ -149,18 +153,19 @@ export function PortfolioApp() {
         <footer className="border-t border-zinc-800 bg-zinc-950 py-8">
           <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
             <div className="flex flex-col items-center justify-between gap-4 sm:flex-row">
-              <p className="font-mono text-xs text-zinc-400">
-                <span className="text-lime-600">&gt;</span> adamslaker.dev
-                <span className="text-zinc-500"> | </span>
+              <p className="font-mono text-xs text-zinc-600">
+                <span style={{ color: 'var(--theme-primary-darker)' }}>&gt;</span> adamslaker.dev
+                <span className="text-zinc-700"> | </span>
                 Built with Astro, React, and Tailwind CSS
               </p>
-              <p className="font-mono text-xs text-zinc-400">
-                <span className="text-emerald-500">&copy;</span> {new Date().getFullYear()} Adam Slaker
+              <p className="font-mono text-xs text-zinc-600">
+                <span style={{ color: 'var(--theme-secondary-dark)' }}>&copy;</span> {new Date().getFullYear()} Adam Slaker
               </p>
             </div>
           </div>
         </footer>
       </AppShell>
-    </FontProvider>
+      </FontProvider>
+    </ThemeProvider>
   )
 }

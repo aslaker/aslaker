@@ -2,7 +2,7 @@ import { Menu, X } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
 import FocusTrap from "focus-trap-react";
 import type { NavigationItem, SocialLink } from "../../types";
-import { FontSelector } from "./FontSelector";
+import { StyleSelector } from "./StyleSelector";
 import { SocialLinks } from "./SocialLinks";
 
 interface MobileMenuProps {
@@ -108,13 +108,17 @@ export function MobileMenu({
                 flex items-center gap-3 rounded-lg px-4 py-3 text-base font-medium transition-colors font-heading
                 ${
 									item.isActive
-										? "bg-lime-400/10 text-lime-400"
+										? ""
 										: "text-zinc-300 hover:bg-zinc-800 hover:text-zinc-100"
 								}
               `}
+							style={item.isActive ? {
+								backgroundColor: 'rgba(var(--theme-primary-rgb), 0.1)',
+								color: 'var(--theme-primary)'
+							} : undefined}
 						>
 							{item.isActive && (
-								<span className="h-1.5 w-1.5 rounded-full bg-lime-400" />
+								<span className="h-1.5 w-1.5 rounded-full" style={{ backgroundColor: 'var(--theme-primary)' }} />
 							)}
 							{item.label}
 						</a>
@@ -131,12 +135,12 @@ export function MobileMenu({
 					</div>
 				)}
 
-				{/* Font Selector */}
+				{/* Style Selector */}
 				<div className="border-t border-zinc-800 p-4">
 					<span className="mb-3 block text-xs font-medium uppercase tracking-wider text-zinc-500">
 						Customize
 					</span>
-					<FontSelector variant="full" />
+					<StyleSelector variant="full" />
 				</div>
 					</div>
 				</FocusTrap>

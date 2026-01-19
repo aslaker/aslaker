@@ -1,5 +1,5 @@
 import type { NavigationItem, SocialLink } from '../../types'
-import { FontSelector } from './FontSelector'
+import { StyleSelector } from './StyleSelector'
 import { MainNav } from './MainNav'
 import { MobileMenu } from './MobileMenu'
 import { SocialLinks } from './SocialLinks'
@@ -34,7 +34,7 @@ export function AppShell({
 
   return (
     <div className="min-h-screen bg-zinc-950 text-zinc-100">
-      {/* Skip Link - visually hidden until focused */}
+      {/* Skip to main content link for keyboard/screen reader users */}
       <a
         href="#main-content"
         className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:rounded focus:bg-lime-500 focus:px-4 focus:py-2 focus:font-mono focus:text-sm focus:font-medium focus:text-zinc-900 focus:outline-none focus:ring-2 focus:ring-lime-400 focus:ring-offset-2 focus:ring-offset-zinc-950"
@@ -53,11 +53,18 @@ export function AppShell({
                 e.preventDefault()
                 handleNavigate('/')
               }}
-              className="group flex items-center gap-2 font-heading text-lg font-semibold tracking-tight text-zinc-100 transition-colors hover:text-lime-400"
+              className="group flex items-center gap-2 font-heading text-lg font-semibold tracking-tight text-zinc-100 transition-colors"
+              style={{ '--hover-color': 'var(--theme-primary)' } as React.CSSProperties}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.color = 'var(--theme-primary)'
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.color = ''
+              }}
             >
-              <span className="text-lime-400">{'>'}</span>
+              <span style={{ color: 'var(--theme-primary)' }}>{'>'}</span>
               <span>{siteName}</span>
-              <span className="animate-pulse text-lime-400">_</span>
+              <span className="animate-pulse" style={{ color: 'var(--theme-primary)' }}>_</span>
             </a>
 
             {/* Desktop Navigation */}
@@ -70,7 +77,7 @@ export function AppShell({
                 </>
               )}
               <div className="h-5 w-px bg-zinc-800" />
-              <FontSelector variant="compact" />
+              <StyleSelector variant="compact" />
             </div>
 
             {/* Mobile Menu */}

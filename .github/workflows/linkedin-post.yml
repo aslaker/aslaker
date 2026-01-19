@@ -1,0 +1,39 @@
+name: Generate LinkedIn Post
+
+on:
+  pull_request:
+    types: [closed]
+    branches: [main]
+
+jobs:
+  generate-linkedin-post:
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      id-token: write
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.PAT_TOKEN }}
+
+      - uses: anthropics/claude-code-action@v1
+        with:
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          github_token: ${{ secrets.PAT_TOKEN }}
+          prompt: "/linkedin-post ${{ github.event.pull_request.number }} ${{ github.event.pull_request.title }}"
+          claude_args: |
+            --allowedTools "Write,Bash(gh:*),Bash(git:*),Bash(mkdir:*)"
+
+      - name: Commit LinkedIn draft
+        env:
+          PAT_TOKEN: ${{ secrets.PAT_TOKEN }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git remote set-url origin "https://x-access-token:${PAT_TOKEN}@github.com/${{ github.repository }}.git"
+          git add linkedin-drafts/ .claude/skills/writing-style/feedback/
+          git diff --staged --quiet || git commit -m "chore: add LinkedIn draft for PR #${{ github.event.pull_request.number }}"
+          git push

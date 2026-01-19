@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <!-- Background circle -->
+  <circle cx="32" cy="32" r="30" fill="#18181b" stroke="#84cc16" stroke-width="2"/>
+
+  <!-- Multiple agent circles representing the crew -->
+  <circle cx="20" cy="24" r="6" fill="#a855f7" opacity="0.8"/>
+  <circle cx="44" cy="24" r="6" fill="#3b82f6" opacity="0.8"/>
+  <circle cx="32" cy="44" r="6" fill="#10b981" opacity="0.8"/>
+
+  <!-- Connection lines between agents -->
+  <line x1="25" y1="27" x2="39" y2="27" stroke="#84cc16" stroke-width="1.5" opacity="0.6"/>
+  <line x1="22" y1="29" x2="29" y2="40" stroke="#84cc16" stroke-width="1.5" opacity="0.6"/>
+  <line x1="42" y1="29" x2="35" y2="40" stroke="#84cc16" stroke-width="1.5" opacity="0.6"/>
+
+  <!-- Central flow indicator -->
+  <path d="M32 16 L32 20" stroke="#84cc16" stroke-width="2" stroke-linecap="round"/>
+  <path d="M29 18 L32 14 L35 18" stroke="#84cc16" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+
+  <!-- Small dots representing data flow -->
+  <circle cx="32" cy="32" r="2" fill="#84cc16"/>
+</svg>
