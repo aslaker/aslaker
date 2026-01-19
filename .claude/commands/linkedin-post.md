@@ -24,10 +24,14 @@ PR_TITLE = $ARGUMENTS
 ## Process
 
 1. **Load style guide** - Read `.claude/skills/writing-style/SKILL.md` and `.claude/skills/writing-style/SAMPLES.md` for voice, rules, and concrete examples
-2. **Gather context** - Read the most recent merged PR or current git diff to understand what changed
-3. **Identify the story** - What problem does this solve? What's interesting about the implementation?
-4. **Draft the post** - Write a LinkedIn-appropriate post following the guidelines below
-5. **Save the draft** - Write to `linkedin-drafts/YYYY-MM-DD-<slug>.md`
+2. **Load learned preferences** - If `.claude/skills/writing-style/LEARNED.md` exists, read it and apply high-confidence patterns
+3. **Gather context** - Read the most recent merged PR or current git diff to understand what changed
+4. **Identify the story** - What problem does this solve? What's interesting about the implementation?
+5. **Draft the post** - Write a LinkedIn-appropriate post following the guidelines AND learned preferences
+6. **Save the draft** - Write to BOTH locations:
+   - `linkedin-drafts/YYYY-MM-DD-<slug>.md` (the public draft)
+   - `.claude/skills/writing-style/feedback/YYYY-MM-DD-<slug>/draft.md` (for feedback tracking)
+7. **Output capture instructions** - Tell the user the draft ID and how to capture their final
 
 ## Post Guidelines
 
@@ -58,6 +62,7 @@ PR_TITLE = $ARGUMENTS
 
 **PR:** #[PR_NUMBER] - [PR_TITLE]
 **Generated:** [YYYY-MM-DD]
+**Draft ID:** [YYYY-MM-DD-<slug>]
 
 ---
 
@@ -67,6 +72,16 @@ PR_TITLE = $ARGUMENTS
 
 **Suggested hashtags:** #[relevant] #[hashtags]
 **Suggested posting time:** [morning/afternoon] [timezone]
+
+---
+
+## Capture Your Final
+
+After you edit and publish, capture your final version to help improve future drafts:
+
+\`\`\`
+/capture-linkedin-final [DRAFT_ID]
+\`\`\`
 ```
 
 ## Example Posts
@@ -101,3 +116,19 @@ Check it out at mysite.com!
 2. Adjust any parts that feel forced or generic
 3. Add or remove hashtags as appropriate
 4. Consider the best time to post for your audience
+
+## Feedback Loop
+
+This command is part of a feedback loop system that learns from your edits over time.
+
+**After publishing**, capture your final version:
+```
+/capture-linkedin-final <draft-id>
+```
+
+**Periodically**, synthesize what you've learned:
+```
+/synthesize-linkedin-feedback
+```
+
+See `.claude/skills/writing-style/README.md` for full documentation on how the feedback loop works.
