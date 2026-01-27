@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef, useCallback } from 'react'
+import FocusTrap from 'focus-trap-react'
 import type { ContactFormData, TopicOption, TopicValue, CalendarConfig } from '../../../types'
 
 type ModalStep = 'form' | 'calendar' | 'success'
