@@ -29,6 +29,8 @@ export function RelatedPostCard({ writing, onClick }: RelatedPostCardProps) {
           <img
             src={writing.thumbnailImage}
             alt={`Thumbnail for ${writing.title}`}
+            loading="lazy"
+            decoding="async"
             className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
           />
           {/* Scanline overlay */}

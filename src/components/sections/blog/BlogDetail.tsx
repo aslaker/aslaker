@@ -223,6 +223,8 @@ export function BlogDetail({
           <img
             src={writing.headerImage}
             alt={`Header image for ${writing.title}`}
+            loading="eager"
+            decoding="async"
             className="h-full w-full object-cover"
           />
           {/* Scanline overlay */}
