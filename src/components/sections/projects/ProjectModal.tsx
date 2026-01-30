@@ -173,6 +173,8 @@ export function ProjectModal({
 									<img
 										src={project.logoUrl}
 										alt={`${project.title} logo`}
+										loading="lazy"
+										decoding="async"
 										className="h-14 w-14 object-contain"
 									/>
 								) : (

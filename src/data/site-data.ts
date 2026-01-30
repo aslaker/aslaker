@@ -155,21 +155,21 @@ export const projects: Project[] = [
 		demoUrl: null,
 		phase: "architecture",
 	},
-	{
-		id: "crewai-idea-pipeline",
-		title: "CrewAI Idea Pipeline",
-		shortDescription:
-			"A multi-agent workflow that captures notes, classifies them as features or bugs, and auto-organizes them into Linear projects.",
-		fullDescription:
-			"CrewAI Idea Pipeline is an intelligent note-processing system powered by multiple AI agents working in coordination. Capture ideas anywhere, and agents handle classification, prioritization, and organization automatically.\n\nThe pipeline uses SQLite for persistent storage and integrates directly with Linear to create properly tagged and organized issues. Each agent specializes in a specific task—classification, enrichment, or project assignment—creating a seamless flow from raw thought to actionable ticket.\n\nBuilt as an experiment in multi-agent orchestration patterns and practical AI workflow automation.",
-		logoUrl: "/projects/crewai-idea-pipeline/logo.svg",
-		tags: ["AI/ML", "Agentic", "Automation", "Developer Tools"],
-		technologies: ["Python", "CrewAI", "SQLite", "Linear API"],
-		screenshots: [],
-		githubUrl: null,
-		demoUrl: null,
-		phase: "architecture",
-	},
+	// {
+	// 	id: "crewai-idea-pipeline",
+	// 	title: "CrewAI Idea Pipeline",
+	// 	shortDescription:
+	// 		"A multi-agent workflow that captures notes, classifies them as features or bugs, and auto-organizes them into Linear projects.",
+	// 	fullDescription:
+	// 		"CrewAI Idea Pipeline is an intelligent note-processing system powered by multiple AI agents working in coordination. Capture ideas anywhere, and agents handle classification, prioritization, and organization automatically.\n\nThe pipeline uses SQLite for persistent storage and integrates directly with Linear to create properly tagged and organized issues. Each agent specializes in a specific task—classification, enrichment, or project assignment—creating a seamless flow from raw thought to actionable ticket.\n\nBuilt as an experiment in multi-agent orchestration patterns and practical AI workflow automation.",
+	// 	logoUrl: "/projects/crewai-idea-pipeline/logo.svg",
+	// 	tags: ["AI/ML", "Agentic", "Automation", "Developer Tools"],
+	// 	technologies: ["Python", "CrewAI", "SQLite", "Linear API"],
+	// 	screenshots: [],
+	// 	githubUrl: null,
+	// 	demoUrl: null,
+	// 	phase: "architecture",
+	// },
 	{
 		id: "personal-assistant",
 		title: "Personal Assistant",
@@ -177,7 +177,7 @@ export const projects: Project[] = [
 			"A home server AI assistant running multiple specialized agents for daily task automation via Moltbot workflows.",
 		fullDescription:
 			"Personal Assistant is a self-hosted AI system running on a Zimaboard home server. Using Moltbot (formerly Clawdbot), it orchestrates multiple specialized agents—executive assistant, security, research, and project-specific—to automate daily tasks and workflows.\n\nBeyond productivity automation, this project serves as a hands-on home lab for learning server management, Linux administration, and secure remote access via Tailscale.",
-		logoUrl: "/projects/personal-assistant/logo.png",
+		logoUrl: "/projects/personal-assistant/logo.svg",
 		tags: ["AI/ML", "Agentic", "Automation"],
 		technologies: ["Moltbot", "Debian", "Tailscale"],
 		screenshots: [],

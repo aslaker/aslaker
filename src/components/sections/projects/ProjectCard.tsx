@@ -72,6 +72,8 @@ export function ProjectCard({ project, index, onSelect }: ProjectCardProps) {
           <img
             src={project.logoUrl}
             alt={`${project.title} logo`}
+            loading="lazy"
+            decoding="async"
             className="h-10 w-10 object-contain sm:h-12 sm:w-12"
           />
         ) : (
