@@ -170,6 +170,21 @@ export const projects: Project[] = [
 		demoUrl: null,
 		phase: "architecture",
 	},
+	{
+		id: "personal-assistant",
+		title: "Personal Assistant",
+		shortDescription:
+			"A home server AI assistant running multiple specialized agents for daily task automation via Moltbot workflows.",
+		fullDescription:
+			"Personal Assistant is a self-hosted AI system running on a Zimaboard home server. Using Moltbot (formerly Clawdbot), it orchestrates multiple specialized agents—executive assistant, security, research, and project-specific—to automate daily tasks and workflows.\n\nBeyond productivity automation, this project serves as a hands-on home lab for learning server management, Linux administration, and secure remote access via Tailscale.",
+		logoUrl: "/projects/personal-assistant/logo.png",
+		tags: ["AI/ML", "Agentic", "Automation"],
+		technologies: ["Moltbot", "Debian", "Tailscale"],
+		screenshots: [],
+		githubUrl: null,
+		demoUrl: null,
+		phase: "building",
+	},
 ];
 
 // =============================================================================
